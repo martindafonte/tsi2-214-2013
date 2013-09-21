@@ -27,4 +27,19 @@
    <value/>
   </managed-property>
  </managed-bean>
+ <managed-bean>
+  <managed-bean-name>userLogin</managed-bean-name>
+  <managed-bean-class>presentacion.UserLogin</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+  <managed-property>
+   <property-name>nick</property-name>
+   <property-class>java.lang.String</property-class>
+   <value/>
+  </managed-property>
+  <managed-property>
+   <property-name>pass</property-name>
+   <property-class>java.lang.String</property-class>
+   <value/>
+  </managed-property>
+ </managed-bean>
 </faces-config>
