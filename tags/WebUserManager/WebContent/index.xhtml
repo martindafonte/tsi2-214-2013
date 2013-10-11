@@ -2,10 +2,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
 
 <h:head></h:head> 
 <body> 
+	<div>
+		
+			<ui:include src="#{userLogin.go()}" />
+
+	</div>
+	
+	<div>
 	<h1>Alta Usuario</h1>
 	<h:form>
 		<div>
@@ -25,5 +33,6 @@
 		</div>
 		
 	</h:form>
+	</div>
 </body> 
 </html>
