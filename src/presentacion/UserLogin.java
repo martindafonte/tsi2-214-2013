@@ -3,13 +3,25 @@
  */
 package presentacion;
 
+import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
+
+import negocio.ServiciosLocal;
+
 /**
  * @author bruno
  *
  */
+
 public class UserLogin {
 	private java.lang.String nick;
 	private java.lang.String pass;
+
+	private Boolean login = false;
+	
+	@EJB
+	private ServiciosLocal serv; 
+	
 
 	public UserLogin() {
 	}
@@ -32,22 +44,33 @@ public class UserLogin {
 	
 	public String login(){
 		
-		Boolean error = false; // = existeUsuario(nick,pass);
-		if(error)
+		Boolean error = serv.existeUsuario(nick, pass);
+		if(!error){
 			return "errorPage.xhtml";
-	
-		return "login.xhtml";
+		}
+		login = true;
+		return "/index.xhtml";
 		
 	}
 	
 	public String logout(){
 		
-		Boolean error = false; // = existeUsuario(nick,pass);
-		if(error)
-			return "errorPage.xhtml";
-	
-		return "logout.xhtml";
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getSessionMap().remove("userLogin");
+		login = false;
+		return "/index.xhtml";
 		
+	}
+	
+	
+	public String go(){
+		
+		if (login){
+			
+			return "/MasterPage/logout.xhtml";
+		}
+		
+		return "/MasterPage/login.xhtml";
 	}
 	
 }
