@@ -38,4 +38,23 @@ public class Servicios implements ServiciosLocal {
 		ul.altaUsuario(u);
 	}
 
+	@Override
+	public Usuario getUsuario(String nick, String pass) {
+		// TODO Auto-generated method stub
+		
+		
+		return ul.getUsuario(nick, pass);	
+	}
+
+	@Override
+	public Boolean existeUsuario(String nick, String pass) {
+		// TODO Auto-generated method stub
+		
+		if (ul.getUsuario(nick, pass) != null){
+			return true;
+		}
+		
+		return false;
+	}
+
 }
