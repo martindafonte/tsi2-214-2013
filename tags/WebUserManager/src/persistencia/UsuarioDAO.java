@@ -13,6 +13,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
 
+import modelo.Desarrollador;
 import modelo.Usuario;
 
 /**
@@ -38,7 +39,6 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void altaUsuario(Usuario u) {
 		// TODO Auto-generated method stub
-//		EntityManager em = Persistence.createEntityManagerFactory("WebUserManager").createEntityManager();
 		EntityManager em = emf.createEntityManager();
 		try{
 			em.persist(u);
@@ -48,9 +48,12 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Usuario getUsuario(String nick, String pass) {
+	public Usuario getUsuario(String nick, String pass, Boolean isDes) {
 		// TODO Auto-generated method stub
+
+		//isDes es para poder usar esta misma operacion, para el login de usuarios de apps y de desarrolladores
 		
 		EntityManager em = emf.createEntityManager();
 		try{
@@ -58,7 +61,11 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 			q.setParameter(1, nick).setParameter(2, pass);
 			List<Usuario> us = q.getResultList();
 			if (us.size() == 1 ){
-				return us.remove(0);
+				Usuario u = us.remove(0);
+				if(isDes == u.soyDesarrollador()){
+					return u;
+				}		
+				
 			}
 			
 			
@@ -67,6 +74,19 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 			
 		}
 		return null;
+	}
+
+	@Override
+	public void altaDesarrollador(Desarrollador u) {
+		// TODO Auto-generated method stub
+		
+		EntityManager em = emf.createEntityManager();
+		try{
+			em.persist(u);
+			em.close();
+			
+		}catch(Throwable ex){}
+		
 	}
 		
 

@@ -58,6 +58,6 @@ public class UserBean {
 	public String go(){
 		
 		serv.altaUsuario(nick, pass, nombre, apellido);
-		return "index.xhtml";		
+		return "/WebUserManager/index.xhtml";		
 	}
 }
