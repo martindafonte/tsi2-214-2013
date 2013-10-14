@@ -67,10 +67,10 @@ public class UserLogin {
 		
 		if (login){
 			
-			return "/MasterPage/logout.xhtml";
+			return "/WebUserManager/MasterPage/logout.xhtml";
 		}
 		
-		return "/MasterPage/login.xhtml";
+		return "/WebUserManager/MasterPage/login.xhtml";
 	}
 	
 }
