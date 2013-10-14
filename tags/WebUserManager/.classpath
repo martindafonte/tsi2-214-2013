@@ -10,13 +10,13 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.jboss.ide.eclipse.as.classpath.core.ejb3.classpathContainer/jboss-as-7.1.1.Final Runtime Server"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JSF 2.0 (Mojarra 2.0.3-FCS)"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JSF"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/EclipseLink 2.5.0 - Kepler">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 			<attribute name="owner.project.facets" value="jpt.jpa"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/bruno/Documentos/facultad/tsi2/primefaces-3.5.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JSF 2.0 (Mojarra 2.0.3-FCS)"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
