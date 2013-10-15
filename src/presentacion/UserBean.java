@@ -12,6 +12,7 @@ import negocio.ServiciosLocal;
  *
  */
 public class UserBean {
+	
 	private java.lang.String nick;
 	private java.lang.String pass;
 	private java.lang.String nombre;
@@ -57,7 +58,7 @@ public class UserBean {
 	
 	public String go(){
 		
-		serv.altaUsuario(nick, pass, nombre, apellido);
-		return "/WebUserManager/index.xhtml";		
+		serv.altaDesarrollador(nick, pass, nombre, apellido);
+		return "/WebUserManager/index.xhtml";	
 	}
 }

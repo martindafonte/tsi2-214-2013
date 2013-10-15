@@ -12,8 +12,22 @@ import javax.persistence.*;
  */
 @Entity
 @NamedQuery(name="Usuario.findAll", query="SELECT u FROM Usuario u")
-public class Usuario extends Persona implements Serializable {
+public class Usuario implements Serializable {
+	
+	
+	
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "id_usuario")
+	private long id;
+	private String nick;
+	private String pass;
+	private String nombre;
+	private String apellido;	
+	
+	private static long autoID;
 
 	@OneToMany(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_aplicacion")
@@ -21,6 +35,7 @@ public class Usuario extends Persona implements Serializable {
 	
 	
 	public Usuario() {
+		id = getGenID();
 	}
 	
 	
@@ -31,13 +46,60 @@ public class Usuario extends Persona implements Serializable {
 	public void setLa(List<Aplicacion> la) {
 		this.la = la;
 	}
+	
+	
+	public long getId() {
+		return id;
+	}
 
 
+	public void setId(long id) {
+		this.id = id;
+	}
 
-	@Override
-	public Boolean soyDesarrollador() {
-		// TODO Auto-generated method stub
-		return false;
+
+	public String getNick() {
+		return nick;
+	}
+
+
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+
+
+	public String getPass() {
+		return pass;
+	}
+
+
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+
+
+	public String getNombre() {
+		return nombre;
+	}
+
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+
+	public String getApellido() {
+		return apellido;
+	}
+
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+	
+	public synchronized static long getGenID(){
+		
+		return autoID++;
 	}
 	
 }

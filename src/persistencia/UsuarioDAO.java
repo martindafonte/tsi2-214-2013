@@ -50,11 +50,9 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Usuario getUsuario(String nick, String pass, Boolean isDes) {
+	public Usuario getUsuario(String nick, String pass) {
 		// TODO Auto-generated method stub
 
-		//isDes es para poder usar esta misma operacion, para el login de usuarios de apps y de desarrolladores
-		
 		EntityManager em = emf.createEntityManager();
 		try{
 			Query q = em.createQuery("SELECT x FROM Usuario x WHERE x.nick = ?1 and pass = ?2");
@@ -62,9 +60,7 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 			List<Usuario> us = q.getResultList();
 			if (us.size() == 1 ){
 				Usuario u = us.remove(0);
-				if(isDes == u.soyDesarrollador()){
-					return u;
-				}		
+				return u;
 				
 			}
 			
@@ -81,12 +77,35 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 		// TODO Auto-generated method stub
 		
 		EntityManager em = emf.createEntityManager();
-		try{
+//		try{
 			em.persist(u);
 			em.close();
 			
-		}catch(Throwable ex){}
+//		}catch(Throwable ex){}
 		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Desarrollador getDesarrollador(String nick, String pass) {
+		// TODO Auto-generated method stub
+		EntityManager em = emf.createEntityManager();
+		try{
+			Query q = em.createQuery("SELECT x FROM Desarrollador x WHERE x.nick = ?1 and pass = ?2");
+			q.setParameter(1, nick).setParameter(2, pass);
+			List<Desarrollador> us = q.getResultList();
+			if (us.size() == 1 ){
+				Desarrollador d = us.remove(0);
+				return d;
+				
+			}
+			
+			
+		}catch(Exception e){
+			return null;
+			
+		}
+		return null;
 	}
 		
 

@@ -2,23 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-
-<h:head>
-	<link type="text/css" rel="stylesheet" href="/css/bootstrap.css"/>
-</h:head> 
-<body>
-
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+      
 		<div class="container-fluid">
 			<div class="navbar nav-header navbar-fixed-top">
 				<h:form class="navbar-form">
 						<h:inputText value="#{userLogin.nick}"/>
 						<h:inputSecret value="#{userLogin.pass}" />
-						<h:commandButton class="btn btn-success" action="#{userLogin.login()}" value="sign in"/>
+						<h:commandButton action="#{userLogin.login()}" value="sign in"/>
 				</h:form>
 			</div>
 		</div>
-	
-	
-</body> 
 </html>
