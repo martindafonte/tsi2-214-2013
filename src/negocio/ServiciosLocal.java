@@ -15,4 +15,6 @@ public interface ServiciosLocal {
 	public Boolean existeUsuario(String nick, String pass);
 	public Boolean existeDesarollador(String nick, String pass);
 	
+	public void altaAplicacion(String nombre, String descripcion, String nick, String pass);
+	
 }

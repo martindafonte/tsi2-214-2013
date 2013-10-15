@@ -2,6 +2,7 @@ package modelo;
 
 import java.io.Serializable;
 import java.lang.String;
+
 import javax.persistence.*;
 
 /**
@@ -9,13 +10,20 @@ import javax.persistence.*;
  *
  */
 @Entity
+@TableGenerator(name="app", initialValue=0, allocationSize=1000)
 public class Aplicacion implements Serializable {
 
-	
 	private String nombre;
+	private String descripcion;
 	
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.AUTO , generator="app")
 	@Column(name="id_aplicacion")
 	private long id;
 	
@@ -48,7 +56,5 @@ public class Aplicacion implements Serializable {
 	public void setId(long id) {
 		this.id = id;
 	}   
-	
-
    
 }
