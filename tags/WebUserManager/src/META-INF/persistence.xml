@@ -5,6 +5,7 @@
 		<class>modelo.Usuario</class>
 		<class>modelo.Desarrollador</class>
 		<class>modelo.Aplicacion</class>
+		<class>model.Sequence</class>
 	    <properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
 			<property name="hibernate.hbm2dll.auto" value="create-drop"/>

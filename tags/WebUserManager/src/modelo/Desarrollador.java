@@ -1,6 +1,8 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -89,6 +91,42 @@ public class Desarrollador implements Serializable {
 	public synchronized static long getGenID(){
 		
 		return autoID++;
+	}
+	
+	
+	
+	public List<Aplicacion> getAplicaciones(String nombre){
+		
+		List<Aplicacion> laRes = new LinkedList<Aplicacion>();
+		Iterator<Aplicacion> it = this.la.iterator();
+		while (it.hasNext()){
+			
+			Aplicacion a = it.next();
+			if (a.getNombre().equals(nombre)){
+				
+				laRes.add(a);
+			}			
+		}
+		
+		return laRes;
+		
+	} 	
+	
+	public List<Aplicacion> filtrarAplicaciones(String nombre){
+		
+		List<Aplicacion> laRes = new LinkedList<Aplicacion>();
+		Iterator<Aplicacion> it = this.la.iterator();
+		while (it.hasNext()){
+			
+			Aplicacion a = it.next();
+			if (a.getNombre().startsWith(nombre)){
+				
+				laRes.add(a);
+			}			
+		}
+		
+		return laRes;
+		
 	}
    
 }

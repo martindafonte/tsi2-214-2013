@@ -4,7 +4,9 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import persistencia.AplicacionDAOLocal;
 import persistencia.UsuarioDAOLocal;
+import modelo.Aplicacion;
 import modelo.Desarrollador;
 import modelo.Usuario;
 
@@ -20,6 +22,10 @@ public class Servicios implements ServiciosLocal {
      */
 	@EJB
 	private UsuarioDAOLocal ul;
+	
+	
+	@EJB
+	private AplicacionDAOLocal al;
 	
     public Servicios() {
         // TODO Auto-generated constructor stub
@@ -91,5 +97,27 @@ public class Servicios implements ServiciosLocal {
 		
 		return false;
 	}
+
+	@Override
+	public void altaAplicacion(String nombre, String descripcion, String nick,
+			String pass) {
+		// TODO Auto-generated method stub
+		
+		Desarrollador d = ul.getDesarrollador(nick, pass);
+		if (d == null) {
+			return;
+		}
+		
+		Aplicacion a = new Aplicacion();
+		a.setD(d);
+		a.setNombre(nombre);
+		a.setDescripcion(descripcion);
+		d.getLa().add(a);
+		ul.altaDesarrollador(d);
+		al.altaApliacion(a);
+		
+		
+	}
+
 
 }
