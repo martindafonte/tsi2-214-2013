@@ -5,6 +5,8 @@ package presentacion;
 
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+
 
 import negocio.ServiciosLocal;
 
@@ -12,18 +14,28 @@ import negocio.ServiciosLocal;
  * @author bruno
  *
  */
-
 public class UserLogin {
+	
 	private java.lang.String nick;
 	private java.lang.String pass;
 
 	private Boolean login = false;
 	
+	public Boolean getLogin() {
+		return login;
+	}
+
+	public void setLogin(Boolean login) {
+		this.login = login;
+	}
+
+
 	@EJB
 	private ServiciosLocal serv; 
 	
 
 	public UserLogin() {
+		this.login = false;
 	}
 
 	public java.lang.String getNick() {
@@ -44,12 +56,16 @@ public class UserLogin {
 	
 	public String login(){
 		
-		Boolean error = serv.existeUsuario(nick, pass);
+		Boolean error = serv.existeDesarollador(nick, pass);
 		if(!error){
-			return "errorPage.xhtml";
+			System.out.println("ERROR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			return "errorPage.xhtml";			
 		}
 		login = true;
-		return "/index.xhtml";
+//		return"/MasterPage/logout.xhtml";
+		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		String ret = req.getRequestURL().toString();
+		return ret;
 		
 	}
 	
@@ -58,19 +74,25 @@ public class UserLogin {
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.getExternalContext().getSessionMap().remove("userLogin");
 		login = false;
-		return "/index.xhtml";
+		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		String ret = req.getRequestURL().toString();
+		return ret;
 		
 	}
 	
 	
 	public String go(){
 		
-		if (login){
-			
-			return "/WebUserManager/MasterPage/logout.xhtml";
+		if (login == null){
+			login = new Boolean(false);			
 		}
 		
-		return "/WebUserManager/MasterPage/login.xhtml";
+		if (login){
+			
+			return "/MasterPage/logout.xhtml";
+		}
+
+		return "/MasterPage/login.xhtml";
 	}
 	
 }

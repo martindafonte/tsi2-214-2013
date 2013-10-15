@@ -3,7 +3,6 @@
 	<persistence-unit name="WebUserManager">
 		<jta-data-source>java:/BaasDS</jta-data-source>
 		<class>modelo.Usuario</class>
-		<class>modelo.Persona</class>
 		<class>modelo.Desarrollador</class>
 		<class>modelo.Aplicacion</class>
 	    <properties>

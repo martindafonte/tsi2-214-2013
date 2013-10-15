@@ -32,6 +32,11 @@
   <managed-bean-class>presentacion.UserLogin</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
   <managed-property>
+   <property-name>login</property-name>
+   <property-class>java.lang.Boolean</property-class>
+   <value/>
+  </managed-property>
+  <managed-property>
    <property-name>nick</property-name>
    <property-class>java.lang.String</property-class>
    <value/>
@@ -41,5 +46,10 @@
    <property-class>java.lang.String</property-class>
    <value/>
   </managed-property>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>appBean</managed-bean-name>
+  <managed-bean-class>presentacion.AppBean</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
  </managed-bean>
 </faces-config>

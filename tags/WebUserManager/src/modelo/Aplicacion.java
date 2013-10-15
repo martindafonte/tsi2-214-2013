@@ -20,7 +20,7 @@ public class Aplicacion implements Serializable {
 	private long id;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_persona")
+	@JoinColumn(name="id_desarrollador")
 	private Desarrollador d;
 	
 	
@@ -48,7 +48,6 @@ public class Aplicacion implements Serializable {
 	public void setId(long id) {
 		this.id = id;
 	}   
-	
 	
 
    
