@@ -1,18 +1,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      >
+      xmlns:mj="http://mojarra.dev.java.net/mojarra_ext"> 
 
-<h:head>
-	<link type="text/css" rel="stylesheet" href="/resources/css/bootstrap.css"/>
-	<link type="text/css" rel="stylesheet" href="/resources/css/bootstrap-responsive.css"/>
-	<link type="text/css" rel="stylesheet" href="/resources/css/bootstrap-responsive.min.css"/>
-	<link type="text/css" rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
-</h:head> 
-<body> 
-
+<h:head></h:head> 
+<body>
 
 	<div>
 	<div class="navbar-fixed-top">
@@ -24,7 +20,7 @@
 	</div>
 	</div>
 	<div>
-	<h1>Alta Usuario</h1>
+	<h1>Alta Aplicacion</h1>
 	<h:form>
 		<div>
 			nick: <h:inputText value="#{userBean.nick}" />
@@ -44,5 +40,6 @@
 		
 	</h:form>
 	</div>
+
 </body> 
 </html>
