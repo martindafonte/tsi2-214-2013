@@ -44,14 +44,14 @@ public class Servicios implements ServiciosLocal {
 		// TODO Auto-generated method stub
 		
 		
-		return (Usuario)ul.getUsuario(nick, pass, false);	
+		return ul.getUsuario(nick, pass);	
 	}
 
 	@Override
 	public Boolean existeUsuario(String nick, String pass) {
 		// TODO Auto-generated method stub
 		
-		if (ul.getUsuario(nick, pass, false) != null){
+		if (ul.getUsuario(nick, pass) != null){
 			return true;
 		}
 		
@@ -79,13 +79,13 @@ public class Servicios implements ServiciosLocal {
 	@Override
 	public Desarrollador getDesarrollador(String nick, String pass) {
 		// TODO Auto-generated method stub
-		return (Desarrollador)ul.getUsuario(nick, pass, true);
+		return ul.getDesarrollador(nick, pass);
 	}
 
 	@Override
 	public Boolean existeDesarollador(String nick, String pass) {
 		// TODO Auto-generated method stub
-		if (ul.getUsuario(nick, pass, true) != null){
+		if (ul.getDesarrollador(nick, pass) != null){
 			return true;
 		}
 		
