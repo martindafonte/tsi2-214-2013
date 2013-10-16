@@ -111,14 +111,11 @@ public class Servicios implements ServiciosLocal {
 		}
 		
 		Aplicacion a = new Aplicacion();
+		
 		a.setId(appinfo.getId("Aplicacion"));
-		a.setD(d);
 		a.setNombre(nombre);
 		a.setDescripcion(descripcion);
-		d.getLa().add(a);
-		//ul.altaDesarrollador(d);
-		al.altaApliacion(a);
-		
+		al.altaApliacion(a,d);	
 		
 	}
 
