@@ -12,7 +12,6 @@ import javax.persistence.*;
  * Entity implementation class for Entity: Desarrollador
  */
 
-
 @Entity
 public class Desarrollador implements Serializable {
 

@@ -42,7 +42,6 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 		EntityManager em = emf.createEntityManager();
 		try{
 			em.persist(u);
-			em.clear();
 			em.close();
 			
 		}catch(Throwable ex){}
@@ -80,7 +79,6 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 		EntityManager em = emf.createEntityManager();
 //		try{
 			em.persist(u);
-			em.clear();
 			em.close();
 			
 //		}catch(Throwable ex){}
