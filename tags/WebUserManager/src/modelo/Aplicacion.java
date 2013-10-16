@@ -37,6 +37,7 @@ public class Aplicacion implements Serializable {
 	public void setD(Desarrollador d) {
 		this.d = d;
 	}
+	
 	private static final long serialVersionUID = 1L;
 	
 	public Aplicacion() {

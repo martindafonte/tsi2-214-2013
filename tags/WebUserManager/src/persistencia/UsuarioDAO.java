@@ -9,8 +9,7 @@ import javax.ejb.TransactionAttributeType;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import modelo.Desarrollador;
@@ -28,8 +27,8 @@ public class UsuarioDAO implements UsuarioDAOLocal {
      * Default constructor. 
      */
 	
-	@PersistenceUnit(unitName = "WebUserManager")
-	private EntityManagerFactory emf;
+	@PersistenceContext(unitName="WebUserManager")
+	private EntityManager em;
 	
     public UsuarioDAO() {
         // TODO Auto-generated constructor stub
@@ -39,10 +38,8 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void altaUsuario(Usuario u) {
 		// TODO Auto-generated method stub
-		EntityManager em = emf.createEntityManager();
 		try{
 			em.persist(u);
-			em.close();
 			
 		}catch(Throwable ex){}
 		
@@ -53,7 +50,7 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 	public Usuario getUsuario(String nick, String pass) {
 		// TODO Auto-generated method stub
 
-		EntityManager em = emf.createEntityManager();
+//		EntityManager em = emf.createEntityManager();
 		try{
 			Query q = em.createQuery("SELECT x FROM Usuario x WHERE x.nick = ?1 and pass = ?2");
 			q.setParameter(1, nick).setParameter(2, pass);
@@ -75,21 +72,17 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 	@Override
 	public void altaDesarrollador(Desarrollador u) {
 		// TODO Auto-generated method stub
-		
-		EntityManager em = emf.createEntityManager();
-//		try{
+		try{
 			em.persist(u);
-			em.close();
-			
-//		}catch(Throwable ex){}
-		
+		}catch(Exception ex){}
+	
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public Desarrollador getDesarrollador(String nick, String pass) {
 		// TODO Auto-generated method stub
-		EntityManager em = emf.createEntityManager();
+
 		try{
 			Query q = em.createQuery("SELECT x FROM Desarrollador x WHERE x.nick = ?1 and pass = ?2");
 			q.setParameter(1, nick).setParameter(2, pass);
