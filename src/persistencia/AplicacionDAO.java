@@ -34,7 +34,6 @@ public class AplicacionDAO implements AplicacionDAOLocal {
 		EntityManager em = emf.createEntityManager();
 		try{
 			em.persist(a);
-			em.clear();
 			em.close();
 			
 		}catch(Throwable ex){}
