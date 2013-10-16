@@ -113,7 +113,7 @@ public class Servicios implements ServiciosLocal {
 		a.setNombre(nombre);
 		a.setDescripcion(descripcion);
 		d.getLa().add(a);
-		ul.altaDesarrollador(d);
+		//ul.altaDesarrollador(d);
 		al.altaApliacion(a);
 		
 		
