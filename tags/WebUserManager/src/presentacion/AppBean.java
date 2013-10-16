@@ -5,8 +5,6 @@ package presentacion;
 
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
-
-import modelo.Desarrollador;
 import negocio.ServiciosLocal;
 
 /**
