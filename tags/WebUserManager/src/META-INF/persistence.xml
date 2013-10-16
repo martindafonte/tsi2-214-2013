@@ -5,6 +5,7 @@
 		<class>model.Sequence</class>
 		<class>modelo.Aplicacion</class>
 		<class>modelo.Desarrollador</class>
+		<class>modelo.Identificador</class>
 		<class>modelo.Usuario</class>
 	    <properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
