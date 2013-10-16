@@ -3,10 +3,12 @@ package persistencia;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
+//import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
+//import javax.persistence.PersistenceUnit;
 
 import modelo.Aplicacion;
+import modelo.Desarrollador;
 
 /**
  * Session Bean implementation class AplicacionDAO
@@ -16,8 +18,8 @@ import modelo.Aplicacion;
 public class AplicacionDAO implements AplicacionDAOLocal {
 
 	
-	@PersistenceUnit(unitName = "WebUserManager")
-	private EntityManagerFactory emf;
+	@PersistenceContext(unitName="WebUserManager")
+	private EntityManager em;
 	
     /**
      * Default constructor. 
@@ -28,15 +30,19 @@ public class AplicacionDAO implements AplicacionDAOLocal {
 
 
 	@Override
-	public void altaApliacion(Aplicacion a) {
+	public void altaApliacion(Aplicacion a, Desarrollador d) {
 		// TODO Auto-generated method stub
 		
-		EntityManager em = emf.createEntityManager();
+		
 		try{
 			em.persist(a);
-			em.close();
+			d.getLa().add(a);
+			a.setD(d);
 			
-		}catch(Throwable ex){}
+		}catch(Throwable ex){
+			System.out.println("ERROR EN ALTA APLICACION!!!");
+			
+		}
 		
 	}
 
