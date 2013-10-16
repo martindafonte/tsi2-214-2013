@@ -10,9 +10,9 @@ import javax.persistence.*;
  *
  */
 @Entity
-@TableGenerator(name="app", initialValue=0, allocationSize=1000)
 public class Aplicacion implements Serializable {
 
+	
 	private String nombre;
 	private String descripcion;
 	
@@ -23,7 +23,6 @@ public class Aplicacion implements Serializable {
 		this.descripcion = descripcion;
 	}
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO , generator="app")
 	@Column(name="id_aplicacion")
 	private long id;
 	
@@ -41,7 +40,6 @@ public class Aplicacion implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	public Aplicacion() {
-		super();
 	}   
 	public String getNombre() {
 		return this.nombre;

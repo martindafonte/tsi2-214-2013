@@ -13,15 +13,12 @@ import javax.persistence.*;
  */
 
 @Entity
-@TableGenerator(name="desarrollador", initialValue=0, allocationSize=1000)
 public class Desarrollador implements Serializable {
 
 	
 	
-
 	@Id
 	@Column(name = "id_desarrollador")
-	@GeneratedValue(strategy=GenerationType.AUTO , generator="desarrollador")
 	private long id;
 	private String nick;
 	private String pass;
@@ -37,7 +34,6 @@ public class Desarrollador implements Serializable {
 	private List<Aplicacion> la;
 	
 	public Desarrollador(){
-//		id = getGenID();
 	}
 	
 	

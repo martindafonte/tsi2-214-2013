@@ -21,8 +21,10 @@ public class Servicios implements ServiciosLocal {
      * Default constructor. 
      */
 	@EJB
-	private UsuarioDAOLocal ul;
+	private AppInfoLocal appinfo;
 	
+	@EJB
+	private UsuarioDAOLocal ul;
 	
 	@EJB
 	private AplicacionDAOLocal al;
@@ -36,7 +38,7 @@ public class Servicios implements ServiciosLocal {
 			String apellido) {
 		// TODO Auto-generated method stub
 		Usuario u = new Usuario();
-		
+		u.setId(appinfo.getId("Usuario"));
 		u.setNick(nick);
 		u.setNombre(nombre);
 		u.setPass(pass);
@@ -70,7 +72,7 @@ public class Servicios implements ServiciosLocal {
 		// TODO Auto-generated method stub
 		
 		Desarrollador u = new Desarrollador();
-		
+		u.setId(appinfo.getId("Desarrollador"));
 		u.setNick(nick);
 		u.setNombre(nombre);
 		u.setPass(pass);
@@ -109,6 +111,7 @@ public class Servicios implements ServiciosLocal {
 		}
 		
 		Aplicacion a = new Aplicacion();
+		a.setId(appinfo.getId("Aplicacion"));
 		a.setD(d);
 		a.setNombre(nombre);
 		a.setDescripcion(descripcion);
