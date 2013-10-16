@@ -12,6 +12,7 @@ import javax.persistence.*;
  */
 @Entity
 @NamedQuery(name="Usuario.findAll", query="SELECT u FROM Usuario u")
+@TableGenerator(name="usuario", initialValue=0, allocationSize=1000)
 public class Usuario implements Serializable {
 	
 	
@@ -19,7 +20,7 @@ public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.AUTO , generator="usuario")
 	@Column(name = "id_usuario")
 	private long id;
 	private String nick;
@@ -35,7 +36,7 @@ public class Usuario implements Serializable {
 	
 	
 	public Usuario() {
-		id = getGenID();
+//		id = getGenID();
 	}
 	
 	
