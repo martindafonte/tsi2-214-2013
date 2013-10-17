@@ -1,17 +1,18 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
-      
-		<div class="container-fluid">
-			<div class="navbar nav-header navbar-fixed-top">
-				<h:form class="navbar-form">
-						<h:inputText value="#{userLogin.nick}"/>
-						<h:inputSecret value="#{userLogin.pass}" />
-						<h:commandButton action="#{userLogin.login()}" value="sign in"/>
-				</h:form>
-			</div>
-		</div>
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<div>
+	<h:form class="navbar-form pull-right">
+		<h:inputText class="span2" type="text" placeholder="Usuario"
+			value="#{userLogin.nick}" />
+		<h:inputSecret class="span2" type="password" placeholder="Password"
+			value="#{userLogin.pass}" />
+		<h:commandButton class="btn" action="#{userLogin.login()}"
+			value="log in" />
+	</h:form>
+</div>
 </html>
