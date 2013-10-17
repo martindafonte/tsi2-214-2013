@@ -15,9 +15,12 @@
  */
 package com.google.android.gcm.demo.server;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import persistencia.RegistroDAOLocal;
 
 /**
  * Servlet that registers a device, whose registration id is identified by
@@ -33,11 +36,14 @@ public class RegisterServlet extends BaseServlet {
 
   private static final String PARAMETER_REG_ID = "regId";
 
+  @EJB
+  private RegistroDAOLocal regL;
+  
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException {
     String regId = getParameter(req, PARAMETER_REG_ID);
-    Datastore.register(regId);
+    regL.register(regId);
     setSuccess(resp);
   }
 

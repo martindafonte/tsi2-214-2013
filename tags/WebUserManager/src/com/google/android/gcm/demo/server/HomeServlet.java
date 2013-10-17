@@ -19,8 +19,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import persistencia.RegistroDAOLocal;
 
 /**
  * Servlet that adds display number of devices and button to send a message.
@@ -33,6 +36,8 @@ public class HomeServlet extends BaseServlet {
 
   static final String ATTRIBUTE_STATUS = "status";
 
+  @EJB
+  private RegistroDAOLocal regL;
   /**
    * Displays the existing messages and offer the option to send a new one.
    */
@@ -51,7 +56,7 @@ public class HomeServlet extends BaseServlet {
     if (status != null) {
       out.print(status);
     }
-    List<String> devices = Datastore.getDevices();
+    List<String> devices = regL.getDevices();
     if (devices.isEmpty()) {
       out.print("<h2>No devices registered!</h2>");
     } else {
