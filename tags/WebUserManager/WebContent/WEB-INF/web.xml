@@ -4,6 +4,26 @@
   <welcome-file-list>
     <welcome-file>index.xhtml</welcome-file>
   </welcome-file-list>
+   <context-param>
+  <param-name>javax.ws.rs.Application</param-name>
+  <param-value>serviciosRest.MongoServicios</param-value>
+ </context-param>
+ <listener>
+  <listener-class>org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap</listener-class>
+ </listener>
+
+ <servlet>
+  <servlet-name>Resteasy</servlet-name>
+  <servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
+ </servlet>
+
+ <servlet-mapping>
+  <servlet-name>Resteasy</servlet-name>
+  <url-pattern>/MongoServicios/*</url-pattern>
+ </servlet-mapping>
+ 
+ 
+ 
    <listener>
     <listener-class>
       com.google.android.gcm.demo.server.ApiKeyInitializer
