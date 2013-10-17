@@ -6,11 +6,13 @@
       xmlns:p="http://primefaces.org/ui"> 
       
 <!-- 	<div> -->
-	<p class="navbar-text pull-right">
-              Logged in as <a href="#" class="navbar-link">#{userLogin.nick}</a>
-              <h:commandButton class="btn" action="#{userLogin.logout()}" value="log out" />
-            </p>
-            
+	<h:form>
+		<p class="navbar-text pull-right">
+              Logged in as <a href="#" class="navbar-link">
+              <h:outputText value="#{userLogin.nick}"/></a>
+              <h:commandButton class="btn" action="#{userLogin.logout2()}" value="log out" />
+    	</p>
+     </h:form>
 <!-- 		<h:form class="form-inline"> -->
 <!-- 				<h:outputText class="span2" type="text" value="#{userLogin.nick}" /> -->
 <!-- 				<h:commandButton class="btn" action="#{userLogin.logout()}" value="log out" /> -->
