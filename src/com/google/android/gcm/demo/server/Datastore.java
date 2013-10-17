@@ -19,6 +19,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.ejb.EJB;
+
+import persistencia.RegistroDAO;
+import persistencia.RegistroDAOLocal;
+
 /**
  * Simple implementation of a data store using standard Java collections.
  * <p>
@@ -27,11 +32,16 @@ import java.util.logging.Logger;
  */
 public final class Datastore {
 
+	
+	@EJB
+	private static RegistroDAOLocal regL;
+	
   private static final List<String> regIds = new ArrayList<String>();
   private static final Logger logger =
       Logger.getLogger(Datastore.class.getName());
 
   private Datastore() {
+	regL = new RegistroDAO();
     throw new UnsupportedOperationException();
   }
 
@@ -39,20 +49,22 @@ public final class Datastore {
    * Registers a device.
    */
   public static void register(String regId) {
-    logger.info("Registering " + regId);
-    synchronized (regIds) {
-      regIds.add(regId);
-    }
+//    logger.info("Registering " + regId);
+//    synchronized (regIds) {
+//      regIds.add(regId);
+//    }
+	  regL.register(regId);
   }
 
   /**
    * Unregisters a device.
    */
   public static void unregister(String regId) {
-    logger.info("Unregistering " + regId);
-    synchronized (regIds) {
-      regIds.remove(regId);
-    }
+//    logger.info("Unregistering " + regId);
+//    synchronized (regIds) {
+//      regIds.remove(regId);
+//    }
+	  regL.unregister(regId);
   }
 
   /**
@@ -70,9 +82,10 @@ public final class Datastore {
    * Gets all registered devices.
    */
   public static List<String> getDevices() {
-    synchronized (regIds) {
-      return new ArrayList<String>(regIds);
-    }
+//    synchronized (regIds) {
+//      return new ArrayList<String>(regIds);
+//    }
+	  return regL.getDevices();
   }
-
+  
 }

@@ -28,10 +28,13 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import persistencia.RegistroDAOLocal;
 
 /**
  * Servlet that adds a new message to all registered devices.
@@ -43,6 +46,9 @@ public class SendAllMessagesServlet extends BaseServlet {
 
   private static final int MULTICAST_SIZE = 1000;
 
+  @EJB
+  private RegistroDAOLocal regL;
+  
   private Sender sender;
 
   private static final Executor threadPool = Executors.newFixedThreadPool(5);
@@ -68,7 +74,7 @@ public class SendAllMessagesServlet extends BaseServlet {
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp)
       throws IOException, ServletException {
-    List<String> devices = Datastore.getDevices();
+    List<String> devices = regL.getDevices();
     String status;
     if (devices.isEmpty()) {
       status = "Message ignored as there is no device registered!";
@@ -103,7 +109,7 @@ public class SendAllMessagesServlet extends BaseServlet {
       }
     }
     req.setAttribute(HomeServlet.ATTRIBUTE_STATUS, status.toString());
-    getServletContext().getRequestDispatcher("/home").forward(req, resp);
+    getServletContext().getRequestDispatcher("/notificaciones").forward(req, resp);
   }
 
   private void asyncSend(List<String> partialDevices) {
@@ -133,14 +139,14 @@ public class SendAllMessagesServlet extends BaseServlet {
             if (canonicalRegId != null) {
               // same device has more than on registration id: update it
               logger.info("canonicalRegId " + canonicalRegId);
-              Datastore.updateRegistration(regId, canonicalRegId);
+              regL.updateRegistration(regId, canonicalRegId);
             }
           } else {
             String error = result.getErrorCodeName();
             if (error.equals(Constants.ERROR_NOT_REGISTERED)) {
               // application has been removed from device - unregister it
               logger.info("Unregistered device: " + regId);
-              Datastore.unregister(regId);
+              regL.unregister(regId);
             } else {
               logger.severe("Error sending message to " + regId + ": " + error);
             }
