@@ -35,7 +35,7 @@ public class UserLogin {
 	
 
 	public UserLogin() {
-		this.login = false;
+//		this.login = false;
 	}
 
 	public java.lang.String getNick() {
@@ -70,6 +70,13 @@ public class UserLogin {
 	}
 	
 	public String logout(){
+		
+		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		String ret = req.getRequestURL().toString();
+		return ret;
+	}
+	
+	public String logout2(){
 		
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.getExternalContext().getSessionMap().remove("userLogin");
