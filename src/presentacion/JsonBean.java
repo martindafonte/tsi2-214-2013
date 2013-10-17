@@ -42,7 +42,7 @@ public class JsonBean {
 	
 	public String doGet(){
 		
-		String direc = "http://192.168.0.106:8080/ClienteWeb/MongoServicios/obtener/" + valor;
+		String direc = "http://localhost:8080/WebUserManager/MongoServicios/obtener/" + valor;
 		
 		try {
 			URL url = new URL(direc);
