@@ -1,53 +1,78 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:a4j="http://richfaces.org/a4j"
-      xmlns:rich="http://richfaces.org/rich"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:mj="http://mojarra.dev.java.net/mojarra_ext"
-      xmlns:p="http://primefaces.org/ui"
-      > 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:mj="http://mojarra.dev.java.net/mojarra_ext"
+	xmlns:p="http://primefaces.org/ui">
 <!--       xmlns:b="http://richfaces.org/sandbox/bootstrap" -->
 
 <h:head>
-	
+	<title>Baas TSI2</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="Proyecto de baas 2013" />
+	<meta name="author" content="TSI214" />
+
+	<style type="text/css">
+body {
+	padding-top: 60px;
+	padding-bottom: 40px;
+}
+</style>
 
 
+	<!-- Bootstrap -->
+	<link href="resources/css/bootstrap-responsive.css" rel="stylesheet" />
+	<link href="resources/css/bootstrap.css" rel="stylesheet"
+		media="screen" />
+	<!-- Fav and touch icons -->
+	<link rel="apple-touch-icon-precomposed" sizes="144x144"
+		href="resources/ico/apple-touch-icon-144-precomposed.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="114x114"
+		href="resources/ico/apple-touch-icon-114-precomposed.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="72x72"
+		href="resources/ico/apple-touch-icon-72-precomposed.png" />
+	<link rel="apple-touch-icon-precomposed"
+		href="resources/ico/apple-touch-icon-57-precomposed.png" />
+	<link rel="shortcut icon" href="resources/ico/favicon.png" />
+	<script src="http://code.jquery.com/jquery.js"></script>
+	<script src="resources/js/bootstrap.js"></script>
 </h:head>
 
- 
+
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-    	<div class="navbar-inner">
-    		<div class="container-fluid">
-    			<a class="brand" href="#">BaaS</a>
-    			<div class="nav-collapse collapse">
-    				<p class="navbar-text nav.pull-right">login</p>
-    				<ul class="nav">
-    					<li>
-    						<a href="#">Home</a>
-    					</li>
-    					<li>
-    						<a href="#">About</a>
-    					</li>
-    					<li>
-    						<a href="/WebUserManager/notificaciones">Notificaciones</a>
-    					</li>
-    					<li>
-    						<a href="/WebUserManager/altaUsuario.xhtml">Alta Usuario</a>
-    					</li>
-    					<li>
-    						<a href="/WebUserManager/altaAplicacion.xhtml">Alta Aplicacion</a>
-    					</li>
-    					<li>
-    						<a href="/WebUserManager/showJson.xhtml">Show Json</a>
-    					</li>
-    				</ul>
-    				
-    			</div>
-    		</div>
-    	</div>
-    </div>
-</body> 
+
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<button type="button" class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="brand" href="#">BAAS TSI2</a>
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li class="active"><a href="#">Home</a></li>
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown">Acciones <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="/WebUserManager/altaUsuario.xhtml">Alta
+										Usuario</a></li>
+								<li><a href="/WebUserManager/altaAplicacion.xhtml">Alta
+										Aplicacion</a></li>
+								<li><a href="/WebUserManager/showJson.xhtml">Show Json</a></li>
+								<li><a href="/WebUserManager/notificaciones">Notificaciones</a>
+								</li>
+							</ul></li>
+					</ul>
+					<ui:include src="#{userLogin.go()}" />
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+		</div>
+	</div>
+</body>
 </html>

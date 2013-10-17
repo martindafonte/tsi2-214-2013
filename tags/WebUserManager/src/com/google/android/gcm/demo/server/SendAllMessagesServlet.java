@@ -76,6 +76,7 @@ public class SendAllMessagesServlet extends BaseServlet {
       throws IOException, ServletException {
     List<String> devices = regL.getDevices();
     String status;
+    String parameter = req.getParameter("mensaje");
     if (devices.isEmpty()) {
       status = "Message ignored as there is no device registered!";
     } else {
@@ -84,10 +85,21 @@ public class SendAllMessagesServlet extends BaseServlet {
       if (devices.size() == 1) {
         // send a single message using plain post
         String registrationId = devices.get(0);
-        Message message = new Message.Builder().build();
+        Message message;
+        if(parameter != null){
+            message = new Message.Builder().addData("Mensaje", parameter).build();
+        }else{
+        	message = new Message.Builder().build();
+        }
         Result result = sender.send(message, registrationId, 5);
         status = "Sent message to one device: " + result;
       } else {
+    	  Message message;
+    	  if(parameter != null){
+              message = new Message.Builder().addData("Mensaje", parameter).build();
+          }else{
+          	message = new Message.Builder().build();
+          }
         // send a multicast message using JSON
         // must split in chunks of 1000 devices (GCM limit)
         int total = devices.size();
@@ -99,7 +111,7 @@ public class SendAllMessagesServlet extends BaseServlet {
           partialDevices.add(device);
           int partialSize = partialDevices.size();
           if (partialSize == MULTICAST_SIZE || counter == total) {
-            asyncSend(partialDevices);
+            asyncSend(partialDevices,message);
             partialDevices.clear();
             tasks++;
           }
@@ -112,13 +124,13 @@ public class SendAllMessagesServlet extends BaseServlet {
     getServletContext().getRequestDispatcher("/notificaciones").forward(req, resp);
   }
 
-  private void asyncSend(List<String> partialDevices) {
+  private void asyncSend(List<String> partialDevices, final Message message) {
     // make a copy
     final List<String> devices = new ArrayList<String>(partialDevices);
     threadPool.execute(new Runnable() {
 
       public void run() {
-        Message message = new Message.Builder().addData("Mensaje", "Esta es la posta de los mensajes push").build();
+//        Message message = new Message.Builder().addData("Mensaje", "Esta es la posta de los mensajes push").build();
         MulticastResult multicastResult;
         try {
           multicastResult = sender.send(message, devices, 5);
