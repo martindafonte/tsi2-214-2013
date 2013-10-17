@@ -52,4 +52,19 @@
   <managed-bean-class>presentacion.AppBean</managed-bean-class>
   <managed-bean-scope>request</managed-bean-scope>
  </managed-bean>
+ <managed-bean>
+  <managed-bean-name>jsonBean</managed-bean-name>
+  <managed-bean-class>presentacion.JsonBean</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+  <managed-property>
+   <property-name>valor</property-name>
+   <property-class>java.lang.String</property-class>
+   <value/>
+  </managed-property>
+  <managed-property>
+   <property-name>js</property-name>
+   <property-class>java.lang.String</property-class>
+   <value/>
+  </managed-property>
+ </managed-bean>
 </faces-config>
