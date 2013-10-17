@@ -57,6 +57,11 @@ public class AppInfo implements AppInfoLocal {
     		i.setValue(0);
     		em.persist(i);
     		
+    		i = new Identificador();
+    		i.setName("Registro");
+    		i.setValue(0);
+    		em.persist(i);
+    		
     	}
 //    	em.close();
     }
