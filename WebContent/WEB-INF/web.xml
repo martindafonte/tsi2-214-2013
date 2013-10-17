@@ -79,7 +79,7 @@
 
   <servlet-mapping>
     <servlet-name>HomeServlet</servlet-name>
-    <url-pattern>/home</url-pattern>
+    <url-pattern>/notificaciones</url-pattern>
   </servlet-mapping>
   
   <servlet>
