@@ -59,6 +59,6 @@ public class UserBean {
 	public String go(){
 		
 		serv.altaDesarrollador(nick, pass, nombre, apellido);
-		return "WebUserManager/altaAplicacion.xhtml";	
+		return "/WebUserManager/index.xhtml";	
 	}
 }
