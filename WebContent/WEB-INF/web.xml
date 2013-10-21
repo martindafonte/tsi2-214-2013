@@ -4,32 +4,26 @@
   <welcome-file-list>
     <welcome-file>index.xhtml</welcome-file>
   </welcome-file-list>
-   <context-param>
-  <param-name>javax.ws.rs.Application</param-name>
-  <param-value>serviciosRest.MongoServicios</param-value>
- </context-param>
- <listener>
-  <listener-class>org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap</listener-class>
- </listener>
-
- <servlet>
-  <servlet-name>Resteasy</servlet-name>
-  <servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
- </servlet>
-
- <servlet-mapping>
-  <servlet-name>Resteasy</servlet-name>
-  <url-pattern>/MongoServicios/*</url-pattern>
- </servlet-mapping>
- 
- 
- 
-   <listener>
+  <context-param>
+    <param-name>javax.ws.rs.Application</param-name>
+    <param-value>serviciosRest.MongoServicios</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap</listener-class>
+  </listener>
+  <servlet>
+    <servlet-name>Resteasy</servlet-name>
+    <servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Resteasy</servlet-name>
+    <url-pattern>/MongoServicios/*</url-pattern>
+  </servlet-mapping>
+  <listener>
     <listener-class>
       com.google.android.gcm.demo.server.ApiKeyInitializer
     </listener-class>
   </listener>
-  
   <servlet>
     <servlet-name>RegisterServlet</servlet-name>
     <servlet-class>
@@ -37,12 +31,10 @@
     </servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
-
   <servlet-mapping>
     <servlet-name>RegisterServlet</servlet-name>
     <url-pattern>/register</url-pattern>
   </servlet-mapping>
-
   <servlet>
     <servlet-name>UnregisterServlet</servlet-name>
     <servlet-class>
@@ -50,12 +42,10 @@
     </servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
-
   <servlet-mapping>
     <servlet-name>UnregisterServlet</servlet-name>
     <url-pattern>/unregister</url-pattern>
   </servlet-mapping>
-
   <servlet>
     <servlet-name>SendAllMessagesServlet</servlet-name>
     <servlet-class>
@@ -63,12 +53,10 @@
     </servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
-
   <servlet-mapping>
     <servlet-name>SendAllMessagesServlet</servlet-name>
     <url-pattern>/sendAll</url-pattern>
   </servlet-mapping>
-
   <servlet>
     <servlet-name>HomeServlet</servlet-name>
     <servlet-class>
@@ -76,12 +64,10 @@
     </servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
-
   <servlet-mapping>
     <servlet-name>HomeServlet</servlet-name>
     <url-pattern>/notificaciones</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>Faces Servlet</servlet-name>
     <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -105,4 +91,14 @@
   <listener>
     <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
   </listener>
+  <!-- <servlet>
+    <description>JAX-RS Tools Generated - Do not modify</description>
+    <servlet-name>JAX-RS Servlet</servlet-name>
+    <servlet-class>HelloWorldResource</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>JAX-RS Servlet</servlet-name>
+    <url-pattern>/Rest/*</url-pattern>
+  </servlet-mapping> -->
 </web-app>
