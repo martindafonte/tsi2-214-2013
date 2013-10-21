@@ -9,7 +9,7 @@ import ejb.MongoLocal;
 
 
 @Stateless
-public class MongoRest implements MongoPublico  {
+public class MongoRest implements IMongoPublico  {
 	
 	public String ObtenerJson(int ClienteId) throws UnknownHostException, JSONException {
 		MongoLocal m = new Mongo();
