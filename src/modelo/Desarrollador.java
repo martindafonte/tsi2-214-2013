@@ -1,6 +1,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,8 +19,10 @@ public class Desarrollador implements Serializable {
 	
 	
 	@Id
-	@Column(name = "id_desarrollador")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "des_seq_gen")
+	@SequenceGenerator(name = "des_seq_gen", sequenceName = "des_id_seq")
 	private long id;
+	
 	private String nick;
 	private String pass;
 	private String nombre;
@@ -27,23 +30,21 @@ public class Desarrollador implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private static long autoID;
+	@OneToMany(mappedBy ="d")
+	private Collection<Aplicacion> la;
 	
-	@OneToMany(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_aplicacion")
-	private List<Aplicacion> la;
-	
-	public Desarrollador(){
-	}
-	
-	
-	public List<Aplicacion> getLa() {
+	public Collection<Aplicacion> getLa() {
 		return la;
 	}
 
-	public void setLa(List<Aplicacion> la) {
+
+	public void setLa(Collection<Aplicacion> la) {
 		this.la = la;
 	}
+
+	public Desarrollador(){
+	}
+
 	
 	public long getId() {
 		return id;
@@ -83,13 +84,7 @@ public class Desarrollador implements Serializable {
 
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
-	}
-	
-	public synchronized static long getGenID(){
-		
-		return autoID++;
-	}
-	
+	}	
 	
 	
 	public List<Aplicacion> getAplicaciones(String nombre){

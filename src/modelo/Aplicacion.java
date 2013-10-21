@@ -22,12 +22,14 @@ public class Aplicacion implements Serializable {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+	
 	@Id
-	@Column(name="id_aplicacion")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "app_seq_gen")
+	@SequenceGenerator(name = "app_seq_gen", sequenceName = "app_id_seq")
 	private long id;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_desarrollador")
+	
+	@ManyToOne
 	private Desarrollador d;
 	
 	
