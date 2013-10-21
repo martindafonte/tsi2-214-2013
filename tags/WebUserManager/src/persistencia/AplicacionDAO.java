@@ -35,8 +35,8 @@ public class AplicacionDAO implements AplicacionDAOLocal {
 		
 		
 		try{
-			em.persist(a);
 			d.getLa().add(a);
+			em.persist(a);
 			a.setD(d);
 			
 		}catch(Throwable ex){
