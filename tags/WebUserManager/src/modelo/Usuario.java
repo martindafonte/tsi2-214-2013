@@ -20,31 +20,28 @@ public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "id_usuario")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq_gen")
+	@SequenceGenerator(name = "user_seq_gen", sequenceName = "user_id_seq")
 	private long id;
 	private String nick;
 	private String pass;
 	private String nombre;
 	private String apellido;	
-	
-	private static long autoID;
 
-	@OneToMany(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_aplicacion")
-	private List<Aplicacion> la;
-	
-	
 	public Usuario() {
 	}
 	
-	
-	public List<Aplicacion> getLa() {
-		return la;
-	}
-
-	public void setLa(List<Aplicacion> la) {
-		this.la = la;
-	}
+//	@OneToMany(mappedBy="d")
+//	private List<Aplicacion> la;
+//	
+//	
+//	public List<Aplicacion> getLa() {
+//		return la;
+//	}
+//
+//	public void setLa(List<Aplicacion> la) {
+//		this.la = la;
+//	}
 	
 	
 	public long getId() {
@@ -95,10 +92,5 @@ public class Usuario implements Serializable {
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
-	
-	public synchronized static long getGenID(){
-		
-		return autoID++;
-	}
-	
+
 }
