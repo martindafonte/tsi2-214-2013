@@ -2,6 +2,7 @@ package modelo;
 
 import java.io.Serializable;
 import java.lang.String;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -32,7 +33,16 @@ public class Aplicacion implements Serializable {
 	@ManyToOne
 	private Desarrollador d;
 	
+	@OneToMany(mappedBy="aplicacion")
+	private List<Canal> canales;
 	
+	
+	public List<Canal> getCanales() {
+		return canales;
+	}
+	public void setCanales(List<Canal> canales) {
+		this.canales = canales;
+	}
 	public Desarrollador getD() {
 		return d;
 	}

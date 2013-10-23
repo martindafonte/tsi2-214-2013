@@ -1,7 +1,6 @@
 package modelo;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.*;
 
@@ -30,18 +29,6 @@ public class Usuario implements Serializable {
 
 	public Usuario() {
 	}
-	
-//	@OneToMany(mappedBy="d")
-//	private List<Aplicacion> la;
-//	
-//	
-//	public List<Aplicacion> getLa() {
-//		return la;
-//	}
-//
-//	public void setLa(List<Aplicacion> la) {
-//		this.la = la;
-//	}
 	
 	
 	public long getId() {

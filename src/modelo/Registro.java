@@ -2,6 +2,9 @@ package modelo;
 
 import java.io.Serializable;
 import java.lang.String;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.persistence.*;
 
 /**
@@ -16,7 +19,17 @@ public class Registro implements Serializable {
 	private long id;
 	private String registrer;
 	private static final long serialVersionUID = 1L;
+	
+	
+	@ManyToMany
+	private List<Canal> canales;
 
+	public List<Canal> getCanales() {
+		return canales;
+	}
+	public void setCanales(List<Canal> canales) {
+		this.canales = canales;
+	}
 	public Registro() {
 		super();
 	}   
@@ -35,4 +48,18 @@ public class Registro implements Serializable {
 		this.registrer = registrer;
 	}
    
+	public void quitarCanal(Canal c){
+		
+		Iterator<Canal> itlc = canales.iterator();
+		int index = 0;
+		while(itlc.hasNext()){
+			if( itlc.next().getId() == c.getId()){
+				canales.remove(index);
+				return;
+			}
+			index++;
+		}
+		
+	}
+	
 }
