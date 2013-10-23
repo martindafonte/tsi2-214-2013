@@ -29,11 +29,19 @@ public class Aplicacion implements Serializable {
 	@SequenceGenerator(name = "app_seq_gen", sequenceName = "app_id_seq")
 	private long id;
 	
+	private boolean singleLogin;
 	
+	public boolean isSingleLogin() {
+		return singleLogin;
+	}
+	public void setSingleLogin(boolean singleLogin) {
+		this.singleLogin = singleLogin;
+	}
+
 	@ManyToOne
 	private Desarrollador d;
 	
-	@OneToMany(mappedBy="aplicacion")
+	@OneToMany
 	private List<Canal> canales;
 	
 	
