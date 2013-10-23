@@ -1,5 +1,7 @@
 package persistencia;
 
+import java.util.List;
+
 import javax.ejb.Local;
 
 import modelo.Aplicacion;
@@ -9,5 +11,6 @@ import modelo.Desarrollador;
 public interface AplicacionDAOLocal {
 
 	public void altaApliacion(Aplicacion a, Desarrollador d);
+	public List<Aplicacion> singleLoginAplicaciones();
 	
 }
