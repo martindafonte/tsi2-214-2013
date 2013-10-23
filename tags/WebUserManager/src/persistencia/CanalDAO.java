@@ -72,7 +72,7 @@ public class CanalDAO implements CanalDAOLocal {
 	public Aplicacion getAplicacionCanal(Canal c) {
 		// TODO Auto-generated method stub
 		Query q = em.createQuery("SELECT x FROM Aplicacion x WHERE x.id = ?1");
-		q.setParameter(1, c.getAplicacionId());
+		q.setParameter(1, c.getApp().getId());
 		@SuppressWarnings("unchecked")
 		List<Aplicacion> l = q.getResultList();
 		Iterator<Aplicacion> it = l.iterator();
