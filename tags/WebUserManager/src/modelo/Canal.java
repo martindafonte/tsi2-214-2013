@@ -12,15 +12,11 @@ import javax.persistence.*;
  *
  */
 @Entity
-
-@IdClass(CanalPK.class)
 public class Canal implements Serializable {
 
 	   
 	@Id
 	private String codigo;   
-	@Id
-	private long aplicacionId;
 	
 	private static final long serialVersionUID = 1L;
 
@@ -34,14 +30,10 @@ public class Canal implements Serializable {
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}   
-	public long getAplicacionId() {
-		return this.aplicacionId;
-	}
-
-	public void setAplicacionId(long aplicacionId) {
-		this.aplicacionId = aplicacionId;
-	}
 	
+	
+	@ManyToOne
+	private Aplicacion app; 
 	
 	@ManyToMany(mappedBy="canales")
 	private List<Registro> registrados;
@@ -72,7 +64,14 @@ public class Canal implements Serializable {
 	
 	public boolean equalKey(String cod, long appid){
 		
-		return ((cod.equals(codigo)) && (appid == aplicacionId));
+		return ((cod.equals(codigo)) && (appid == app.getId()));
+	}
+	
+	public Aplicacion getApp() {
+		return app;
+	}
+	public void setApp(Aplicacion app) {
+		this.app = app;
 	}
 	
 }

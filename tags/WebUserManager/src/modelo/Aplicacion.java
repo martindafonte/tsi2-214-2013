@@ -41,7 +41,7 @@ public class Aplicacion implements Serializable {
 	@ManyToOne
 	private Desarrollador d;
 	
-	@OneToMany
+	@OneToMany(mappedBy="app")
 	private List<Canal> canales;
 	
 	
