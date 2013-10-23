@@ -3,11 +3,13 @@ package negocio;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
 
-import persistencia.UsuarioDAO;
+import persistencia.AplicacionDAOLocal;
+import persistencia.UsuarioDAOLocal;
 import modelo.Aplicacion;
 import modelo.Usuario;
 
@@ -23,7 +25,10 @@ public class ServicioLogin implements ServicioLoginLocal {
      */
 	
 	@EJB
-	private UsuarioDAO servuser;
+	private UsuarioDAOLocal servuser;
+	
+	@EJB
+	private AplicacionDAOLocal servapp;
 	
 	private boolean login = false;
 	private Usuario user;
@@ -58,18 +63,36 @@ public class ServicioLogin implements ServicioLoginLocal {
         // TODO Auto-generated constructor stub
     }
     
-//    public Usuario loginUser(String app, String nick, String pass){
-//    	
-//    	
-//    	if(login){
-//	    	Iterator<Aplicacion> ita = apps.iterator();
-//	    	while( ita.hasNext() ){
-////	    		if
-//	    		
-//	    	}
-//    	}else{
-//    		
-//    	}
-//    }
+    @PostConstruct
+    public void init(){
+    	
+    	apps = servapp.singleLoginAplicaciones();
+    
+    }
+    
+    public Usuario loginUser(String app, String nick, String pass){
+
+    	
+    	if(login){
+	    	Iterator<Aplicacion> ita = apps.iterator();
+	    	while( ita.hasNext() ){
+	    		if( ita.next().getNombre() == app){
+	    			if((user.getNick() == nick)&&(user.getPass() == pass)){
+	    				return user;
+	    			}else{
+	    				return null;
+	    			}
+	    			
+	    		}	    		
+	    	}
+    	}else{
+    		
+    		
+    		return servuser.getUsuario(nick, pass);
+    		
+    	}
+    	
+    	return null;
+    }
 
 }
