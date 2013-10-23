@@ -1,40 +1,48 @@
 package modelo;
 
 import java.io.Serializable;
+import java.lang.String;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.*;
-
-import modelo.Aplicacion;
 
 /**
  * Entity implementation class for Entity: Canal
  *
  */
 @Entity
+
+@IdClass(CanalPK.class)
 public class Canal implements Serializable {
 
 	   
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "canal_seq_gen")
-	@SequenceGenerator(name = "canal_seq_gen", sequenceName = "canal_id_seq")
-	private long id;
-	
-	private String codigo;
-	
-	public String getCodigo() {
-		return codigo;
-	}
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
-
-	@ManyToOne
-	private Aplicacion aplicacion;
+	private String codigo;   
+	@Id
+	private long aplicacionId;
 	
 	private static final long serialVersionUID = 1L;
 
+	public Canal() {
+		super();
+	}   
+	public String getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}   
+	public long getAplicacionId() {
+		return this.aplicacionId;
+	}
+
+	public void setAplicacionId(long aplicacionId) {
+		this.aplicacionId = aplicacionId;
+	}
+	
+	
 	@ManyToMany(mappedBy="canales")
 	private List<Registro> registrados;
 	
@@ -42,26 +50,11 @@ public class Canal implements Serializable {
 	public List<Registro> getRegistrados() {
 		return registrados;
 	}
+	
 	public void setRegistrados(List<Registro> registrados) {
 		this.registrados = registrados;
 	}
-	public Canal() {
-		super();
-	}   
-	public long getId() {
-		return this.id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}   
-	public Aplicacion getAplicacion() {
-		return this.aplicacion;
-	}
-
-	public void setAplicacion(Aplicacion aplicacion) {
-		this.aplicacion = aplicacion;
-	}
+ 
 	
 	public void quitarRegistro(Registro r){
 		
@@ -77,5 +70,9 @@ public class Canal implements Serializable {
 		
 	}
 	
-   
+	public boolean equalKey(String cod, long appid){
+		
+		return ((cod.equals(codigo)) && (appid == aplicacionId));
+	}
+	
 }

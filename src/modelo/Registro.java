@@ -53,7 +53,7 @@ public class Registro implements Serializable {
 		Iterator<Canal> itlc = canales.iterator();
 		int index = 0;
 		while(itlc.hasNext()){
-			if( itlc.next().getId() == c.getId()){
+			if( itlc.next().equalKey(c.getCodigo(), c.getAplicacionId())){
 				canales.remove(index);
 				return;
 			}
