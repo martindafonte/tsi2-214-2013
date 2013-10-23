@@ -1,18 +1,29 @@
 package serviciosRest;
 
-import javax.ejb.Stateless;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+public class PushRest implements IPushRest {
 
-@Path("/Push")
-@Stateless
-public class PushRest {
-
-	@GET
-	@Produces("text/plain")
-	@Path("/Get")
-	public String holaMundo(){
-		return "Hola PEPE";
+	@Override
+	public Mensaje registrar(long p_appId, int p_regId, String p_canal) {
+		Mensaje msj = new Mensaje();
+		msj.codigo = 0;
+		msj.descripcion="Exito";
+		return msj;
 	}
+
+	@Override
+	public Mensaje desregistrar(long p_appId, int p_regId, String p_canal) {
+		Mensaje msj = new Mensaje();
+		msj.codigo = 0;
+		msj.descripcion="Exito";
+		return msj;
+	}
+
+	@Override
+	public Mensaje enviarACanal(long p_appId, String p_canal, String p_msj) {
+		Mensaje msj = new Mensaje();
+		msj.codigo = 0;
+		msj.descripcion="Exito";
+		return msj;
+	}
+
 }
