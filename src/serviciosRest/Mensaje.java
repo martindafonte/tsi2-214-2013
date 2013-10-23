@@ -11,11 +11,12 @@ public class Mensaje{
 	String descripcion;
 }
 
+
 //Esta clase es un ejemplo de lo que se debe devolver
-class MensajeExtendido extends Mensaje{
-	@XmlElement
-	String json;
-}
+//class MensajeExtendido extends Mensaje{
+//	@XmlElement
+//	String json;
+//}
 
 //Ejemplo de servicio
 //@GET
