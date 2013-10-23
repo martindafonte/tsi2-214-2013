@@ -7,7 +7,9 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
+import modelo.Aplicacion;
 import modelo.Canal;
 import modelo.Registro;
 
@@ -63,6 +65,22 @@ public class CanalDAO implements CanalDAOLocal {
 		em.persist(r);
 		em.persist(c);
 
+	}
+
+
+	@Override
+	public Aplicacion getAplicacionCanal(Canal c) {
+		// TODO Auto-generated method stub
+		Query q = em.createQuery("SELECT x FROM Aplicacion x WHERE x.id = ?1");
+		q.setParameter(1, c.getAplicacionId());
+		@SuppressWarnings("unchecked")
+		List<Aplicacion> l = q.getResultList();
+		Iterator<Aplicacion> it = l.iterator();
+		if(it.hasNext()){			
+			return it.next();
+		}
+		return null;
+		
 	}
     
     
