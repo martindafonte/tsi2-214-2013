@@ -45,7 +45,11 @@ import java.io.Serializable;
  */
 public final class Result implements Serializable {
 
-  private final String messageId;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3879597487497152500L;
+private final String messageId;
   private final String canonicalRegistrationId;
   private final String errorCode;
 
