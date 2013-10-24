@@ -5,6 +5,8 @@ import java.util.HashSet;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
+
+import ejb.PruebaWebService;
 @ApplicationPath("/Rest")
 public class MongoServicios extends Application {
 
@@ -13,6 +15,7 @@ public class MongoServicios extends Application {
 	public MongoServicios(){
 	     singletons.add(new MongoRest());
 	     singletons.add(new PushRest());
+	     empty.add(PruebaWebService.class);
 	}
 	@Override
 	public Set<Class<?>> getClasses() {
