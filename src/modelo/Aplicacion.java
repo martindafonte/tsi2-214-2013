@@ -28,6 +28,8 @@ public class Aplicacion implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "app_seq_gen")
 	@SequenceGenerator(name = "app_seq_gen", sequenceName = "app_id_seq")
 	private long id;
+
+	private long jsonid;
 	
 	private boolean singleLogin;
 	
@@ -43,6 +45,15 @@ public class Aplicacion implements Serializable {
 	
 	@OneToMany(mappedBy="app")
 	private List<Canal> canales;
+	
+	@OneToMany
+	private List<Pedido> pedidosJson;
+	
+	@OneToMany
+	private List<Pedido> pedidosPush;
+	
+	@OneToMany
+	private List<Pedido> pedidosUM;
 	
 	
 	public List<Canal> getCanales() {
@@ -75,5 +86,34 @@ public class Aplicacion implements Serializable {
 	public void setId(long id) {
 		this.id = id;
 	}   
-   
+	
+	public List<Pedido> getPedidosJson() {
+		return pedidosJson;
+	}
+	public void setPedidosJson(List<Pedido> pedidosJson) {
+		this.pedidosJson = pedidosJson;
+	}
+	public long getJsonid() {
+		return jsonid;
+	}
+	public void setJsonid(long jsonid) {
+		this.jsonid = jsonid;
+	}
+	
+	public List<Pedido> getPedidosPush() {
+		return pedidosPush;
+	}
+	public void setPedidosPush(List<Pedido> pedidosPush) {
+		this.pedidosPush = pedidosPush;
+	}
+	public List<Pedido> getPedidosUM() {
+		return pedidosUM;
+	}
+	public void setPedidosUM(List<Pedido> pedidosUM) {
+		this.pedidosUM = pedidosUM;
+	}
+	
+	public synchronized long getJSONID(){
+		return jsonid++;
+	}
 }
