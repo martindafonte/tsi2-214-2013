@@ -5,10 +5,8 @@ import java.util.List;
 
 import com.google.android.gcm.server.Message;
 import com.google.android.gcm.server.MulticastResult;
-import com.google.android.gcm.server.Result;
 import com.google.android.gcm.server.Sender;
 
-import modelo.Aplicacion;
 import modelo.Canal;
 import modelo.Registro;
 import persistencia.*;
