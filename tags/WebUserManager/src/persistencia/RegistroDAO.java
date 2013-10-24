@@ -36,13 +36,14 @@ public class RegistroDAO implements RegistroDAOLocal {
     }
 
 	@Override
-	public void register(String regId) {
+	public Registro register(String regId) {
 		// TODO Auto-generated method stub
 		
 		Registro reg = new Registro();
-		reg.setId(appInfo.getId("Registro"));
+//		reg.setId(appInfo.getId("Registro"));
 		reg.setRegistrer(regId);
 		em.persist(reg);
+		return reg;
 		
 	}
 

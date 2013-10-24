@@ -53,8 +53,7 @@ public class CanalDAO implements CanalDAOLocal {
 		// TODO Auto-generated method stub
 		c.getRegistrados().add(r);
 		r.getCanales().add(c);
-		em.persist(c);
-		em.persist(r);
+		em.flush();
 	}
 
 	@Override
@@ -62,8 +61,7 @@ public class CanalDAO implements CanalDAOLocal {
 		// TODO Auto-generated method stub
 		r.quitarCanal(c);
 		c.quitarRegistro(r);
-		em.persist(r);
-		em.persist(c);
+		em.flush();
 
 	}
 
