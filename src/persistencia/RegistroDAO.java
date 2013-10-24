@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import negocio.AppInfoLocal;
 import modelo.Registro;
 
@@ -32,13 +33,10 @@ public class RegistroDAO implements RegistroDAOLocal {
 	private AppInfoLocal appInfo;
 	
     public RegistroDAO() {
-        // TODO Auto-generated constructor stub
     }
 
 	@Override
 	public Registro register(String regId) {
-		// TODO Auto-generated method stub
-		
 		Registro reg = new Registro();
 //		reg.setId(appInfo.getId("Registro"));
 		reg.setRegistrer(regId);
@@ -50,7 +48,6 @@ public class RegistroDAO implements RegistroDAOLocal {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void unregister(String regId) {
-		// TODO Auto-generated method stub
 		Query q = em.createQuery("SELECT x FROM Registro x WHERE x.registrer = ?1");
 		q.setParameter(1, regId);
 		List<Registro> ls = (List<Registro>)q.getResultList();
@@ -66,15 +63,12 @@ public class RegistroDAO implements RegistroDAOLocal {
 
 	@Override
 	public void updateRegistration(String oldId, String newId) {
-		// TODO Auto-generated method stub
-		
-		
+		throw new NotImplementedException();	
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<String> getDevices() {
-		// TODO Auto-generated method stub
 		Query q = em.createQuery("SELECT x FROM Registro x");
 		List<Registro> ls = (List<Registro>)q.getResultList();
 		List<String> lres = new LinkedList<String>(); 

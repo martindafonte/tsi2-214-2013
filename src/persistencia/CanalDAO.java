@@ -27,18 +27,15 @@ public class CanalDAO implements CanalDAOLocal {
 	private EntityManager em;
 	
     public CanalDAO() {
-        // TODO Auto-generated constructor stub
     }
 
 	@Override
 	public void altaCanal(Canal c) {
-		// TODO Auto-generated method stub
 		em.persist(c);
 	}
 
 	@Override
 	public void borrarCanal(Canal c) {
-		// TODO Auto-generated method stub
 		List<Registro> lr = c.getRegistrados();
 		Iterator<Registro> itlr = lr.iterator();
 		while(itlr.hasNext()){
@@ -50,7 +47,6 @@ public class CanalDAO implements CanalDAOLocal {
 
 	@Override
 	public void agregarRegistroCanal(Canal c, Registro r) {
-		// TODO Auto-generated method stub
 		c.getRegistrados().add(r);
 		r.getCanales().add(c);
 		em.flush();
@@ -58,7 +54,6 @@ public class CanalDAO implements CanalDAOLocal {
 
 	@Override
 	public void quitarRegistroCanal(Canal c, Registro r) {
-		// TODO Auto-generated method stub
 		r.quitarCanal(c);
 		c.quitarRegistro(r);
 		em.flush();
@@ -68,7 +63,6 @@ public class CanalDAO implements CanalDAOLocal {
 
 	@Override
 	public Aplicacion getAplicacionCanal(Canal c) {
-		// TODO Auto-generated method stub
 		Query q = em.createQuery("SELECT x FROM Aplicacion x WHERE x.id = ?1");
 		q.setParameter(1, c.getApp().getId());
 		@SuppressWarnings("unchecked")
@@ -83,7 +77,6 @@ public class CanalDAO implements CanalDAOLocal {
 
 	@Override
 	public Canal getCanal(String id) {
-		// TODO Auto-generated method stub
 		Query q = em.createQuery("SELECT x FROM Canal x WHERE x.id = ?1");
 		q.setParameter(1, id);
 		@SuppressWarnings("unchecked")
