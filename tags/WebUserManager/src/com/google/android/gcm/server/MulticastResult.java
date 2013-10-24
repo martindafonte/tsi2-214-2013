@@ -25,7 +25,11 @@ import java.util.List;
  */
 public final class MulticastResult implements Serializable {
 
-  private final int success;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8244098890490685467L;
+private final int success;
   private final int failure;
   private final int canonicalIds;
   private final long multicastId;

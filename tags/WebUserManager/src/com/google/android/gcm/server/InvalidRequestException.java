@@ -24,7 +24,11 @@ import java.io.IOException;
  */
 public final class InvalidRequestException extends IOException {
 
-  private final int status;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5007836361895595767L;
+private final int status;
   private final String description;
 
   public InvalidRequestException(int status) {

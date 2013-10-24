@@ -58,7 +58,11 @@ import java.util.Map;
  */
 public final class Message implements Serializable {
 
-  private final String collapseKey;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3832496480439825497L;
+private final String collapseKey;
   private final Boolean delayWhileIdle;
   private final Integer timeToLive;
   private final Map<String, String> data;
