@@ -80,6 +80,19 @@ public class CanalDAO implements CanalDAOLocal {
 		return null;
 		
 	}
+
+	@Override
+	public Canal getCanal(String id) {
+		// TODO Auto-generated method stub
+		Query q = em.createQuery("SELECT x FROM Canal x WHERE x.id = ?1");
+		q.setParameter(1, id);
+		@SuppressWarnings("unchecked")
+		List<Canal> lc = q.getResultList();
+		if(lc.size() == 1){
+			return lc.iterator().next();
+		}		
+		return null;
+	}
     
     
 

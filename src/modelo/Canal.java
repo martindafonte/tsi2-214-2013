@@ -16,7 +16,7 @@ public class Canal implements Serializable {
 
 	   
 	@Id
-	private String codigo;   
+	private String codigo;
 	
 	private static final long serialVersionUID = 1L;
 
@@ -62,10 +62,10 @@ public class Canal implements Serializable {
 		
 	}
 	
-	public boolean equalKey(String cod, long appid){
-		
-		return ((cod.equals(codigo)) && (appid == app.getId()));
-	}
+//	public boolean equalKey(String cod, long appid){
+//		
+//		return ((cod.equals(codigo)) && (appid == app.getId()));
+//	}
 	
 	public Aplicacion getApp() {
 		return app;
