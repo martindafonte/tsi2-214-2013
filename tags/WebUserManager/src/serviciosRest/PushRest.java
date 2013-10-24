@@ -19,15 +19,20 @@ public class PushRest implements IPushRest {
 	public Mensaje registrar(long p_appId, String p_regId, String p_canal) {
 		Mensaje msj = new Mensaje();
 		try {
-			AplicacionDAOLocal apl = new AplicacionDAO();
-			Aplicacion a = new Aplicacion();
+			RegistroDAOLocal rdl = new RegistroDAO();
+			Registro r =rdl.register(p_regId);
 			CanalDAOLocal cdl = new CanalDAO();
-			// cdl.agregarRegistroCanal(c, null);
-
+			Canal c = cdl.getCanal(p_regId);
+			if(c == null){
+				msj.codigo = Constantes.Push_Error_No_Existe_Canal;
+				msj.descripcion = "El canal ingresado no existe";
+				return msj;
+			}
+			cdl.agregarRegistroCanal(c,r);
 			msj.codigo = 0;
 			msj.descripcion = "Exito";
 		} catch (Exception e) {
-			msj.codigo = Constantes.Cte_Excepcion_Push;
+			msj.codigo = Constantes.Push_Excepcion;
 			msj.descripcion = "Ocurrio una excepcion inesperada";
 		}
 		return msj;
@@ -42,7 +47,7 @@ public class PushRest implements IPushRest {
 			msj.codigo = 0;
 			msj.descripcion = "Exito";
 		} catch (Exception e) {
-			msj.codigo = Constantes.Cte_Excepcion_Push;
+			msj.codigo = Constantes.Push_Excepcion;
 			msj.descripcion = "Ocurrio una excepcion inesperada";
 		}
 		return msj;
@@ -73,11 +78,11 @@ public class PushRest implements IPushRest {
 				msj.codigo = 0;
 				msj.descripcion="Exito";
 			}else{
-				msj.codigo=Constantes.Cte_Error_Enviar_Push;
+				msj.codigo=Constantes.Push_Error_Enviar;
 				msj.descripcion ="No se pudieron enviar " + result.getFailure();
 			}
 		} catch (Exception e) {
-			msj.codigo = Constantes.Cte_Excepcion_Push;
+			msj.codigo = Constantes.Push_Excepcion;
 			msj.descripcion = "Ocurrio una excepcion inesperada";
 		}
 		return msj;

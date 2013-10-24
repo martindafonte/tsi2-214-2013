@@ -7,6 +7,7 @@ public abstract class Constantes {
 	
 	
 	//Para servicios push se toma el rango desde 100-199
-	public static final int Cte_Excepcion_Push = 100;
-	public static final int Cte_Error_Enviar_Push = 101;
+	public static final int Push_Excepcion = 100;
+	public static final int Push_Error_Enviar = 101;
+	public static final int Push_Error_No_Existe_Canal = 101;
 }
