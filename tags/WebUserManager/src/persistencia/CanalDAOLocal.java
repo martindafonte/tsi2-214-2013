@@ -15,5 +15,6 @@ public interface CanalDAOLocal {
 	public void agregarRegistroCanal(Canal c, Registro r);
 	public void quitarRegistroCanal(Canal c, Registro r);
 	public Aplicacion getAplicacionCanal(Canal c);
+	public Canal getCanal(String id);
 
 }
