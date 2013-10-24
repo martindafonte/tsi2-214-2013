@@ -80,4 +80,22 @@ public class AplicacionDAO implements AplicacionDAOLocal {
 	}
 
 
+	@Override
+	public Aplicacion getAplicacion(long id) {
+		// TODO Auto-generated method stub
+		Query q = em.createQuery("SELECT x FROM Aplicacion x WHERE x.id = ?1");
+		q.setParameter(1, id);
+		@SuppressWarnings("unchecked")
+		List<Aplicacion> la = q.getResultList();
+		if (la.size() == 1){
+		
+			return la.iterator().next();
+			
+		}		
+		return null;
+	}
+
+	
+	
+
 }

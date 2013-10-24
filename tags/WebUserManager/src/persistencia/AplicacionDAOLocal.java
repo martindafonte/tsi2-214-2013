@@ -14,5 +14,6 @@ public interface AplicacionDAOLocal {
 	public List<Aplicacion> singleLoginAplicaciones();
 	public List<Aplicacion> getAplicaciones(Desarrollador d);
 	public long getIdJSON(Aplicacion a);
+	public Aplicacion getAplicacion(long id);
 	
 }
