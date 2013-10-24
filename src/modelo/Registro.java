@@ -62,4 +62,17 @@ public class Registro implements Serializable {
 		
 	}
 	
+	public boolean existeCanalRegistro(Canal ca){
+		
+		Iterator<Canal> itc = canales.iterator();
+		while(itc.hasNext()){
+			if(itc.next().getCodigo().equals(ca.getCodigo())){
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	
 }

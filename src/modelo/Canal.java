@@ -74,4 +74,16 @@ public class Canal implements Serializable {
 		this.app = app;
 	}
 	
+	public boolean existeRegistroCanal(Registro reg){
+		
+		Iterator<Registro> itr = registrados.iterator();
+		while(itr.hasNext()){
+			if(itr.next().getRegistrer().equals(reg.getRegistrer())){
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
 }
