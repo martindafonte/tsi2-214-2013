@@ -16,12 +16,12 @@ public interface IPushRest {
 	@POST
 	@Path("{apid}/{chanel}/User")
 	@Produces(MediaType.APPLICATION_JSON)
-	public abstract Mensaje registrar(@PathParam("apid")long p_appId, @FormParam("id") int p_regId, @PathParam("chanel") String p_canal);
+	public abstract Mensaje registrar(@PathParam("apid")long p_appId, @FormParam("id") String p_regId, @PathParam("chanel") String p_canal);
 	
 	@DELETE
 	@Path("{apid}/{chanel}/User/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public abstract Mensaje desregistrar(@PathParam("apid")long p_appId, @PathParam("id") int p_regId, @PathParam("chanel") String p_canal);
+	public abstract Mensaje desregistrar(@PathParam("apid")long p_appId, @PathParam("id") String p_regId, @PathParam("chanel") String p_canal);
 	
 	@POST
 	@Path("{apid}/{chanel}/Message")

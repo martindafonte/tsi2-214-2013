@@ -36,73 +36,9 @@ body {
 	<script src="resources/js/bootstrap.js"></script>
 </h:head>
 <body>
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<button type="button" class="btn btn-navbar" data-toggle="collapse"
-					data-target=".nav-collapse">
-					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="brand" href="/WebUserManager">BAAS TSI2</a>
-				<div class="nav-collapse collapse">
-					<ul class="nav">
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">Acciones <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="/WebUserManager/altaUsuario.xhtml">Alta
-										Usuario</a></li>
-								<li><a href="/WebUserManager/altaAplicacion.xhtml">Alta
-										Aplicacion</a></li>
-								<li><a href="/WebUserManager/showJson.xhtml">Show Json</a></li>
-								<li><a href="/WebUserManager/notificaciones">Notificaciones</a></li>
-							</ul></li>
-					</ul>
-					<ui:include src="#{userLogin.go()}" />
-				</div>
-				<!--/.nav-collapse -->
-			</div>
-		</div>
-	</div>
+	<ui:include src="/BannerTop.xhtml"></ui:include>
 	<div class="container">
-		<h:form  class="form-horizontal">
-			<fieldset>
-				<legend>Alta Usuario</legend>
-				<div class="control-group">
-					<label class="control-label" for="inputEmail">Nick </label>
-					<div class="controls">
-						<h:inputText type="text" value="#{userBean.nick}"
-							placeholder="Ingrese un nick" />
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label" for="inputEmail">Password </label>
-					<div class="controls">
-						<h:inputSecret type="password" value="#{userBean.pass}"
-							placeholder="Password" />
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label" for="inputEmail">Nombre </label>
-					<div class="controls">
-						<h:inputText type="text" value="#{userBean.nombre}"
-							placeholder="Ingrese su nombre" />
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label" for="inputEmail">Apellido </label>
-					<div class="controls">
-						<h:inputText type="text" value="#{userBean.apellido}"
-							placeholder="Ingrese su apellido" />
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="controls">
-					<h:commandButton value="Aceptar" action="#{userBean.go()}" />
-					</div>
-				</div>
-			</fieldset>
-		</h:form>
+		
 
 	</div>
 </body>

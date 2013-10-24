@@ -27,49 +27,85 @@ body {
 	<link href="resources/css/bootstrap-responsive.css" rel="stylesheet" />
 	<link href="resources/css/bootstrap.css" rel="stylesheet"
 		media="screen" />
-	<!-- Fav and touch icons -->
-	<link rel="apple-touch-icon-precomposed" sizes="144x144"
-		href="resources/ico/apple-touch-icon-144-precomposed.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="114x114"
-		href="resources/ico/apple-touch-icon-114-precomposed.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="72x72"
-		href="resources/ico/apple-touch-icon-72-precomposed.png" />
-	<link rel="apple-touch-icon-precomposed"
-		href="resources/ico/apple-touch-icon-57-precomposed.png" />
-	<link rel="shortcut icon" href="resources/ico/favicon.png" />
 	<script src="http://code.jquery.com/jquery.js"></script>
 	<script src="resources/js/bootstrap.js"></script>
 </h:head>
 
 
 <body>
+	<ui:include src="/BannerTop.xhtml"></ui:include>
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span4">
+				<h1>Introducción</h1>
+				<p>El objetivo de un BAAS es brindar a los desarrolladores un
+					Backend común para todas sus aplicaciones, que le permita
+					incorporar funcionalidades básicas realizando un mínimo esfuerzo.
+					Permiten desligar a los implementadores de la tarea de programar la
+					misma funcionalidad en diversas plataformas, permitiéndoles dedicar
+					más tiempo al desarrollo de su aplicación y a enriquecer la
+					experiencia del usuario. Los servicios se ofrecen a través de un
+					API REST, además de proporcionar un kit de desarrollo o SDK que
+					facilita la utilización de los servicios para las distintas
+					plataformas. Otra de las grandes ventajas de este sistema es poder
+					contar con el Backend “in the cloud”, esto repercute de forma
+					directa con el monto de la inversión inicial para lanzar una
+					aplicación, ya que no se deben comprar servidores, grandes
+					conexiones a internet, a la vez que se evita los gastos de tiempo y
+					dinero que lleva el mantenimiento de los mismos. Gracias a los
+					datos estadísticos que brinda el sistema los desarrolladores podrán
+					planificar el crecimiento de los requerimientos y pagar de acorde a
+					estos, por lo que el tiempo de respuesta ante un aumento de la
+					demanda disminuye con respecto a los Backend tradicionales. En
+					resumen, el desarrolladores requiere de una inversión inicial
+					menor, ahorra horas de implementación y de transportar su Backend a
+					diversas plataformas, y aumenta la capacidad de respuesta ante un
+					aumenta de los requerimientos, lo que en su conjunto mejoran el
+					tiempo de puesta en producción y la capacidad de crecimiento.</p>
+			</div>
+			<div class="span4 offset2">
 
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<button type="button" class="btn btn-navbar" data-toggle="collapse"
-					data-target=".nav-collapse">
-					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="brand" href="/WebUserManager">BAAS TSI2</a>
-				<div class="nav-collapse collapse">
-					<ul class="nav">
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">Acciones <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="/WebUserManager/altaUsuario.xhtml">Alta
-										Usuario</a></li>
-								<li><a href="/WebUserManager/altaAplicacion.xhtml">Alta
-										Aplicacion</a></li>
-								<li><a href="/WebUserManager/showJson.xhtml">Show Json</a></li>
-								<li><a href="/WebUserManager/notificaciones">Notificaciones</a>
-								</li>
-							</ul></li>
-					</ul>
-					<ui:include src="#{userLogin.go()}" />
-				</div>
-				<!--/.nav-collapse -->
+				<h:form class="form-horizontal.span4">
+					<div class="hero-unit">
+						<fieldset>
+							<legend>Alta Usuario</legend>
+							<div class="control-group">
+								<label class="control-label" for="inputEmail">Nick </label>
+								<div class="controls">
+									<h:inputText type="text" value="#{userBean.nick}"
+										placeholder="Ingrese un nick" />
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="inputEmail">Password </label>
+								<div class="controls">
+									<h:inputSecret type="password" value="#{userBean.pass}"
+										placeholder="Password" />
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="inputEmail">Nombre </label>
+								<div class="controls">
+									<h:inputText type="text" value="#{userBean.nombre}"
+										placeholder="Ingrese su nombre" />
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="inputEmail">Apellido </label>
+								<div class="controls">
+									<h:inputText type="text" value="#{userBean.apellido}"
+										placeholder="Ingrese su apellido" />
+								</div>
+							</div>
+							<div class="control-group">
+								<div class="controls">
+									<h:commandButton value="Aceptar" class="btn"
+										action="#{userBean.go()}" />
+								</div>
+							</div>
+						</fieldset>
+					</div>
+				</h:form>
 			</div>
 		</div>
 	</div>
