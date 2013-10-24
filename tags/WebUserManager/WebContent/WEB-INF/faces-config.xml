@@ -67,4 +67,14 @@
    <value/>
   </managed-property>
  </managed-bean>
+ <managed-bean>
+  <managed-bean-name>fileUpLoad</managed-bean-name>
+  <managed-bean-class>presentacion.FileUpLoad</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+  <managed-property>
+   <property-name>imagen</property-name>
+   <property-class>java.io.File</property-class>
+   <value/>
+  </managed-property>
+ </managed-bean>
 </faces-config>
