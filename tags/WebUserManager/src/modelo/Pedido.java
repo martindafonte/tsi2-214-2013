@@ -11,7 +11,6 @@ import javax.persistence.*;
  *
  */
 @Entity
-
 public class Pedido implements Serializable {
 
 	   
@@ -19,6 +18,7 @@ public class Pedido implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pedido_seq_gen")
 	@SequenceGenerator(name = "pedido_seq_gen", sequenceName = "pedido_id_seq")
 	private long id;
+	private String ip;
 	private String url;
 	private String method;
 	private static final long serialVersionUID = 1L;
@@ -46,6 +46,12 @@ public class Pedido implements Serializable {
 
 	public void setMethod(String method) {
 		this.method = method;
+	}
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
    
 }
