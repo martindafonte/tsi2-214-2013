@@ -7,6 +7,7 @@ import com.google.android.gcm.server.Message;
 import com.google.android.gcm.server.MulticastResult;
 import com.google.android.gcm.server.Sender;
 
+import mensajesRest.Mensaje;
 import modelo.Canal;
 import modelo.Registro;
 import persistencia.*;

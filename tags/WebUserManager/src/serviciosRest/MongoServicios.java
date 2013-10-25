@@ -13,9 +13,10 @@ public class MongoServicios extends Application {
 	private Set<Object> singletons = new HashSet<Object>();
 	private Set<Class<?>> empty = new HashSet<Class<?>>();
 	public MongoServicios(){
-	     singletons.add(new MongoRest());
+	//     singletons.add(new MongoRest());
 	     singletons.add(new PushRest());
 	     empty.add(PruebaWebService.class);
+	     empty.add(MongoRest.class);
 	}
 	@Override
 	public Set<Class<?>> getClasses() {
