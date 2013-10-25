@@ -1,44 +1,72 @@
 package serviciosRest;
 
 
+import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
+import java.util.concurrent.Executor;
+
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
+
+import mensajesRest.Mensaje;
+import mensajesRest.MensajeJson;
+import mensajesRest.MensajeJsonId;
+
 import org.json.JSONException;
+
+import com.sun.net.httpserver.HttpContext;
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpServer;
+
+import persistencia.AplicacionDAO;
+import persistencia.AplicacionDAOLocal;
 import ejb.Mongo;
 import ejb.MongoLocal;
 
 
 @Stateless
 public class MongoRest implements IMongoPublico  {
+	@EJB
+	private MongoLocal m;
 	
-	public String ObtenerJson(int ClienteId) throws UnknownHostException, JSONException {
-		MongoLocal m = new Mongo();
-		String json = m.Json("base", ClienteId);
-		return json;
-	}
 
-	@Override
-	public String IngresarJson(int ClienteId, String jsonString) throws UnknownHostException {
-		// TODO Auto-generated method stub
-		MongoLocal m = new Mongo();
-		return m.IngresarJson("base", jsonString, ClienteId);
-
-	}
-
-	@Override
-	public String EliminarJson(int ClienteId) throws UnknownHostException {
-		// TODO Auto-generated method stub
-		MongoLocal m = new Mongo();
+	
+	public MensajeJson ObtenerJson(int app,int jsonId) throws UnknownHostException, JSONException {	
 		
-		return m.EliminarJson("base", ClienteId);
+		return  m.Json(app, jsonId);
 	}
 
 	@Override
-	public String ActualizarJson(int ClienteId, String json)
+	public MensajeJsonId IngresarJson(int appid, String jsonString) throws UnknownHostException {
+		// TODO Auto-generated method stub
+	
+		return m.IngresarJson(appid, jsonString);
+
+	}
+
+	@Override
+	public Mensaje EliminarJson(int app, int jsonId) throws UnknownHostException {
+		// TODO Auto-generated method stub
+		
+		
+		return m.EliminarJson(app, jsonId);
+	}
+
+	@Override
+	public Mensaje ActualizarJson(int app,int jsonId, String json)
 			throws UnknownHostException {
 		// TODO Auto-generated method stub
-		MongoLocal m = new Mongo();
 		
-		return m.ActualizarJson("base", json, ClienteId);
+		return m.ActualizarJson(app, json, jsonId);
 	}
+
+	@Override
+	public Mensaje BorrarBase(int app) throws UnknownHostException {
+		// TODO Auto-generated method stub
+		return m.EliminarBase(app);
+	}
+
+	
+	
 }

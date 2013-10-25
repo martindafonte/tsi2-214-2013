@@ -1,4 +1,4 @@
-package serviciosRest;
+package mensajesRest;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -6,9 +6,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Mensaje{
 	@XmlElement
-	int codigo;
+	public int codigo;
 	@XmlElement
-	String descripcion;
+	public String descripcion;
 }
 
 
