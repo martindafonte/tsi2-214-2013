@@ -4,7 +4,7 @@ package ejb;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import java.io.FileInputStream;
+//import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.UnknownHostException;
@@ -18,9 +18,9 @@ import mensajesRest.MensajeJsonId;
 import modelo.Aplicacion;
 
 import org.json.JSONException;
-import org.json.JSONObject;
-
-import persistencia.AplicacionDAO;
+//import org.json.JSONObject;
+//
+//import persistencia.AplicacionDAO;
 import persistencia.AplicacionDAOLocal;
 import serviciosRest.Constantes;
 
