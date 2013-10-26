@@ -1,9 +1,12 @@
 package negocio;
 
+import java.util.List;
+
 import javax.ejb.Local;
 
 import modelo.Desarrollador;
 import modelo.Usuario;
+import modelo.Aplicacion;
 
 @Local
 public interface ServiciosLocal {
@@ -16,5 +19,6 @@ public interface ServiciosLocal {
 	public Boolean existeDesarollador(String nick, String pass);
 	
 	public void altaAplicacion(String nombre, String descripcion, String nick, String pass);
+	public List<Aplicacion> getAplicaciones(Desarrollador d);
 	
 }

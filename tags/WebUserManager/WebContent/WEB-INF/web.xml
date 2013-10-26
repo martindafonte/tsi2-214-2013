@@ -20,6 +20,7 @@
     <url-pattern>/MongoServicios/*</url-pattern>
     <url-pattern>/Push/*</url-pattern>
     <url-pattern>/prueba1/*</url-pattern>
+    <url-pattern>/caca2/*</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>Faces Servlet</servlet-name>

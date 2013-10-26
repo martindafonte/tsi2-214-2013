@@ -1,5 +1,7 @@
 package negocio;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -116,6 +118,14 @@ public class Servicios implements ServiciosLocal {
 		a.setNombre(nombre);
 		a.setDescripcion(descripcion);
 		al.altaApliacion(a,d);	
+		
+	}
+
+	@Override
+	public List<Aplicacion> getAplicaciones(Desarrollador d) {
+		// TODO Auto-generated method stub
+		
+		return al.getAplicaciones(d);
 		
 	}
 

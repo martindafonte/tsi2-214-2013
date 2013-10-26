@@ -51,6 +51,16 @@
   <managed-bean-name>appBean</managed-bean-name>
   <managed-bean-class>presentacion.AppBean</managed-bean-class>
   <managed-bean-scope>request</managed-bean-scope>
+  <managed-property>
+   <property-name>descripcion</property-name>
+   <property-class>java.lang.String</property-class>
+   <value/>
+  </managed-property>
+  <managed-property>
+   <property-name>nombre</property-name>
+   <property-class>java.lang.String</property-class>
+   <value/>
+  </managed-property>
  </managed-bean>
  <managed-bean>
   <managed-bean-name>jsonBean</managed-bean-name>
@@ -68,12 +78,17 @@
   </managed-property>
  </managed-bean>
  <managed-bean>
-  <managed-bean-name>fileUpLoad</managed-bean-name>
-  <managed-bean-class>presentacion.FileUpLoad</managed-bean-class>
-  <managed-bean-scope>request</managed-bean-scope>
+  <managed-bean-name>appSesBean</managed-bean-name>
+  <managed-bean-class>presentacion.AppSesBean</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
   <managed-property>
-   <property-name>imagen</property-name>
-   <property-class>java.io.File</property-class>
+   <property-name>aplicacionid</property-name>
+   <property-class>java.lang.Long</property-class>
+   <value/>
+  </managed-property>
+  <managed-property>
+   <property-name>caca</property-name>
+   <property-class>java.util.List</property-class>
    <value/>
   </managed-property>
  </managed-bean>
