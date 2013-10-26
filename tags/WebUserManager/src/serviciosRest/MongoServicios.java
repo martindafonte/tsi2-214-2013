@@ -18,6 +18,7 @@ public class MongoServicios extends Application {
 	     empty.add(PruebaWebService.class);
 	     empty.add(MongoRest.class);
 	}
+	
 	@Override
 	public Set<Class<?>> getClasses() {
 	     return empty;

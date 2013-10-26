@@ -3,11 +3,16 @@
  */
 package presentacion;
 
+import java.util.Iterator;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
-
+import modelo.Aplicacion;
+import modelo.Desarrollador;
 import negocio.ServiciosLocal;
 
 /**
@@ -19,6 +24,9 @@ public class UserLogin {
 	private java.lang.String nick;
 	private java.lang.String pass;
 
+//	private List<AppBean> apps;
+	
+	
 	private Boolean login = false;
 	
 	public Boolean getLogin() {
@@ -29,6 +37,23 @@ public class UserLogin {
 		this.login = login;
 	}
 
+	
+//	@PostConstruct
+//	private void init(){
+//	
+//		Desarrollador d = serv.getDesarrollador(nick, pass);
+//		List<Aplicacion> la = serv.getAplicaciones(d);
+//		Iterator<Aplicacion> ita = la.iterator();
+//		while(ita.hasNext()){
+//			
+//			Aplicacion a = ita.next();
+//			AppBean ap = new AppBean();
+//			ap.setDescripcion(a.getDescripcion());
+//			ap.setNombre(a.getNombre());
+//			apps.add(ap);
+//		}
+//	}
+	
 
 	@EJB
 	private ServiciosLocal serv; 
