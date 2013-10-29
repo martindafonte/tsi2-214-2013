@@ -3,10 +3,18 @@
  */
 package presentacion;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
+import modelo.Aplicacion;
+import modelo.Desarrollador;
 import negocio.ServiciosLocal;
 
 /**
@@ -17,10 +25,20 @@ public class UserLogin {
 	
 	private java.lang.String nick;
 	private java.lang.String pass;
+	private Integer appActual;
 
-//	private List<AppBean> apps;
+	private List<AppSesBean> apps;
 	
 	
+	public List<AppSesBean> getApps() {
+		return apps;
+	}
+
+	public void setApps(List<AppSesBean> apps) {
+		this.apps = apps;
+	}
+
+
 	private Boolean login = false;
 	
 	public Boolean getLogin() {
@@ -30,23 +48,6 @@ public class UserLogin {
 	public void setLogin(Boolean login) {
 		this.login = login;
 	}
-
-	
-//	@PostConstruct
-//	private void init(){
-//	
-//		Desarrollador d = serv.getDesarrollador(nick, pass);
-//		List<Aplicacion> la = serv.getAplicaciones(d);
-//		Iterator<Aplicacion> ita = la.iterator();
-//		while(ita.hasNext()){
-//			
-//			Aplicacion a = ita.next();
-//			AppBean ap = new AppBean();
-//			ap.setDescripcion(a.getDescripcion());
-//			ap.setNombre(a.getNombre());
-//			apps.add(ap);
-//		}
-//	}
 	
 
 	@EJB
@@ -54,7 +55,11 @@ public class UserLogin {
 	
 
 	public UserLogin() {
-//		this.login = false;
+	}
+	
+	@PostConstruct
+	private void init(){
+		apps = new ArrayList<AppSesBean>();
 	}
 
 	public java.lang.String getNick() {
@@ -77,11 +82,11 @@ public class UserLogin {
 		
 		Boolean error = serv.existeDesarollador(nick, pass);
 		if(!error){
-			System.out.println("ERROR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			return "errorPage.xhtml";			
 		}
 		login = true;
-//		return"/MasterPage/logout.xhtml";
+		apps = serv.getAplicaciones(nick, pass);
+
 		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		String ret = req.getRequestURL().toString();
 		return ret;
@@ -119,6 +124,24 @@ public class UserLogin {
 		}
 
 		return "/MasterPage/login.xhtml";
+	}
+
+	public Integer getAppActual() {
+		return appActual;
+	}
+
+	public void setAppActual(Integer appActual) {
+		this.appActual = appActual;
+	}
+	
+	public void borrarCanal(String codigo, AppSesBean app){
+		serv.borrarCanal(codigo, app);
+		apps = serv.getAplicaciones(nick, pass);
+	}
+	
+	public void cambiarSingleLogin(long id , boolean valor){
+		
+		serv.cambiarSingleLogin(id, valor);
 	}
 	
 }
