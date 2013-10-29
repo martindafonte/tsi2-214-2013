@@ -58,7 +58,6 @@ public class CanalSesBean {
 		UserLogin user = (UserLogin)context.getExternalContext().getSessionMap().get("userLogin");
 		app.setCanales(lcAux);
 		user.borrarCanal(codigo, app);
-//		serv.borrarCanal(codigo);
 		
 	}
 
