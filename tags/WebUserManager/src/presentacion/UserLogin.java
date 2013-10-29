@@ -3,16 +3,10 @@
  */
 package presentacion;
 
-import java.util.Iterator;
-import java.util.List;
-
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
-import modelo.Aplicacion;
-import modelo.Desarrollador;
 import negocio.ServiciosLocal;
 
 /**
