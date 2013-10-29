@@ -21,7 +21,7 @@ public class Registro implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.ALL)
 	private List<Canal> canales;
 
 	public List<Canal> getCanales() {

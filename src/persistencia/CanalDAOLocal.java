@@ -12,6 +12,7 @@ public interface CanalDAOLocal {
 	
 	public void altaCanal(Canal c);
 	public void borrarCanal(Canal c);
+	public boolean existeCanal(String cod);
 	public void agregarRegistroCanal(Canal c, Registro r);
 	public void quitarRegistroCanal(Canal c, Registro r);
 	public Aplicacion getAplicacionCanal(Canal c);
