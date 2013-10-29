@@ -1,11 +1,13 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.*;
 
 
@@ -30,7 +32,7 @@ public class Desarrollador implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	@OneToMany(mappedBy ="d")
+	@OneToMany(mappedBy ="d", cascade=CascadeType.ALL)
 	private Collection<Aplicacion> la;
 	
 	public Collection<Aplicacion> getLa() {
@@ -43,6 +45,13 @@ public class Desarrollador implements Serializable {
 	}
 
 	public Desarrollador(){
+	}
+	
+	@PostConstruct
+	public void init(){
+		
+		la = new ArrayList<Aplicacion>();
+		
 	}
 
 	
@@ -120,5 +129,5 @@ public class Desarrollador implements Serializable {
 		return laRes;
 		
 	}
-   
+	   
 }

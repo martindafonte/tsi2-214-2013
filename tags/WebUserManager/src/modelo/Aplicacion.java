@@ -2,9 +2,13 @@ package modelo;
 
 import java.io.Serializable;
 import java.lang.String;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.*;
+
+import presentacion.CanalSesBean;
 
 /**
  * Entity implementation class for Entity: Aplicacion
@@ -40,21 +44,22 @@ public class Aplicacion implements Serializable {
 		this.singleLogin = singleLogin;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Desarrollador d;
 	
-	@OneToMany(mappedBy="app")
+	@OneToMany(mappedBy="app", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	private List<Canal> canales;
 	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	private List<Pedido> pedidosJson;
 	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	private List<Pedido> pedidosPush;
 	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	private List<Pedido> pedidosUM;
 	
+
 	
 	public List<Canal> getCanales() {
 		return canales;
@@ -115,5 +120,42 @@ public class Aplicacion implements Serializable {
 	
 	public synchronized long getJSONID(){
 		return jsonid++;
+	}
+	
+	public List<CanalSesBean> getCanalesAppSes(){
+		List<CanalSesBean> la = new ArrayList<CanalSesBean>();
+			if(canales != null){
+			Iterator<Canal> itc = canales.iterator();
+			while(itc.hasNext()){
+				Canal ca = itc.next();
+				CanalSesBean cs = new CanalSesBean();
+				cs.setCodigo(ca.getCodigo());
+				cs.setRegistrados(ca.getRegistrados().size());
+				la.add(cs);
+			}
+		
+		}
+		return la;
+	}
+	
+	public Canal quitarCanal(String codigo){
+		
+		List<Canal> lc = new ArrayList<Canal>();
+		Iterator<Canal> itc = canales.iterator();
+		Canal c = null;
+		Canal rest = null;
+		while(itc.hasNext()){
+			
+				c = itc.next();		
+				if(! codigo.equals(c.getCodigo())){
+					lc.add(c);
+				}else{
+					rest = c;
+				}
+		}
+		
+		canales = lc;
+		return rest;
+		
 	}
 }

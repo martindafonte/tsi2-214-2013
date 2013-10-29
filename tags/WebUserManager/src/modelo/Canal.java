@@ -32,10 +32,10 @@ public class Canal implements Serializable {
 	}   
 	
 	
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST})
 	private Aplicacion app; 
 	
-	@ManyToMany(mappedBy="canales")
+	@ManyToMany(mappedBy="canales", cascade = { CascadeType.MERGE, CascadeType.PERSIST})
 	private List<Registro> registrados;
 	
 	
