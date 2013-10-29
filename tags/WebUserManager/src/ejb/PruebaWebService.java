@@ -6,13 +6,15 @@ import javax.ejb.Stateful;
 //import javax.ejb.StatefulTimeout;
 //import javax.ejb.Stateless;
 import javax.enterprise.context.SessionScoped;
+import javax.ws.rs.FormParam;
 //import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
+import mensajesRest.Mensaje;
 import modelo.Desarrollador;
 import negocio.ServiciosLocal;
 import persistencia.AplicacionDAOLocal;
@@ -56,17 +58,18 @@ public class PruebaWebService {
     	return "a la mierda";
     } 
     
-    @GET
-    @Path("{user}/{pass}")
-    @Produces("text/plain")
-    public String login(@PathParam("user") String user, @PathParam("pass")String pass){
-    
+    @POST
+    //@Path("{user}/{pass}")
+//    @Produces("text/plain")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Mensaje login(@FormParam("user") String user, @FormParam("pass")String pass){
+    	Mensaje msj = new Mensaje();
     	Desarrollador d = serv.getDesarrollador(user, pass);
     	if(d != null){
-    		return "LOGIN OK";
-    	}
-    	
-    	return "LOGIN BAD";
+    		msj.codigo=0;
+    	}else{
+    	msj.codigo=1;}
+    	return msj;
     }
 
 }
