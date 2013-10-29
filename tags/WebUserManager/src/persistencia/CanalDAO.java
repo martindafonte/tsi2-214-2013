@@ -3,6 +3,7 @@ package persistencia;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -23,6 +24,10 @@ public class CanalDAO implements CanalDAOLocal {
     /**
      * Default constructor. 
      */
+	@EJB
+	private AplicacionDAOLocal al;
+	
+	
 	@PersistenceContext(unitName="WebUserManager")
 	private EntityManager em;
 	
@@ -31,7 +36,13 @@ public class CanalDAO implements CanalDAOLocal {
 
 	@Override
 	public void altaCanal(Canal c) {
-		em.persist(c);
+		
+		try{
+			em.persist(c);
+		}	catch(Throwable ex){
+			System.out.println("ERROR EN ALTA CANAL!!!");
+		
+		}
 	}
 
 	@Override
@@ -42,7 +53,7 @@ public class CanalDAO implements CanalDAOLocal {
 			Registro r = itlr.next();
 			r.quitarCanal(c);
 		}
-		em.remove(c);
+		c.setApp(null);
 	}
 
 	@Override
@@ -77,7 +88,7 @@ public class CanalDAO implements CanalDAOLocal {
 
 	@Override
 	public Canal getCanal(String id) {
-		Query q = em.createQuery("SELECT x FROM Canal x WHERE x.id = ?1");
+		Query q = em.createQuery("SELECT x FROM Canal x WHERE x.codigo = ?1");
 		q.setParameter(1, id);
 		@SuppressWarnings("unchecked")
 		List<Canal> lc = q.getResultList();
@@ -86,6 +97,18 @@ public class CanalDAO implements CanalDAOLocal {
 		}		
 		return null;
 	}
+
+	@SuppressWarnings("rawtypes")
+	@Override
+	public boolean existeCanal(String cod) {
+		// TODO Auto-generated method stub
+		Query q = em.createQuery("SELECT x FROM Canal x WHERE x.codigo = ?1");
+		q.setParameter(1, cod);
+		List l = q.getResultList();
+		return ((l != null) && (l.size() > 0));
+	}
+
+
     
     
 

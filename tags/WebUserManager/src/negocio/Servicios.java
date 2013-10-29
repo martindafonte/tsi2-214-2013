@@ -1,5 +1,7 @@
 package negocio;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -7,9 +9,14 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import persistencia.AplicacionDAOLocal;
+import persistencia.CanalDAOLocal;
 import persistencia.UsuarioDAOLocal;
+import presentacion.AppSesBean;
+import presentacion.CanalSesBean;
 import modelo.Aplicacion;
+import modelo.Canal;
 import modelo.Desarrollador;
+import modelo.Registro;
 import modelo.Usuario;
 
 /**
@@ -27,6 +34,9 @@ public class Servicios implements ServiciosLocal {
 	
 	@EJB
 	private UsuarioDAOLocal ul;
+	
+	@EJB
+	private CanalDAOLocal cl;
 	
 	@EJB
 	private AplicacionDAOLocal al;
@@ -79,7 +89,6 @@ public class Servicios implements ServiciosLocal {
 		u.setNombre(nombre);
 		u.setPass(pass);
 		u.setApellido(apellido);
-		
 		ul.altaDesarrollador(u);
 		
 		
@@ -117,7 +126,7 @@ public class Servicios implements ServiciosLocal {
 //		a.setId(appinfo.getId("Aplicacion"));
 		a.setNombre(nombre);
 		a.setDescripcion(descripcion);
-		al.altaApliacion(a,d);	
+		al.altaApliacion(a,d);
 		
 	}
 
@@ -128,6 +137,135 @@ public class Servicios implements ServiciosLocal {
 		return al.getAplicaciones(d);
 		
 	}
+
+//	@Override
+//	public boolean altaCanal(Canal c, Aplicacion a) {
+//		// TODO Auto-generated method stub
+////		cl.altaCanal(c);
+////		return al.agregarCanalAplicacion(c, a);
+//		return al.agregarCanalAplicacion(c.getCodigo(), a.getId());
+//	}
+
+	@Override
+	public Canal getCanal(String cod) {
+		// TODO Auto-generated method stub
+		cl.getCanal(cod);
+		return null;
+	}
+
+	@Override
+	public Aplicacion getApliacion(long id) {
+		// TODO Auto-generated method stub
+		
+		return al.getAplicacion(id);
+	}
+
+	@Override
+	public void cambiarSingleLogin(long id, boolean valor) {
+		// TODO Auto-generated method stub
+		al.cambiarSingleLogin(id, valor);
+	}
+	
+	@Override
+	public void cambiarSingleLogin(long id) {
+		// TODO Auto-generated method stub
+		al.cambiarSingleLogin(id);
+	}
+
+	@Override
+	public List<Canal> getCanales(Aplicacion a) {
+		// TODO Auto-generated method stub
+		return al.getCanales(a);
+	}
+
+//	@Override
+//	public Canal crearCanal(String codigo, Aplicacion a) {
+//		// TODO Auto-generated method stub
+//		Canal c = new Canal();
+//		c.setCodigo(codigo);
+////		cl.altaCanal(c, a);
+//		return c;
+//	}
+
+	@Override
+	public List<AppSesBean> getAplicaciones(String nick, String pass) {
+		// TODO Auto-generated method stub
+		List<AppSesBean> la = new ArrayList<AppSesBean>();
+		Desarrollador d = this.getDesarrollador(nick, pass);
+		Iterator<Aplicacion> it = d.getLa().iterator();
+		AppSesBean ap = null;
+		Aplicacion a = null;
+		int num = 1;
+		while( it.hasNext()){
+			ap = new AppSesBean();
+			a = it.next();
+			ap.setAplicacionid(a.getId());
+			ap.setDescripcion(a.getDescripcion());
+			ap.setNombre(a.getNombre());
+			ap.setSingleLogin(a.isSingleLogin());
+			ap.setNum(num);
+			num++;
+			List<CanalSesBean> lc = new ArrayList<CanalSesBean>();
+			Canal c = null;
+			CanalSesBean ca = null;
+			Iterator<Canal> itc = a.getCanales().iterator();
+			while(itc.hasNext()){
+				
+				c = itc.next();
+				ca = new CanalSesBean();
+				ca.setCodigo(c.getCodigo());
+				ca.setRegistrados(c.getRegistrados().size());
+				lc.add(ca);
+				
+			}
+			ap.setCanales(lc);
+			la.add(ap);			
+		}
+		
+		return la;
+		
+		
+	}
+
+	@Override
+	public List<CanalSesBean> getCanales(long id) {
+		// TODO Auto-generated method stub
+		
+		List<CanalSesBean> lc = new ArrayList<CanalSesBean>();
+		Aplicacion a = al.getAplicacion(id);
+		Iterator<Canal> itc = a.getCanales().iterator();
+		Canal c;
+		CanalSesBean ca;
+		while(itc.hasNext()){
+			
+			c = itc.next();
+			ca = new CanalSesBean();
+			ca.setCodigo(c.getCodigo());
+			ca.setRegistrados(c.getRegistrados().size());
+			lc.add(ca);
+		}
+			
+		return lc;
+	}
+
+	@Override
+	public void crearCanal(String codigo, AppSesBean app) {
+		// TODO Auto-generated method stub
+		
+		Aplicacion a = al.getAplicacion(app.getAplicacionid());
+		Canal c = new Canal();
+		c.setCodigo(codigo);
+		c.setApp(a);
+		c.setRegistrados(new ArrayList<Registro>());
+		cl.altaCanal(c);
+	}
+
+	@Override
+	public void borrarCanal(String codigo, AppSesBean app) {
+		// TODO Auto-generated method stub
+		al.quitarCanalAplicacion(codigo, app.getAplicacionid());
+	}
+
 
 
 }

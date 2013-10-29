@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import presentacion.AppSesBean;
+import presentacion.CanalSesBean;
+import modelo.Canal;
 import modelo.Desarrollador;
 import modelo.Usuario;
 import modelo.Aplicacion;
@@ -19,6 +22,26 @@ public interface ServiciosLocal {
 	public Boolean existeDesarollador(String nick, String pass);
 	
 	public void altaAplicacion(String nombre, String descripcion, String nick, String pass);
+	public Aplicacion getApliacion(long id);
 	public List<Aplicacion> getAplicaciones(Desarrollador d);
+	public void cambiarSingleLogin(long id);
+	public void cambiarSingleLogin(long id, boolean valor);
+	
+	
+//	################ de prueba
+	//anduvo
+	public List<AppSesBean> getAplicaciones(String nick, String pass);
+	
+	public List<CanalSesBean> getCanales(long id);
+	
+	public void crearCanal(String codigo, AppSesBean app);
+	
+	public void borrarCanal(String codigo, AppSesBean app);
+	
+//	################
+	
+
+	public Canal getCanal(String cod);
+	public List<Canal> getCanales(Aplicacion a);	
 	
 }
