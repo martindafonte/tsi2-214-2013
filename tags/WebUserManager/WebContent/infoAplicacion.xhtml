@@ -5,18 +5,40 @@
       xmlns:rich="http://richfaces.org/rich"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"> 
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"> 
 
 <h:head></h:head> 
 <body>
 	
 	
-<!-- 	<h:form> -->
-<!-- 		<p:dataGrid var="item" value="#{userLogin.apps}"> -->
-<!-- 			<h:outputText value="#{item.nombre}" /> -->
-<!-- 		</p:dataGrid> -->
-<!-- 	</h:form> -->
-	
+	<h:form>
+		<div>
+			<div>
+				Nombre: <h:outputText value="#{appSesBean.nombre}" />
+			</div>
+			<div>
+				Descripcion: <h:outputText value="#{appSesBean.descripcion}" />
+			</div>
+		<c:forEach var="c" items="#{appSesBean.canales}">
+			<div>
+				<h:outputText value="#{c.codigo}" />
+				<h:outputText value="#{c.registrados}" />
+				<h:commandButton action="#{c.borrarCanal}" value="borrar"/>
+			</div>
+		</c:forEach>
+		</div>
+
+		<div>
+			<h:inputText value="#{canalBean.codigo}" />
+			<h:commandButton action="#{canalBean.altaCanal()}" value="agregar" />
+		</div>
+			Single Login <h:selectBooleanCheckbox value="#{appSesBean.singleLogin}" />
+			<h:commandButton action="#{appSesBean.changeSingleLogin()}" value="guardar cambios" />
+		<div>
+		</div>
+		
+	</h:form>
 
 </body> 
 </html>

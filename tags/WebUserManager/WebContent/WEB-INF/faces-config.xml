@@ -46,6 +46,11 @@
    <property-class>java.lang.String</property-class>
    <value/>
   </managed-property>
+  <managed-property>
+   <property-name>apps</property-name>
+   <property-class>java.util.List</property-class>
+   <value/>
+  </managed-property>
  </managed-bean>
  <managed-bean>
   <managed-bean-name>appBean</managed-bean-name>
@@ -87,9 +92,77 @@
    <value/>
   </managed-property>
   <managed-property>
-   <property-name>caca</property-name>
+   <property-name>descripcion</property-name>
+   <property-class>java.lang.String</property-class>
+   <value/>
+  </managed-property>
+  <managed-property>
+   <property-name>nombre</property-name>
+   <property-class>java.lang.String</property-class>
+   <value/>
+  </managed-property>
+  <managed-property>
+   <property-name>singleLogin</property-name>
+   <property-class>java.lang.Boolean</property-class>
+   <value/>
+  </managed-property>
+  <managed-property>
+   <property-name>num</property-name>
+   <property-class>java.lang.Integer</property-class>
+   <value/>
+  </managed-property>
+  <managed-property>
+   <property-name>canales</property-name>
    <property-class>java.util.List</property-class>
    <value/>
   </managed-property>
  </managed-bean>
+ <managed-bean>
+  <managed-bean-name>canalBean</managed-bean-name>
+  <managed-bean-class>presentacion.CanalBean</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+  <managed-property>
+   <property-name>codigo</property-name>
+   <property-class>java.lang.String</property-class>
+   <value/>
+  </managed-property>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>canalSesBean</managed-bean-name>
+  <managed-bean-class>presentacion.CanalSesBean</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+  <managed-property>
+   <property-name>codigo</property-name>
+   <property-class>java.lang.String</property-class>
+   <value/>
+  </managed-property>
+  <managed-property>
+   <property-name>registrados</property-name>
+   <property-class>java.lang.Integer</property-class>
+   <value/>
+  </managed-property>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>errorBean</managed-bean-name>
+  <managed-bean-class>presentacion.ErrorBean</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+  <managed-property>
+   <property-name>codigo</property-name>
+   <property-class>java.lang.String</property-class>
+   <value/>
+  </managed-property>
+  <managed-property>
+   <property-name>mostrar</property-name>
+   <property-class>java.lang.Boolean</property-class>
+   <value/>
+  </managed-property>
+ </managed-bean>
+ <!--  <navigation-rule> 
+   <from-view-id>/showAplicaciones.xhtml</from-view-id> 
+   <navigation-case> 
+    <from-action>#{appSesBean.showAppInfo()}</from-action> 
+    <from-outcome>/infoAplicacion.xhtml</from-outcome> 
+    <to-view-id>/infoAplicacion.xhtml</to-view-id> 
+   </navigation-case> 
+  </navigation-rule> -->
 </faces-config>
