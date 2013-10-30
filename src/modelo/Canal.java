@@ -16,6 +16,11 @@ public class Canal implements Serializable {
 
 	   
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "canal_seq_gen")
+	@SequenceGenerator(name = "canal_seq_gen", sequenceName = "canal_id_seq")
+	private long id;
+	
+	
 	private String codigo;
 	
 	private static final long serialVersionUID = 1L;
@@ -62,10 +67,6 @@ public class Canal implements Serializable {
 		
 	}
 	
-//	public boolean equalKey(String cod, long appid){
-//		
-//		return ((cod.equals(codigo)) && (appid == app.getId()));
-//	}
 	
 	public Aplicacion getApp() {
 		return app;

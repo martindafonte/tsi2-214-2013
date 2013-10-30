@@ -43,6 +43,19 @@ public class Aplicacion implements Serializable {
 	public void setSingleLogin(boolean singleLogin) {
 		this.singleLogin = singleLogin;
 	}
+	
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="aplicacion")
+	private List<Rol> roles;
+
+	@OneToMany(mappedBy = "aplicacion")
+	private List<Usuario> users;
+	
+	public List<Usuario> getUsers() {
+		return users;
+	}
+	public void setUsers(List<Usuario> users) {
+		this.users = users;
+	}
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Desarrollador d;
