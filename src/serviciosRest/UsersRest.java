@@ -3,27 +3,18 @@ package serviciosRest;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
-//import javax.ejb.StatefulTimeout;
-//import javax.ejb.Stateless;
 import javax.enterprise.context.SessionScoped;
-import javax.ws.rs.FormParam;
-//import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 
 import mensajesRest.Mensaje;
 import modelo.Desarrollador;
 import negocio.ServiciosLocal;
 import persistencia.AplicacionDAOLocal;
+//import javax.inject.Inject;
 
 @Stateful
 @LocalBean
 @SessionScoped
-@Path("/Users")
-public class UsersRest {
+public class UsersRest implements IUsersRest {
 	
 	@EJB
 	private AplicacionDAOLocal app;
@@ -36,14 +27,8 @@ public class UsersRest {
     public UsersRest() {
     }
     
-    @GET
-    public String test(){
-    	return String.valueOf(++count);
-    }
-    
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    public Mensaje login(@FormParam("user") String user, @FormParam("pass")String pass){
+    @Override
+    public Mensaje login(String user,String pass){
     	Mensaje msj = new Mensaje();
     	Desarrollador d = serv.getDesarrollador(user, pass);
     	if(d != null){
