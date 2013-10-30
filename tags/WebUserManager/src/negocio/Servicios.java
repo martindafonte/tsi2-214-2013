@@ -1,5 +1,6 @@
 package negocio;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -10,12 +11,17 @@ import javax.ejb.Stateless;
 
 import persistencia.AplicacionDAOLocal;
 import persistencia.CanalDAOLocal;
+import persistencia.PedidosDAOLocal;
 import persistencia.UsuarioDAOLocal;
 import presentacion.AppSesBean;
 import presentacion.CanalSesBean;
 import modelo.Aplicacion;
 import modelo.Canal;
 import modelo.Desarrollador;
+import modelo.PedidoJson;
+import modelo.PedidoMsj;
+import modelo.PedidoPush;
+import modelo.PedidoUser;
 import modelo.Registro;
 import modelo.Usuario;
 
@@ -37,6 +43,9 @@ public class Servicios implements ServiciosLocal {
 	
 	@EJB
 	private AplicacionDAOLocal al;
+	
+	@EJB
+	private PedidosDAOLocal pl;
 	
     public Servicios() {
         // TODO Auto-generated constructor stub
@@ -263,6 +272,77 @@ public class Servicios implements ServiciosLocal {
 		al.quitarCanalAplicacion(codigo, app.getAplicacionid());
 	}
 
+	
+	
+//	################ pedidos
 
+	@Override
+	public int crearPedidoJson(String http, String metodo, long app,
+			int jsonId) {
+		try {
+			PedidoJson p = new PedidoJson();
+			p.setJsonId(jsonId);
+			p.setMethod(http);
+			p.setUrl(metodo);
+			Timestamp time = new Timestamp(System.currentTimeMillis());
+			p.setTime(time);
+			
+			pl.altaPedidoJSONAplicacion(app, p);
+			return 1;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return 0;
+		}
+	}
+	
+	@Override
+	public int crearPedidoPush(String http, String metodo, long app) {
+		try {
+			PedidoPush p = new PedidoPush();
+			p.setMethod(http);
+			p.setUrl(metodo);
+			Timestamp time = new Timestamp(System.currentTimeMillis());
+			p.setTime(time);
+			
+			pl.altaPedidoPUSHAplicacion(app, p);
+			return 1;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return 0;
+		}
+	}
+	
+	@Override
+	public int crearPedidoUser(String http, String metodo, long app,
+			String userId) {
+		try {
+			PedidoUser p = new PedidoUser();
+			p.setMethod(http);
+			p.setUrl(metodo);
+			Timestamp time = new Timestamp(System.currentTimeMillis());
+			p.setTime(time);
+			
+			pl.altaPedidoUMAplicacion(app, p, userId);
+			return 1;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return 0;
+		}
+	}
+	
+	@Override
+	public int crearPedidoMsj(long app, String canId) {
+		try {
+			PedidoMsj p = new PedidoMsj();
+			Timestamp time = new Timestamp(System.currentTimeMillis());
+			p.setTime(time);
+			
+			pl.altaPedidoMSJ(p, canId);
+			return 1;
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+	
 
 }

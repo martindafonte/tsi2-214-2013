@@ -44,4 +44,13 @@ public interface ServiciosLocal {
 	public Canal getCanal(String cod);
 	public List<Canal> getCanales(Aplicacion a);	
 	
+	
+//	################ pedidos
+	
+	public int crearPedidoJson(String http, String metodo, long app, int jsonId);
+	public int crearPedidoPush(String http, String metodo, long app);
+	public int crearPedidoUser(String http, String metodo, long app, String userId);
+	public int crearPedidoMsj(long app,	String canId);
+
+	
 }
