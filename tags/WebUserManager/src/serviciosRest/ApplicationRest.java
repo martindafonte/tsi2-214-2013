@@ -6,11 +6,11 @@ import java.util.HashSet;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 @ApplicationPath("/Rest")
-public class MongoServicios extends Application {
+public class ApplicationRest extends Application {
 
 	private Set<Object> singletons = new HashSet<Object>();
 	private Set<Class<?>> empty = new HashSet<Class<?>>();
-	public MongoServicios(){
+	public ApplicationRest(){
 	//     singletons.add(new MongoRest());
 	     empty.add(PushRest.class);
 	     empty.add(UsersRest.class);
