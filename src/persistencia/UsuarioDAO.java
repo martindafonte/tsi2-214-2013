@@ -14,6 +14,7 @@ import javax.persistence.Query;
 
 import modelo.Desarrollador;
 import modelo.Usuario;
+import persistencia.ConstantesPersistencia;
 
 /**
  * Session Bean implementation class UsuarioDAO
@@ -36,21 +37,20 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 
 	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void altaUsuario(Usuario u) {
-		// TODO Auto-generated method stub
+	public int altaUsuario(Usuario u) {
 		try{
 			em.persist(u);
+			return ConstantesPersistencia.Exito;
 			
-		}catch(Throwable ex){}
+		}catch(Throwable ex){
+			return ConstantesPersistencia.Error;
+		}
 		
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public Usuario getUsuario(String nick, String pass) {
-		// TODO Auto-generated method stub
-
-//		EntityManager em = emf.createEntityManager();
 		try{
 			Query q = em.createQuery("SELECT x FROM Usuario x WHERE x.nick = ?1 and pass = ?2");
 			q.setParameter(1, nick).setParameter(2, pass);
@@ -70,11 +70,14 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 	}
 
 	@Override
-	public void altaDesarrollador(Desarrollador u) {
+	public int altaDesarrollador(Desarrollador u) {
 		// TODO Auto-generated method stub
 		try{
 			em.persist(u);
-		}catch(Exception ex){}
+			return ConstantesPersistencia.Exito;
+		}catch(Exception ex){
+			return ConstantesPersistencia.Error;
+		}
 	
 	}
 
