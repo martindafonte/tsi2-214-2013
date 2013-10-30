@@ -23,6 +23,9 @@ public class Canal implements Serializable {
 	
 	private String codigo;
 	
+	@OneToMany(cascade=CascadeType.ALL)
+	private List<PedidoMsj> pedidosMsj;
+	
 	private static final long serialVersionUID = 1L;
 
 	public Canal() {
