@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -12,7 +11,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-import negocio.AppInfoLocal;
 import modelo.Registro;
 
 /**
@@ -29,8 +27,6 @@ public class RegistroDAO implements RegistroDAOLocal {
 	@PersistenceContext(unitName="WebUserManager")
 	private EntityManager em;
 	
-	@EJB
-	private AppInfoLocal appInfo;
 	
     public RegistroDAO() {
     }
