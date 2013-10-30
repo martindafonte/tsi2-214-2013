@@ -64,13 +64,16 @@ public class Aplicacion implements Serializable {
 	private List<Canal> canales;
 	
 	@OneToMany(cascade=CascadeType.ALL)
-	private List<Pedido> pedidosJson;
+	private List<PedidoJson> pedidosJson;
 	
 	@OneToMany(cascade=CascadeType.ALL)
-	private List<Pedido> pedidosPush;
+	private List<PedidoPush> pedidosPush;
 	
 	@OneToMany(cascade=CascadeType.ALL)
-	private List<Pedido> pedidosUM;
+	private List<PedidoUser> pedidosUM;
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	private List<PedidoMsj> pedidosMsj;
 	
 
 	
@@ -105,10 +108,10 @@ public class Aplicacion implements Serializable {
 		this.id = id;
 	}   
 	
-	public List<Pedido> getPedidosJson() {
+	public List<PedidoJson> getPedidosJson() {
 		return pedidosJson;
 	}
-	public void setPedidosJson(List<Pedido> pedidosJson) {
+	public void setPedidosJson(List<PedidoJson> pedidosJson) {
 		this.pedidosJson = pedidosJson;
 	}
 	public long getJsonid() {
@@ -117,17 +120,22 @@ public class Aplicacion implements Serializable {
 	public void setJsonid(long jsonid) {
 		this.jsonid = jsonid;
 	}
-	
-	public List<Pedido> getPedidosPush() {
+	public List<PedidoMsj> getPedidosMsj() {
+		return pedidosMsj;
+	}
+	public void setPedidosMsj(List<PedidoMsj> pedidosMsj) {
+		this.pedidosMsj = pedidosMsj;
+	}
+	public List<PedidoPush> getPedidosPush() {
 		return pedidosPush;
 	}
-	public void setPedidosPush(List<Pedido> pedidosPush) {
+	public void setPedidosPush(List<PedidoPush> pedidosPush) {
 		this.pedidosPush = pedidosPush;
 	}
-	public List<Pedido> getPedidosUM() {
+	public List<PedidoUser> getPedidosUM() {
 		return pedidosUM;
 	}
-	public void setPedidosUM(List<Pedido> pedidosUM) {
+	public void setPedidosUM(List<PedidoUser> pedidosUM) {
 		this.pedidosUM = pedidosUM;
 	}
 	
