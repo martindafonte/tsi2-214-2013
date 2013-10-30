@@ -1,4 +1,4 @@
-package ejb;
+package serviciosRest;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
@@ -19,22 +19,11 @@ import modelo.Desarrollador;
 import negocio.ServiciosLocal;
 import persistencia.AplicacionDAOLocal;
 
-/**
- * Session Bean implementation class PruebaWebService
- */
-//@Stateless
 @Stateful
 @LocalBean
 @SessionScoped
-//@StatefulTimeout(600000)
-@Path("/prueba1")
-public class PruebaWebService {
-
-    /**
-     * Default constructor. 
-     */
-	
-	private int count;
+@Path("/Users")
+public class UsersRest {
 	
 	@EJB
 	private AplicacionDAOLocal app;
@@ -42,25 +31,17 @@ public class PruebaWebService {
 	@EJB
 	private ServiciosLocal serv;
 	
-    public PruebaWebService() {
-        // TODOAuto-generated constructor stub
+	private int count =0;
+	
+    public UsersRest() {
     }
     
     @GET
-    @Path("/hola")
-    @Produces("text/plain")
-    public String algo(){
-    	if(app != null){
-    		count++;
-    		return "Hola " + count;
-    		
-    	}
-    	return "a la mierda";
-    } 
+    public String test(){
+    	return String.valueOf(++count);
+    }
     
     @POST
-    //@Path("{user}/{pass}")
-//    @Produces("text/plain")
     @Produces(MediaType.APPLICATION_JSON)
     public Mensaje login(@FormParam("user") String user, @FormParam("pass")String pass){
     	Mensaje msj = new Mensaje();
@@ -68,7 +49,7 @@ public class PruebaWebService {
     	if(d != null){
     		msj.codigo=0;
     	}else{
-    	msj.codigo=1;}
+    	msj.codigo=++count;}
     	return msj;
     }
 
