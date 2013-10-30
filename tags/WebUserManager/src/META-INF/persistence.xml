@@ -6,7 +6,10 @@
 		<class>modelo.Aplicacion</class>
 		<class>modelo.Canal</class>
 		<class>modelo.Desarrollador</class>
-		<class>modelo.Pedido</class>
+		<class>modelo.PedidoJson</class>
+		<class>modelo.PedidoMsj</class>
+		<class>modelo.PedidoPush</class>
+		<class>modelo.PedidoUser</class>
 		<class>modelo.Permiso</class>
 		<class>modelo.Registro</class>
 		<class>modelo.Rol</class>
