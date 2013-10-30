@@ -21,7 +21,7 @@ public class PushRest implements IPushRest {
 			RegistroDAOLocal rdl = new RegistroDAO();
 			Registro r =rdl.register(p_regId);
 			CanalDAOLocal cdl = new CanalDAO();
-			Canal c = cdl.getCanal(p_regId);
+			Canal c = cdl.getCanal(p_canal);
 			if(c == null){
 				msj.codigo = Constantes.Push_Error_No_Existe_Canal;
 				msj.descripcion = "El canal ingresado no existe";
