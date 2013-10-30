@@ -13,4 +13,8 @@ public abstract class Constantes {
 	
 	// para servicio Json 200-299
 	public static final int Cte_Error_Buscar_Id = 200;
+	
+	//Para servicio usuario 300-399
+	public static final int User_Error_loginfail = 300;
+	public static final int User_Error_registration = 301;
 }

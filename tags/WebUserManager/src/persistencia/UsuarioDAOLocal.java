@@ -8,8 +8,8 @@ import modelo.Usuario;
 @Local
 public interface UsuarioDAOLocal {
 	
-	public void altaUsuario(Usuario u);
-	public void altaDesarrollador(Desarrollador u);
+	public int altaUsuario(Usuario u);
+	public int altaDesarrollador(Desarrollador u);
 	public Usuario getUsuario(String nick, String pass);
 	public Desarrollador getDesarrollador(String nick, String pass);
 }
