@@ -53,6 +53,7 @@ public class Usuario implements Serializable {
 		this.aplicacion = aplicacion;
 	}
 
+	
 
 	public Usuario() {
 	}
