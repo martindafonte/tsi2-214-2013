@@ -48,6 +48,7 @@ public class AppBean {
 		}
 		
 		serv.altaAplicacion(nombre, descripcion, user.getNick(), user.getPass());
+		user.refresh();
 		return "";
 		
 	}

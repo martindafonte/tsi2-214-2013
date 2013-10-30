@@ -4,8 +4,6 @@
 package presentacion;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -13,8 +11,6 @@ import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
-import modelo.Aplicacion;
-import modelo.Desarrollador;
 import negocio.ServiciosLocal;
 
 /**
@@ -142,6 +138,11 @@ public class UserLogin {
 	public void cambiarSingleLogin(long id , boolean valor){
 		
 		serv.cambiarSingleLogin(id, valor);
+	}
+	
+	public void refresh(){
+		
+		apps = serv.getAplicaciones(nick, pass);
 	}
 	
 }

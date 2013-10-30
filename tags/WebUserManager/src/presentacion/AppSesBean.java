@@ -91,13 +91,16 @@ public class AppSesBean {
 	}
 	
 	public void changeSingleLogin(){
+		
 		FacesContext context = FacesContext.getCurrentInstance();
 		UserLogin user = (UserLogin)context.getExternalContext().getSessionMap().get("userLogin");
 		user.cambiarSingleLogin(aplicacionid , singleLogin);
+		this.refresh();
 	}
 	
 	
 	public AppSesBean clone(){
+		
 		AppSesBean app = new AppSesBean();
 		app.aplicacionid = new Long(aplicacionid.longValue());
 		app.descripcion = new String(descripcion);
@@ -117,6 +120,25 @@ public class AppSesBean {
 		}
 		
 		return app;
+		
+	}
+	
+	public void refresh(){
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		UserLogin user = (UserLogin)context.getExternalContext().getSessionMap().get("userLogin");
+		user.refresh();
+		Iterator<AppSesBean> ita = user.getApps().iterator();
+		AppSesBean ap = null;
+		while(ita.hasNext()){
+			
+			ap = ita.next();
+			if(ap.getAplicacionid().longValue() == aplicacionid.longValue()){
+				
+				canales = new ArrayList<CanalSesBean>(ap.getCanales());
+			}
+			
+		}
 		
 	}
 }
