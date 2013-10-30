@@ -30,9 +30,6 @@ public class Servicios implements ServiciosLocal {
      * Default constructor. 
      */
 	@EJB
-	private AppInfoLocal appinfo;
-	
-	@EJB
 	private UsuarioDAOLocal ul;
 	
 	@EJB
