@@ -1,6 +1,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -12,7 +13,6 @@ import javax.persistence.*;
  */
 @Entity
 @NamedQuery(name="Usuario.findAll", query="SELECT u FROM Usuario u")
-//@TableGenerator(table="usuario", name="usuario", initialValue=0, allocationSize=1000)
 public class Usuario implements Serializable {
 	
 	
@@ -25,7 +25,34 @@ public class Usuario implements Serializable {
 	private String nick;
 	private String pass;
 	private String nombre;
-	private String apellido;	
+	private String apellido;
+
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	private Aplicacion aplicacion;
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	private List<Rol> roles;
+	
+	
+	public List<Rol> getRoles() {
+		return roles;
+	}
+
+
+	public void setRoles(List<Rol> roles) {
+		this.roles = roles;
+	}
+
+
+	public Aplicacion getAplicacion() {
+		return aplicacion;	}
+
+
+	public void setAplicacion(Aplicacion aplicacion) {
+		this.aplicacion = aplicacion;
+	}
+
 
 	public Usuario() {
 	}
