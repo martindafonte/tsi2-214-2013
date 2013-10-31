@@ -145,4 +145,24 @@ public class UserLogin {
 		apps = serv.getAplicaciones(nick, pass);
 	}
 	
+	public void refresh(AppSesBean app){
+		
+	}
+	
+	
+	public void agregarRol(String nombre, long appId){
+		
+//		int res = serv.agregarRol(nombre, appId);
+		serv.agregarRol(nombre, appId);
+		
+	}
+	
+	public void agregarPermiso(String nombre, long rolId){
+		
+//		int res = serv.agregarPermisoRol(nombre, rolId);
+		serv.agregarPermisoRol(nombre, rolId);
+		
+	}
+	
+	
 }
