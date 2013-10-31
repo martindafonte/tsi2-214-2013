@@ -1,5 +1,6 @@
 package persistencia;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -12,7 +13,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import modelo.Aplicacion;
+import modelo.Canal;
 import modelo.Desarrollador;
+import modelo.Registro;
+import modelo.Rol;
 import modelo.Usuario;
 import persistencia.ConstantesPersistencia;
 
@@ -32,13 +37,29 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 	private EntityManager em;
 	
     public UsuarioDAO() {
+        // TODO Auto-generated constructor stub
     }
 
 	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public int altaUsuario(Usuario u) {
+	public int altaUsuario(Usuario u, long appId) {
 		try{
+			
+			Canal c  = new Canal();
+			Aplicacion a = em.find(Aplicacion.class, appId);
+			c.setApp(a);
+			c.setCodigo(u.getNick());
+			c.setPropietario(true);
+			List<Registro> lr = new ArrayList<Registro>(); 
+			List<Rol> lrol = new ArrayList<Rol>();
+			c.setRegistrados(lr);
+			c.setUser(u);
+			a.getCanales().add(c);
+			u.setRoles(lrol);
+			u.setAplicacion(a);
 			em.persist(u);
+			a.getUsers().add(u);
+			
 			return ConstantesPersistencia.Exito;
 			
 		}catch(Throwable ex){
@@ -70,6 +91,7 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 
 	@Override
 	public int altaDesarrollador(Desarrollador u) {
+		// TODO Auto-generated method stub
 		try{
 			em.persist(u);
 			return ConstantesPersistencia.Exito;
@@ -82,6 +104,8 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Desarrollador getDesarrollador(String nick, String pass) {
+		// TODO Auto-generated method stub
+
 		try{
 			Query q = em.createQuery("SELECT x FROM Desarrollador x WHERE x.nick = ?1 and pass = ?2");
 			q.setParameter(1, nick).setParameter(2, pass);
