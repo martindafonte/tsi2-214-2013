@@ -89,6 +89,7 @@ public class PushRest implements IPushRest {
 				msj.codigo=Constantes.Push_Error_Enviar;
 				msj.descripcion ="No se pudieron enviar " + result.getFailure();
 			}
+			serv.crearPedidoMsj(p_appId, p_canal);
 			serv.crearPedidoPush("/Push/apid/chanel/Message", "POST", p_appId);
 		} catch (Exception e) {
 			msj.codigo = Constantes.Push_Excepcion;
