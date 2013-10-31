@@ -2,9 +2,14 @@ package modelo;
 
 import java.io.Serializable;
 import java.lang.String;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.*;
+
+import presentacion.PermSesBean;
+import presentacion.RolSesBean;
 
 /**
  * Entity implementation class for Entity: Rol
@@ -26,6 +31,22 @@ public class Rol implements Serializable {
 	@OneToMany
 	private List<Permiso> perms;
 	
+	public Aplicacion getAplicacion() {
+		return aplicacion;
+	}
+
+	public void setAplicacion(Aplicacion aplicacion) {
+		this.aplicacion = aplicacion;
+	}
+
+	public List<Permiso> getPerms() {
+		return perms;
+	}
+
+	public void setPerms(List<Permiso> perms) {
+		this.perms = perms;
+	}
+
 	public Rol() {
 		super();
 	}
@@ -44,6 +65,28 @@ public class Rol implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	
+	public RolSesBean getRolSesBean(){
+		
+		RolSesBean r = new RolSesBean();
+		r.setId(id);
+		r.setNombre(nombre);
+		List<PermSesBean> lp = new ArrayList<PermSesBean>();
+		PermSesBean pses = null;
+		Permiso p = null;
+		Iterator<Permiso> itp = perms.iterator();
+		while(itp.hasNext()){
+			
+			p = itp.next();
+			pses = p.getPermSesBean();
+			lp.add(pses);
+		}
+		
+		r.setPerms(lp);
+		
+		return r;
+		
 	}
    
 }
