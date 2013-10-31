@@ -14,7 +14,7 @@ import mensajesRest.MensajeUsuario;
 public interface IUsersRest {
 	@POST
     @Produces(MediaType.APPLICATION_JSON)
-	public Mensaje login(@FormParam("nick") String user, @FormParam("pass")String pass);
+	public Mensaje login(@FormParam("nick") String user, @FormParam("pass")String pass, @FormParam("app")long app);
 	
 	@GET
 	@Path("{nick}/{app}")
@@ -24,5 +24,5 @@ public interface IUsersRest {
 	@POST
 	@Path("/register")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Mensaje registrar(@FormParam("nick") String user, @FormParam("pass")String pass,@FormParam("nombre")String nombre,@FormParam("apellido")String apellido);
+	public Mensaje registrar(@FormParam("nick") String user, @FormParam("pass")String pass,@FormParam("nombre")String nombre,@FormParam("apellido")String apellido, @FormParam("app")long app);
 }
