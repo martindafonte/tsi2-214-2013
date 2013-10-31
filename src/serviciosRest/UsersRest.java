@@ -4,7 +4,6 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
-import javax.ws.rs.PathParam;
 
 import mensajesRest.Mensaje;
 import mensajesRest.MensajeUsuario;
@@ -34,6 +33,7 @@ public class UsersRest implements IUsersRest {
     
     @Override
     public Mensaje login(String nick,String pass, long appId){
+    	//TODO verificar que el usuario no este bloqueado
     	Mensaje msj = new Mensaje();
     	Usuario d = serv.getUsuario(nick, pass);
     	if(d != null){
