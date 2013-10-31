@@ -78,7 +78,8 @@ public class MongoRest implements IMongoPublico  {
 
 	@Override
 	public MensajeJson ObtenerListaJson(int appid, String Json) throws UnknownHostException, JSONException {
-		// TODO Auto-generated method stub
+
+		serv.crearPedidoJson("/MongoServicios/listaJson/apid", "GET", appid, -1);
 		return m.ObtenerListaJson(appid, Json);
 	}
 
