@@ -4,10 +4,12 @@ package ejb;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-//import java.io.FileInputStream;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Properties;
 
 import javax.ejb.LocalBean;
@@ -17,13 +19,15 @@ import mensajesRest.MensajeJson;
 import mensajesRest.MensajeJsonId;
 import modelo.Aplicacion;
 
+import org.json.JSONArray;
 import org.json.JSONException;
-//import org.json.JSONObject;
-//
-//import persistencia.AplicacionDAO;
+import org.json.JSONObject;
+
+import persistencia.AplicacionDAO;
 import persistencia.AplicacionDAOLocal;
 import serviciosRest.Constantes;
 
+import com.google.gson.Gson;
 import com.mongodb.*;
 import com.mongodb.util.JSON;
 
@@ -178,6 +182,61 @@ public class Mongo implements MongoLocal {
         System.out.println(m.json);
         
         return m ;
+	}
+	
+	public MensajeJson ObtenerListaJson(int appid, String filtro) throws JSONException, UnknownHostException{
+
+		Aplicacion app = aplicacion.getAplicacion(appid);
+		if (app == null){
+			return  MensajeErrorAppJson();
+		}
+		String nombreDB = Integer.toString(appid).concat("_").concat(app.getNombre().replace(" ", ""));	
+		
+		MongoProperties mprop = new MongoProperties();
+		MongoClient mongoClient = new MongoClient(mprop.hostname,mprop.port);
+		DB base = mongoClient.getDB(nombreDB); 
+		
+		MensajeJson m = new MensajeJson();
+		DBCollection collection = base.getCollection("Json");
+		BasicDBObject query = new BasicDBObject(); 
+       
+		JSONObject jsonFiltro = new JSONObject(filtro);
+
+		Iterator<?> filtros = jsonFiltro.keys();
+		
+		while(filtros.hasNext() ){
+			Object o = filtros.next();
+			
+			query.put(o.toString(),jsonFiltro.get(o.toString()).toString());
+		}
+		
+		DBCursor cursor;
+//		if (jsonFiltro.isNull("todos")){
+		cursor = collection.find(query);
+//		}
+//		else{
+//			cursor = collection.find();
+//		}
+		if (cursor.size() == 0){
+			m.codigo = Constantes.Cte_Error_Buscar_Id;
+			m.descripcion = "No hay datos para la consulta";
+			return m;
+		}
+			
+
+		//ArrayList array = new ArrayList(cursor.size());
+		JSONArray array = new JSONArray();
+		
+		while (cursor.hasNext()){
+			DBObject o = cursor.next();
+			o.removeField("_id");
+			array.put(o);
+		}	
+		m.json = array.toString();
+		m.codigo = Constantes.Cte_Exito;
+		
+		
+		return m;
 	}
 
 	@Override
