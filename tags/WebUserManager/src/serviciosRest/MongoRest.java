@@ -1,10 +1,10 @@
 package serviciosRest;
 
 
-//import java.io.IOException;
-//import java.net.InetSocketAddress;
+import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
-//import java.util.concurrent.Executor;
+import java.util.concurrent.Executor;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -15,13 +15,13 @@ import mensajesRest.MensajeJsonId;
 
 import org.json.JSONException;
 
-//import com.sun.net.httpserver.HttpContext;
-//import com.sun.net.httpserver.HttpHandler;
-//import com.sun.net.httpserver.HttpServer;
-//
-//import persistencia.AplicacionDAO;
-//import persistencia.AplicacionDAOLocal;
-//import ejb.Mongo;
+import com.sun.net.httpserver.HttpContext;
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpServer;
+
+import persistencia.AplicacionDAO;
+import persistencia.AplicacionDAOLocal;
+import ejb.Mongo;
 import ejb.MongoLocal;
 
 
@@ -65,6 +65,12 @@ public class MongoRest implements IMongoPublico  {
 	public Mensaje BorrarBase(int app) throws UnknownHostException {
 		// TODO Auto-generated method stub
 		return m.EliminarBase(app);
+	}
+
+	@Override
+	public MensajeJson ObtenerListaJson(int appid, String Json) throws UnknownHostException, JSONException {
+		// TODO Auto-generated method stub
+		return m.ObtenerListaJson(appid, Json);
 	}
 
 	
