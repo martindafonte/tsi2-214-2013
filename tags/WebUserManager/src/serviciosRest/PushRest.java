@@ -3,6 +3,10 @@ package serviciosRest;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.ejb.EJB;
+
+import negocio.ServiciosLocal;
+
 import com.google.android.gcm.server.Message;
 import com.google.android.gcm.server.MulticastResult;
 import com.google.android.gcm.server.Sender;
@@ -14,6 +18,9 @@ import persistencia.*;
 
 public class PushRest implements IPushRest {
 
+	@EJB
+	private ServiciosLocal serv;
+	
 	@Override
 	public Mensaje registrar(long p_appId, String p_regId, String p_canal) {
 		Mensaje msj = new Mensaje();
@@ -30,6 +37,7 @@ public class PushRest implements IPushRest {
 			cdl.agregarRegistroCanal(c,r);
 			msj.codigo = 0;
 			msj.descripcion = "Exito";
+			serv.crearPedidoPush("/Push/apid/chanel/User", "POST", p_appId);
 		} catch (Exception e) {
 			msj.codigo = Constantes.Push_Excepcion;
 			msj.descripcion = "Ocurrio una excepcion inesperada";
@@ -45,6 +53,7 @@ public class PushRest implements IPushRest {
 			rdl.unregister(p_regId);
 			msj.codigo = 0;
 			msj.descripcion = "Exito";
+			serv.crearPedidoPush("/Push/apid/chanel/User/id", "DELETE", p_appId);
 		} catch (Exception e) {
 			msj.codigo = Constantes.Push_Excepcion;
 			msj.descripcion = "Ocurrio una excepcion inesperada";
@@ -80,6 +89,7 @@ public class PushRest implements IPushRest {
 				msj.codigo=Constantes.Push_Error_Enviar;
 				msj.descripcion ="No se pudieron enviar " + result.getFailure();
 			}
+			serv.crearPedidoPush("/Push/apid/chanel/Message", "POST", p_appId);
 		} catch (Exception e) {
 			msj.codigo = Constantes.Push_Excepcion;
 			msj.descripcion = "Ocurrio una excepcion inesperada";
