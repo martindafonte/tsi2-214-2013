@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 
 import persistencia.AplicacionDAOLocal;
 import persistencia.CanalDAOLocal;
+import persistencia.RolDAOLocal;
 import persistencia.PedidosDAOLocal;
 import persistencia.UsuarioDAOLocal;
 import presentacion.AppSesBean;
@@ -18,11 +19,13 @@ import presentacion.CanalSesBean;
 import modelo.Aplicacion;
 import modelo.Canal;
 import modelo.Desarrollador;
+import modelo.Permiso;
 import modelo.PedidoJson;
 import modelo.PedidoMsj;
 import modelo.PedidoPush;
 import modelo.PedidoUser;
 import modelo.Registro;
+import modelo.Rol;
 import modelo.Usuario;
 
 /**
@@ -35,6 +38,9 @@ public class Servicios implements ServiciosLocal {
     /**
      * Default constructor. 
      */
+	@EJB
+	private RolDAOLocal rl;
+	
 	@EJB
 	private UsuarioDAOLocal ul;
 	
@@ -53,7 +59,7 @@ public class Servicios implements ServiciosLocal {
 
 	@Override
 	public void altaUsuario(String nick, String pass, String nombre,
-			String apellido) {
+			String apellido, long appId) {
 		Usuario u = new Usuario();
 //		u.setId(appinfo.getId("Usuario"));
 		u.setNick(nick);
@@ -61,7 +67,7 @@ public class Servicios implements ServiciosLocal {
 		u.setPass(pass);
 		u.setApellido(apellido);
 		
-		ul.altaUsuario(u);
+		ul.altaUsuario(u, appId);
 	}
 
 	@Override
@@ -202,6 +208,7 @@ public class Servicios implements ServiciosLocal {
 				lc.add(ca);
 				
 			}
+			ap.setRoles(a.getRolSesBeans());
 			ap.setCanales(lc);
 			la.add(ap);			
 		}
@@ -247,9 +254,39 @@ public class Servicios implements ServiciosLocal {
 		al.quitarCanalAplicacion(codigo, app.getAplicacionid());
 	}
 
-	
-	
-//	################ pedidos
+	@Override
+	public int agregarPermisoRol(String nombre, long rolId) {
+		// TODO Auto-generated method stub
+		try{
+			
+			Permiso p = new Permiso();
+			p.setNombre(nombre);
+			rl.agregarPermRol(p, rolId);
+			
+		}catch(Exception e){
+			return 0;
+		}
+		
+		return 1;
+	}
+
+	@Override
+	public int agregarRol(String nombre, long appId) {
+		// TODO Auto-generated method stub
+		try{
+			Rol r = new Rol();
+			r.setNombre(nombre);
+			List<Permiso> lp = new ArrayList<Permiso>();
+			r.setPerms(lp);
+			rl.altaRolAplicacion(r, appId);
+			
+		}catch(Exception e){
+			return 0;
+		}
+		
+		return 1;
+	}
+
 
 	@Override
 	public int crearPedidoJson(String http, String metodo, long app,
