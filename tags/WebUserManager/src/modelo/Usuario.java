@@ -26,7 +26,8 @@ public class Usuario implements Serializable {
 	private String pass;
 	private String nombre;
 	private String apellido;
-//TODO EL usuario tiene que tener un canal
+//TODO EL usuario tiene que tener un canal y un bool que indique si esta bloqueados o no
+	
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Aplicacion aplicacion;
