@@ -16,7 +16,7 @@ import modelo.Aplicacion;
 public interface ServiciosLocal {
 
 	public void altaDesarrollador(String nick, String pass, String nombre, String apellido);
-	public void altaUsuario(String nick, String pass, String nombre, String apellido);
+	public void altaUsuario(String nick, String pass, String nombre, String apellido, long appId);
 	public Desarrollador getDesarrollador(String nick, String pass);
 	public Usuario getUsuario(String nick, String pass);
 	public Boolean existeUsuario(String nick, String pass);
@@ -43,7 +43,12 @@ public interface ServiciosLocal {
 	
 
 	public Canal getCanal(String cod);
-	public List<Canal> getCanales(Aplicacion a);	
+	public List<Canal> getCanales(Aplicacion a);
+	
+	
+	public int agregarPermisoRol(String nombre, long rolId);
+	public int agregarRol(String nombre, long appId);
+	
 	
 	
 //	################ pedidos
