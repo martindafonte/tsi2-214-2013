@@ -2,6 +2,7 @@ package negocio;
 
 import java.util.List;
 
+import javax.ejb.Asynchronous;
 import javax.ejb.Local;
 
 import presentacion.AppSesBean;
@@ -47,9 +48,16 @@ public interface ServiciosLocal {
 	
 //	################ pedidos
 	
+	@Asynchronous
 	public int crearPedidoJson(String http, String metodo, long app, int jsonId);
+	
+	@Asynchronous
 	public int crearPedidoPush(String http, String metodo, long app);
+	
+	@Asynchronous
 	public int crearPedidoUser(String http, String metodo, long app, String userId);
+	
+	@Asynchronous
 	public int crearPedidoMsj(long app,	String canId);
 
 	
