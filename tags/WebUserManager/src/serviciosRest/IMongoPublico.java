@@ -4,7 +4,7 @@ import java.net.UnknownHostException;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
-//import javax.ws.rs.FormParam;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -28,6 +28,13 @@ public interface IMongoPublico  {
 	@Path("{apid}/{jsonid}")
 	public MensajeJson ObtenerJson( @PathParam("apid") int app, @PathParam("jsonid") int jsonId) throws UnknownHostException, JSONException;
 
+	// CAMBIAR A GET
+	@POST
+	@Consumes("application/json")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("listaJson/{apid}")
+	public MensajeJson ObtenerListaJson( @PathParam("apid") int appid, String Json) throws UnknownHostException, JSONException;
+	
 	@POST
 	@Consumes("application/json")
 	@Produces(MediaType.APPLICATION_JSON)
