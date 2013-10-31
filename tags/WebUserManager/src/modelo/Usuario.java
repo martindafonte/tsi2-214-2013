@@ -1,6 +1,8 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.*;
@@ -28,6 +30,9 @@ public class Usuario implements Serializable {
 	private String apellido;
 //TODO EL usuario tiene que tener un canal y un bool que indique si esta bloqueados o no
 	
+	@OneToOne(cascade=CascadeType.ALL)
+	private Canal canal;
+
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Aplicacion aplicacion;
@@ -108,5 +113,34 @@ public class Usuario implements Serializable {
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
+	
+	public Canal getCanal() {
+		return canal;
+	}
 
+
+	public void setCanal(Canal canal) {
+		this.canal = canal;
+	}
+	
+
+	public void quitarRolUsuario(long rolId){
+		
+		List<Rol> lr = new ArrayList<Rol>();
+		Iterator<Rol> itr = roles.iterator();
+		Rol r = null;
+		while(itr.hasNext()){
+			r = itr.next();
+			if(r.getId() != rolId){
+				
+				lr.add(r);
+				
+			}
+			
+		}
+		
+		roles = lr;
+		
+	}
+	
 }
