@@ -33,7 +33,7 @@ public class UsersRest implements IUsersRest {
     }
     
     @Override
-    public Mensaje login(String nick,String pass){
+    public Mensaje login(String nick,String pass, long appId){
     	Mensaje msj = new Mensaje();
     	Usuario d = serv.getUsuario(nick, pass);
     	if(d != null){
@@ -43,12 +43,13 @@ public class UsersRest implements IUsersRest {
     	msj.codigo=Constantes.User_Error_loginfail;
     	msj.descripcion="El usuario o la contraeña no son correctos";
     	}
+    	serv.crearPedidoUser("/Users", "POST", appId, nick);
     	return msj;
     }
 
 	@Override
 	public Mensaje registrar(String user, String pass, String nombre,
-			String apellido) {
+			String apellido , long appId) {
 		Usuario u = new Usuario();
 		u.setNick(user);
 		u.setNombre(nombre);
@@ -62,12 +63,13 @@ public class UsersRest implements IUsersRest {
 		}else{
 			msj.codigo = Constantes.User_Error_registration;
 		}
+		serv.crearPedidoUser("/Users/register", "POST", appId, user);
 		return msj;
 	}
 
 	@Override
 	public MensajeUsuario obtenerUsuario(String nick, long app) {
-		
+		serv.crearPedidoUser( "/Users/nick/app", "GET", app, nick);
 		return null;
 	}
 
