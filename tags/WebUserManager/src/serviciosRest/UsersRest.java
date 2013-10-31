@@ -41,7 +41,7 @@ public class UsersRest implements IUsersRest {
     		msj.descripcion="Ok";
     	}else{
     	msj.codigo=Constantes.User_Error_loginfail;
-    	msj.descripcion="El usuario o la contraeña no son correctos";
+    	msj.descripcion="El usuario o la contraeï¿½a no son correctos";
     	}
     	serv.crearPedidoUser("/Users", "POST", appId, nick);
     	return msj;
@@ -56,7 +56,7 @@ public class UsersRest implements IUsersRest {
 		u.setPass(pass);
 		u.setApellido(apellido);
 		Mensaje msj = new Mensaje();
-		if (ul.altaUsuario(u) == 0)
+		if (ul.altaUsuario(u, appId) == 0)
 		{
 			msj.codigo=Constantes.Cte_Exito;
 			msj.descripcion = "Registro exitoso";
@@ -65,6 +65,7 @@ public class UsersRest implements IUsersRest {
 		}
 		serv.crearPedidoUser("/Users/register", "POST", appId, user);
 		return msj;
+//			return null;
 	}
 
 	@Override
