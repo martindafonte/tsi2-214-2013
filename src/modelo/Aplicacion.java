@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import presentacion.CanalSesBean;
+import presentacion.RolSesBean;
 
 /**
  * Entity implementation class for Entity: Aplicacion
@@ -46,6 +47,13 @@ public class Aplicacion implements Serializable {
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="aplicacion")
 	private List<Rol> roles;
+
+	public List<Rol> getRoles() {
+		return roles;
+	}
+	public void setRoles(List<Rol> roles) {
+		this.roles = roles;
+	}
 
 	@OneToMany(mappedBy = "aplicacion")
 	private List<Usuario> users;
@@ -179,4 +187,18 @@ public class Aplicacion implements Serializable {
 		return rest;
 		
 	}
+	
+	public List<RolSesBean> getRolSesBeans(){
+		
+		List<RolSesBean> lr = new ArrayList<RolSesBean>();
+		Iterator<Rol> itr = roles.iterator();
+		while(itr.hasNext()){
+			
+			lr.add(itr.next().getRolSesBean());
+			
+		}
+		
+		return lr;
+		
+	} 
 }
