@@ -282,8 +282,8 @@ public class Servicios implements ServiciosLocal {
 		try {
 			PedidoJson p = new PedidoJson();
 			p.setJsonId(jsonId);
-			p.setMethod(http);
-			p.setUrl(metodo);
+			p.setMethod(metodo);
+			p.setUrl(http);
 			Timestamp time = new Timestamp(System.currentTimeMillis());
 			p.setTime(time);
 			
@@ -299,8 +299,8 @@ public class Servicios implements ServiciosLocal {
 	public int crearPedidoPush(String http, String metodo, long app) {
 		try {
 			PedidoPush p = new PedidoPush();
-			p.setMethod(http);
-			p.setUrl(metodo);
+			p.setMethod(metodo);
+			p.setUrl(http);
 			Timestamp time = new Timestamp(System.currentTimeMillis());
 			p.setTime(time);
 			
@@ -317,8 +317,8 @@ public class Servicios implements ServiciosLocal {
 			String userId) {
 		try {
 			PedidoUser p = new PedidoUser();
-			p.setMethod(http);
-			p.setUrl(metodo);
+			p.setMethod(metodo);
+			p.setUrl(http);
 			Timestamp time = new Timestamp(System.currentTimeMillis());
 			p.setTime(time);
 			
