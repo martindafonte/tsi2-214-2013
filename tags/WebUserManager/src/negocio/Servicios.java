@@ -48,13 +48,12 @@ public class Servicios implements ServiciosLocal {
 	private PedidosDAOLocal pl;
 	
     public Servicios() {
-        // TODO Auto-generated constructor stub
+        
     }
 
 	@Override
 	public void altaUsuario(String nick, String pass, String nombre,
 			String apellido) {
-		// TODO Auto-generated method stub
 		Usuario u = new Usuario();
 //		u.setId(appinfo.getId("Usuario"));
 		u.setNick(nick);
@@ -67,7 +66,6 @@ public class Servicios implements ServiciosLocal {
 
 	@Override
 	public Usuario getUsuario(String nick, String pass) {
-		// TODO Auto-generated method stub
 		
 		
 		return ul.getUsuario(nick, pass);	
@@ -75,8 +73,6 @@ public class Servicios implements ServiciosLocal {
 
 	@Override
 	public Boolean existeUsuario(String nick, String pass) {
-		// TODO Auto-generated method stub
-		
 		if (ul.getUsuario(nick, pass) != null){
 			return true;
 		}
@@ -87,7 +83,6 @@ public class Servicios implements ServiciosLocal {
 	@Override
 	public void altaDesarrollador(String nick, String pass, String nombre,
 			String apellido) {
-		// TODO Auto-generated method stub
 		
 		Desarrollador u = new Desarrollador();
 //		u.setId(appinfo.getId("Desarrollador"));
@@ -96,20 +91,15 @@ public class Servicios implements ServiciosLocal {
 		u.setPass(pass);
 		u.setApellido(apellido);
 		ul.altaDesarrollador(u);
-		
-		
-		
 	}
 
 	@Override
 	public Desarrollador getDesarrollador(String nick, String pass) {
-		// TODO Auto-generated method stub
 		return ul.getDesarrollador(nick, pass);
 	}
 
 	@Override
 	public Boolean existeDesarollador(String nick, String pass) {
-		// TODO Auto-generated method stub
 		if (ul.getDesarrollador(nick, pass) != null){
 			return true;
 		}
@@ -120,8 +110,6 @@ public class Servicios implements ServiciosLocal {
 	@Override
 	public void altaAplicacion(String nombre, String descripcion, String nick,
 			String pass) {
-		// TODO Auto-generated method stub
-		
 		Desarrollador d = ul.getDesarrollador(nick, pass);
 		if (d == null) {
 			return;
@@ -138,7 +126,6 @@ public class Servicios implements ServiciosLocal {
 
 	@Override
 	public List<Aplicacion> getAplicaciones(Desarrollador d) {
-		// TODO Auto-generated method stub
 		
 		return al.getAplicaciones(d);
 		
@@ -146,7 +133,6 @@ public class Servicios implements ServiciosLocal {
 
 //	@Override
 //	public boolean altaCanal(Canal c, Aplicacion a) {
-//		// TODO Auto-generated method stub
 ////		cl.altaCanal(c);
 ////		return al.agregarCanalAplicacion(c, a);
 //		return al.agregarCanalAplicacion(c.getCodigo(), a.getId());
@@ -154,39 +140,32 @@ public class Servicios implements ServiciosLocal {
 
 	@Override
 	public Canal getCanal(String cod) {
-		// TODO Auto-generated method stub
 		cl.getCanal(cod);
 		return null;
 	}
 
 	@Override
 	public Aplicacion getApliacion(long id) {
-		// TODO Auto-generated method stub
-		
 		return al.getAplicacion(id);
 	}
 
 	@Override
 	public void cambiarSingleLogin(long id, boolean valor) {
-		// TODO Auto-generated method stub
 		al.cambiarSingleLogin(id, valor);
 	}
 	
 	@Override
 	public void cambiarSingleLogin(long id) {
-		// TODO Auto-generated method stub
 		al.cambiarSingleLogin(id);
 	}
 
 	@Override
 	public List<Canal> getCanales(Aplicacion a) {
-		// TODO Auto-generated method stub
 		return al.getCanales(a);
 	}
 
 //	@Override
 //	public Canal crearCanal(String codigo, Aplicacion a) {
-//		// TODO Auto-generated method stub
 //		Canal c = new Canal();
 //		c.setCodigo(codigo);
 ////		cl.altaCanal(c, a);
@@ -195,7 +174,6 @@ public class Servicios implements ServiciosLocal {
 
 	@Override
 	public List<AppSesBean> getAplicaciones(String nick, String pass) {
-		// TODO Auto-generated method stub
 		List<AppSesBean> la = new ArrayList<AppSesBean>();
 		Desarrollador d = this.getDesarrollador(nick, pass);
 		Iterator<Aplicacion> it = d.getLa().iterator();
@@ -235,7 +213,6 @@ public class Servicios implements ServiciosLocal {
 
 	@Override
 	public List<CanalSesBean> getCanales(long id) {
-		// TODO Auto-generated method stub
 		
 		List<CanalSesBean> lc = new ArrayList<CanalSesBean>();
 		Aplicacion a = al.getAplicacion(id);
@@ -256,8 +233,7 @@ public class Servicios implements ServiciosLocal {
 
 	@Override
 	public void crearCanal(String codigo, AppSesBean app) {
-		// TODO Auto-generated method stub
-		
+	
 		Aplicacion a = al.getAplicacion(app.getAplicacionid());
 		Canal c = new Canal();
 		c.setCodigo(codigo);
@@ -268,7 +244,6 @@ public class Servicios implements ServiciosLocal {
 
 	@Override
 	public void borrarCanal(String codigo, AppSesBean app) {
-		// TODO Auto-generated method stub
 		al.quitarCanalAplicacion(codigo, app.getAplicacionid());
 	}
 
@@ -290,7 +265,6 @@ public class Servicios implements ServiciosLocal {
 			pl.altaPedidoJSONAplicacion(app, p);
 			return 1;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			return 0;
 		}
 	}
@@ -307,7 +281,6 @@ public class Servicios implements ServiciosLocal {
 			pl.altaPedidoPUSHAplicacion(app, p);
 			return 1;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			return 0;
 		}
 	}
@@ -325,7 +298,6 @@ public class Servicios implements ServiciosLocal {
 			pl.altaPedidoUMAplicacion(app, p, userId);
 			return 1;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			return 0;
 		}
 	}

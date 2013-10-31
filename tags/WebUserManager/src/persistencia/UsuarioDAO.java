@@ -32,7 +32,6 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 	private EntityManager em;
 	
     public UsuarioDAO() {
-        // TODO Auto-generated constructor stub
     }
 
 	@Override
@@ -71,7 +70,6 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 
 	@Override
 	public int altaDesarrollador(Desarrollador u) {
-		// TODO Auto-generated method stub
 		try{
 			em.persist(u);
 			return ConstantesPersistencia.Exito;
@@ -84,8 +82,6 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Desarrollador getDesarrollador(String nick, String pass) {
-		// TODO Auto-generated method stub
-
 		try{
 			Query q = em.createQuery("SELECT x FROM Desarrollador x WHERE x.nick = ?1 and pass = ?2");
 			q.setParameter(1, nick).setParameter(2, pass);
