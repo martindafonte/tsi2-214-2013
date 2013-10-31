@@ -5,6 +5,8 @@ import java.lang.String;
 
 import javax.persistence.*;
 
+import presentacion.PermSesBean;
+
 /**
  * Entity implementation class for Entity: Permiso
  *
@@ -38,6 +40,15 @@ public class Permiso implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	
+	public PermSesBean getPermSesBean(){
+		
+		PermSesBean p = new PermSesBean();
+		p.setId(id);
+		p.setNombre(nombre);		
+		return p;
+		
 	}
    
 }
