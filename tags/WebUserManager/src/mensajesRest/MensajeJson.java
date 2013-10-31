@@ -1,6 +1,5 @@
 package mensajesRest;
 
-import java.util.LinkedList;
 
 
 public class MensajeJson  extends Mensaje  {
