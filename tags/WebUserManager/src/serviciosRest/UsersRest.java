@@ -4,6 +4,7 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
+import javax.ws.rs.PathParam;
 
 import mensajesRest.Mensaje;
 import mensajesRest.MensajeUsuario;
@@ -65,7 +66,7 @@ public class UsersRest implements IUsersRest {
 	}
 
 	@Override
-	public MensajeUsuario obtenerUsuario(String nick) {
+	public MensajeUsuario obtenerUsuario(String nick, long app) {
 		
 		return null;
 	}
