@@ -28,6 +28,18 @@ public class Canal implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
+	private boolean propietario;
+	
+	@OneToOne(mappedBy="canal")
+	private Usuario user;
+	
+	@ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST})
+	private Aplicacion app; 
+	
+	@ManyToMany(mappedBy="canales", cascade = { CascadeType.MERGE, CascadeType.PERSIST})
+	private List<Registro> registrados;
+	
+	
 	public Canal() {
 		super();
 	}   
@@ -38,13 +50,6 @@ public class Canal implements Serializable {
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}   
-	
-	
-	@ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST})
-	private Aplicacion app; 
-	
-	@ManyToMany(mappedBy="canales", cascade = { CascadeType.MERGE, CascadeType.PERSIST})
-	private List<Registro> registrados;
 	
 	
 	public List<Registro> getRegistrados() {
@@ -70,7 +75,6 @@ public class Canal implements Serializable {
 		
 	}
 	
-	
 	public Aplicacion getApp() {
 		return app;
 	}
@@ -88,6 +92,26 @@ public class Canal implements Serializable {
 		}
 		
 		return false;
+	}
+	
+	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public boolean isPropietario() {
+		return propietario;
+	}
+	public void setPropietario(boolean propietario) {
+		this.propietario = propietario;
+	}
+	public Usuario getUser() {
+		return user;
+	}
+	public void setUser(Usuario user) {
+		this.user = user;
 	}
 	
 }
