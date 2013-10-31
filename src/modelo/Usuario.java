@@ -26,7 +26,7 @@ public class Usuario implements Serializable {
 	private String pass;
 	private String nombre;
 	private String apellido;
-
+//TODO EL usuario tiene que tener un canal
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Aplicacion aplicacion;
