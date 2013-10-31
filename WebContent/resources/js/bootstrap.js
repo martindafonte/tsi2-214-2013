@@ -39,7 +39,7 @@
             ,  'OTransition'      : 'oTransitionEnd otransitionend'
             ,  'transition'       : 'transitionend'
             }
-          , name;
+          , name=0;
         for (name in transEndEventNames){
           if (el.style[name] !== undefined) {
             return transEndEventNames[name];
