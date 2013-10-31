@@ -27,7 +27,16 @@ public class AppSesBean {
 	private Integer num;
 	
 	private List<CanalSesBean> canales;
+	private List<RolSesBean> roles;
 	
+	public List<RolSesBean> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<RolSesBean> roles) {
+		this.roles = roles;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -119,6 +128,8 @@ public class AppSesBean {
 			app.canales.add(ca);
 		}
 		
+		app.roles = new ArrayList<RolSesBean>(this.roles);
+		
 		return app;
 		
 	}
@@ -136,6 +147,7 @@ public class AppSesBean {
 			if(ap.getAplicacionid().longValue() == aplicacionid.longValue()){
 				
 				canales = new ArrayList<CanalSesBean>(ap.getCanales());
+				roles = new ArrayList<RolSesBean>(ap.getRoles());
 			}
 			
 		}
