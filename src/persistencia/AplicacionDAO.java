@@ -32,15 +32,11 @@ public class AplicacionDAO implements AplicacionDAOLocal {
      * Default constructor. 
      */
     public AplicacionDAO() {
-        // TODO Auto-generated constructor stub
     }
 
 
 	@Override
 	public void altaApliacion(Aplicacion a, Desarrollador d) {
-		// TODO Auto-generated method stub
-		
-		
 		try{
 			d.getLa().add(a);
 			em.persist(a);
@@ -57,8 +53,6 @@ public class AplicacionDAO implements AplicacionDAOLocal {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Aplicacion> singleLoginAplicaciones() {
-		// TODO Auto-generated method stub
-		
 		Query q = em.createQuery("SELECT x FROM Aplicacion x WHERE x.singleLogin");
 		return (List<Aplicacion>)q.getResultList();
 		
@@ -68,7 +62,6 @@ public class AplicacionDAO implements AplicacionDAOLocal {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Aplicacion> getAplicaciones(Desarrollador d) {
-		// TODO Auto-generated method stub
 		Query q = em.createQuery("SELECT x FROM Aplicacion x WHERE x.d = ?1");
 		q.setParameter(1, d);
 		return (List<Aplicacion>)q.getResultList();
@@ -78,14 +71,12 @@ public class AplicacionDAO implements AplicacionDAOLocal {
 
 	@Override
 	public long getIdJSON(Aplicacion a) {
-		// TODO Auto-generated method stub
 		return a.getJSONID();
 	}
 
 
 	@Override
 	public Aplicacion getAplicacion(long id) {
-		// TODO Auto-generated method stub
 		Query q = em.createQuery("SELECT x FROM Aplicacion x WHERE x.id = ?1");
 		q.setParameter(1, id);
 		@SuppressWarnings("unchecked")
@@ -101,7 +92,6 @@ public class AplicacionDAO implements AplicacionDAOLocal {
 
 	@Override
 	public void quitarCanalAplicacion(Canal c, Aplicacion a) {
-		// TODO Auto-generated method stub
 		List<Canal> lc = a.getCanales();
 		List<Canal> lcAux = new ArrayList<Canal>();
 		Iterator<Canal> itlc = lc.iterator();
@@ -124,8 +114,6 @@ public class AplicacionDAO implements AplicacionDAOLocal {
 
 	@Override
 	public boolean agregarCanalAplicacion(Canal c, Aplicacion a) {
-		// TODO Auto-generated method stub
-		
 		boolean esta = false;
 		List<Canal> lc = a.getCanales();
 		Iterator<Canal>itlc = lc.iterator();
@@ -150,7 +138,6 @@ public class AplicacionDAO implements AplicacionDAOLocal {
 
 	@Override
 	public void cambiarSingleLogin(long id) {
-		// TODO Auto-generated method stub
 		Aplicacion a = this.getAplicacion(id);
 		a.setSingleLogin(!a.isSingleLogin());
 		em.flush();
@@ -159,7 +146,6 @@ public class AplicacionDAO implements AplicacionDAOLocal {
 
 	@Override
 	public void cambiarSingleLogin(long id, boolean valor) {
-		// TODO Auto-generated method stub
 		Aplicacion a = this.getAplicacion(id);
 		a.setSingleLogin(valor);
 		em.flush();
@@ -168,14 +154,12 @@ public class AplicacionDAO implements AplicacionDAOLocal {
 
 	@Override
 	public List<Canal> getCanales(Aplicacion a) {
-		// TODO Auto-generated method stub
 		return a.getCanales();
 	}
 
 
 	@Override
 	public boolean agregarCanalAplicacion(String codigo, long id) {
-		// TODO Auto-generated method stub
 		Query q = em.createQuery("SELECT x FROM Aplicacion x WHERE x.id = ?1");
 		q.setParameter(1, id);
 		@SuppressWarnings("rawtypes")
@@ -205,8 +189,6 @@ public class AplicacionDAO implements AplicacionDAOLocal {
 
 	@Override
 	public void quitarCanalAplicacion(String cod, long id) {
-		// TODO Auto-generated method stub
-		
 		Aplicacion a = this.getAplicacion(id);
 		Canal c = a.quitarCanal(cod);
 		em.remove(c);

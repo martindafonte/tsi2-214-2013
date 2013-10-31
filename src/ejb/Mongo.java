@@ -44,8 +44,6 @@ public class Mongo implements MongoLocal {
      * Default constructor. 
      */
     public Mongo() {
-        // TODO Auto-generated constructor stub
-    	
     }
     
 	public Mensaje MensajeErrorApp(){
@@ -102,7 +100,6 @@ public class Mongo implements MongoLocal {
 
 	@Override
 	public Mensaje EliminarBase(int appid) throws UnknownHostException {
-		// TODO Auto-generated method stub
 		Aplicacion app = aplicacion.getAplicacion(appid);
 		if (app == null){
 			return  MensajeErrorApp();
@@ -121,7 +118,6 @@ public class Mongo implements MongoLocal {
 
 	@Override
 	public MensajeJsonId IngresarJson(int appid, String json) throws UnknownHostException {
-		// TODO Auto-generated method stub
 		Aplicacion app = aplicacion.getAplicacion(appid);
 		if (app == null){
 			return  MensajeErrorAppJsonId();
@@ -149,7 +145,6 @@ public class Mongo implements MongoLocal {
 
 	@Override
 	public MensajeJson Json(int appid, int jsonId) throws UnknownHostException, JSONException {
-		// TODO Auto-generated method stub
 		Aplicacion app = aplicacion.getAplicacion(appid);
 		if (app == null){
 			return  MensajeErrorAppJson();
@@ -241,7 +236,6 @@ public class Mongo implements MongoLocal {
 
 	@Override
 	public Mensaje ActualizarJson(int appid, String json, int jsonId) throws UnknownHostException {
-		// TODO Auto-generated method stub
 		Aplicacion app = aplicacion.getAplicacion(appid);
 		if (app == null){
 			return  MensajeErrorApp();
@@ -277,7 +271,6 @@ public class Mongo implements MongoLocal {
 
 	@Override
 	public Mensaje EliminarJson(int appid, int jsonId) throws UnknownHostException {
-		// TODO Auto-generated method stub
 	// no existe la app
 		Aplicacion app = aplicacion.getAplicacion(appid);
 		if (app == null){
@@ -320,10 +313,8 @@ class MongoProperties{
 		try {
 			propMongo.load(Mongo.class.getResourceAsStream("/META-INF/MongoDB.properties"));
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
 		hostname = propMongo.getProperty("hostname");

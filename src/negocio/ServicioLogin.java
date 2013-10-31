@@ -60,7 +60,6 @@ public class ServicioLogin implements ServicioLoginLocal {
 
 
     public ServicioLogin() {
-        // TODO Auto-generated constructor stub
     }
     
     @PostConstruct
