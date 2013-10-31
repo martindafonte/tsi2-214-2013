@@ -25,4 +25,9 @@ public interface IUsersRest {
 	@Path("/register")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Mensaje registrar(@FormParam("nick") String user, @FormParam("pass")String pass,@FormParam("nombre")String nombre,@FormParam("apellido")String apellido, @FormParam("app")long app);
+	
+	//TODO log out
+	//TODO obtenerpermisosusuario
+	//TODO asignarrolusuario
+	//TODO bloquear usuario
 }
