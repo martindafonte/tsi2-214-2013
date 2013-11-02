@@ -16,6 +16,8 @@ public class Registro implements Serializable {
 
 	   
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "registro_seq_gen")
+	@SequenceGenerator(name = "registro_seq_gen", sequenceName = "registro_id_seq")
 	private long id;
 	private String registrer;
 	private static final long serialVersionUID = 1L;
