@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import presentacion.CanalSesBean;
+import presentacion.PermSesBean;
 import presentacion.RolSesBean;
 
 /**
@@ -63,6 +64,17 @@ public class Aplicacion implements Serializable {
 	}
 	public void setUsers(List<Usuario> users) {
 		this.users = users;
+	}
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	private List<Permiso> permisos;
+	
+
+	public List<Permiso> getPermisos() {
+		return permisos;
+	}
+	public void setPermisos(List<Permiso> permisos) {
+		this.permisos = permisos;
 	}
 
 	@ManyToOne(cascade=CascadeType.ALL)
@@ -201,4 +213,18 @@ public class Aplicacion implements Serializable {
 		return lr;
 		
 	} 
+	
+	public List<PermSesBean> getPermSesBeans(){
+		
+		List<PermSesBean> lr = new ArrayList<PermSesBean>();
+		Iterator<Permiso> itr = permisos.iterator();
+		while(itr.hasNext()){
+			
+			lr.add(itr.next().getPermSesBean());
+			
+		}
+		
+		return lr;
+		
+	}
 }
