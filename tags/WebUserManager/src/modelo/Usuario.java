@@ -131,15 +131,34 @@ public class Usuario implements Serializable {
 		while(itr.hasNext()){
 			r = itr.next();
 			if(r.getId() != rolId){
-				
+
 				lr.add(r);
-				
 			}
-			
 		}
 		
-		roles = lr;
+		roles = new ArrayList<>(lr);
 		
+	}
+	
+	public void agregarRolUsuario(Rol r){
+		
+		boolean esta = false;
+		Rol ro;
+		Iterator<Rol> itr = roles.iterator(); 
+		while(itr.hasNext()){
+			ro = itr.next();
+			if(ro.getId() == r.getId()){
+				esta = true;
+				break;
+			}			
+		}
+		
+		if (! esta){
+			
+			roles.add(r);
+			
+		}
+				
 	}
 	
 }

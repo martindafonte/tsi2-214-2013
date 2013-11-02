@@ -10,6 +10,7 @@ import javax.faces.context.FacesContext;
  *
  */
 public class PermBean {
+	
 	public PermBean() {
 	}
 	

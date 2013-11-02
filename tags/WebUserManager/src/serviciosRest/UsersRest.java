@@ -111,7 +111,7 @@ public class UsersRest implements IUsersRest {
 	public Mensaje setearRolUsuario(String nick, long app, String p_rol) {
 		Mensaje msj;
 		try {
-			rl.asignarRolUsuario(1,1,nick,app,p_rol);
+			rl.asignarRolUsuario(nick,app,p_rol);
 			msj = new Mensaje(Constantes.Cte_Exito);
 			return msj;
 		} catch (Exception e) {
@@ -125,7 +125,7 @@ public class UsersRest implements IUsersRest {
 	public Mensaje quitarRolUsuario(String nick, long app, String p_rol) {
 		Mensaje msj;
 		try {
-			rl.quitarRolUsuario(1,1,nick,app,p_rol);
+			rl.quitarRolUsuario(nick,app,p_rol);
 			msj = new Mensaje(Constantes.Cte_Exito);
 			return msj;
 		} catch (Exception e) {
