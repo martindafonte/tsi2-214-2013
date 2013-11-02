@@ -9,6 +9,13 @@ public class Mensaje{
 	public int codigo;
 	@XmlElement
 	public String descripcion;
+	
+	public Mensaje(){
+		
+	}
+	public Mensaje(int p_codigo){
+		codigo =p_codigo;
+	}
 }
 
 

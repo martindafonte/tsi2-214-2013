@@ -31,5 +31,10 @@ public interface IPushRest {
 	//Envia a todos los canales de una aplicacion un mensaje
 	public abstract Mensaje enviarACanal(@PathParam("apid")long p_appId, @PathParam("chanel") String p_canal, @FormParam("msg") String p_msj);
 	
+	@POST
+	@Path("{apid}/User/{nick}")
+	@Produces(MediaType.APPLICATION_JSON)
+	//Envia a todos los canales de una aplicacion un mensaje
+	public abstract Mensaje enviarAUsuario(@PathParam("apid")long p_appId, @PathParam("nick") String p_nick, @FormParam("msg") String p_msj);
 	//TODO enviar mensaje a usuario
 }
