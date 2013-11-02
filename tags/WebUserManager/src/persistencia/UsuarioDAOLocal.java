@@ -19,4 +19,5 @@ public interface UsuarioDAOLocal {
 	public int agregarRegistroUsuario(String nick, long app_id, String regid);
 	public int quitarRegistroUsuario(String nick, long app_id, String regid);
 	public Usuario obtenerUsuario(String nick, long appid);
+	public List<String> obtenerPermisosUsuario(String nick, long appid);
 }

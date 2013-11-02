@@ -1,6 +1,7 @@
 package persistencia;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -16,6 +17,7 @@ import javax.persistence.Query;
 import modelo.Aplicacion;
 import modelo.Canal;
 import modelo.Desarrollador;
+import modelo.Permiso;
 import modelo.Registro;
 import modelo.Rol;
 import modelo.Usuario;
@@ -222,6 +224,32 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 			return 0;
 		}
 		return 0;
+	}
+
+	@Override
+	public List<String> obtenerPermisosUsuario(String nick, long appid) {
+		try{
+			List<String> permisos = new LinkedList<String>();
+			Query q2 = em.createQuery("SELECT x FROM Aplicacion x WHERE x.id = ?1");
+			q2.setParameter(1, appid);
+			@SuppressWarnings("unchecked")
+			List<Aplicacion> la = q2.getResultList();
+			Query q = em.createQuery("SELECT x FROM Usuario x WHERE x.nick = ?1 and aplicacion = ?2");
+			q.setParameter(1, nick).setParameter(2, la.get(0));
+			@SuppressWarnings("unchecked")
+			List<Usuario> us = q.getResultList();
+			if (us.size() == 1 ){
+				Usuario u = us.get(0);
+				for(Rol r:u.getRoles()){
+					for(Permiso p:r.getPerms()){
+						permisos.add(p.getNombre());
+					}
+				}
+			}	
+			return permisos;
+		}catch(Exception e){
+			return null;
+		}
 	}
 	
 }
