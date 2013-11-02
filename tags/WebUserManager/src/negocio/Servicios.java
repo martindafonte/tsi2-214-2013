@@ -346,7 +346,7 @@ public class Servicios implements ServiciosLocal {
 			Timestamp time = new Timestamp(System.currentTimeMillis());
 			p.setTime(time);
 			
-			pl.altaPedidoMSJ(p, canId);
+			pl.altaPedidoMSJ(p, canId, app);
 			return 1;
 		} catch (Exception e) {
 			return 0;
