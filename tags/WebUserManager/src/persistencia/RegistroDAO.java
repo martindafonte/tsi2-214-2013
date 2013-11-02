@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import excepciones.MultipleRegistersExists;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import modelo.Registro;
 
@@ -73,6 +74,21 @@ public class RegistroDAO implements RegistroDAOLocal {
 			lres.add(itls.next().getRegistrer());
 		}
 		return lres;
+	}
+
+	@Override
+	public Registro existsDevice(String regId) throws MultipleRegistersExists {
+		Query q = em.createQuery("SELECT x FROM Registro x WHERE x.registrer=?1");
+		q.setParameter(1, regId);
+		@SuppressWarnings("unchecked")
+		List<Registro> ls = (List<Registro>)q.getResultList();
+		if(ls.isEmpty()){
+			return null;
+		}else if(ls.size() == 1 ){
+			return ls.get(0);
+		}else{
+			throw new MultipleRegistersExists();
+		}
 	}
 
 }

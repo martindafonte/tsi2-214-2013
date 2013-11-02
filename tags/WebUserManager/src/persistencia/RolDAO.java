@@ -23,13 +23,11 @@ public class RolDAO implements RolDAOLocal {
 	
 	
     public RolDAO() {
-        // TODO Auto-generated constructor stub
     }
 
 
 	@Override
 	public int altaRolAplicacion(Rol r, long appId) {
-		// TODO Auto-generated method stub
 		try{
 			
 			em.persist(r);
@@ -47,7 +45,6 @@ public class RolDAO implements RolDAOLocal {
 
 	@Override
 	public int agregarPermRol(Permiso p, long rolId) {
-		// TODO Auto-generated method stub
 		try{
 			
 			em.persist(p);
@@ -64,7 +61,7 @@ public class RolDAO implements RolDAOLocal {
 
 	@Override
 	public int asignarRolUsuario(long rolId, long userId) {
-		// TODO Auto-generated method stub
+
 		try{
 			
 			Usuario u = em.find(Usuario.class, userId);
@@ -82,7 +79,7 @@ public class RolDAO implements RolDAOLocal {
 
 	@Override
 	public int quitarRolUsuario(long rolId, long userId) {
-		// TODO Auto-generated method stub
+	
 		try{
 			
 			Usuario u = em.find(Usuario.class, userId);
