@@ -11,6 +11,7 @@ import mensajesRest.MensajeUsuario;
 import modelo.Usuario;
 import negocio.ServiciosLocal;
 import persistencia.AplicacionDAOLocal;
+import persistencia.RolDAOLocal;
 //import javax.inject.Inject;
 import persistencia.UsuarioDAOLocal;
 
@@ -27,6 +28,9 @@ public class UsersRest implements IUsersRest {
 
 	@EJB
 	private UsuarioDAOLocal ul;
+	
+	@EJB
+	private RolDAOLocal rl;
 
 	public UsersRest() {
 	}
@@ -91,26 +95,44 @@ public class UsersRest implements IUsersRest {
 
 	@Override
 	public MensajePermisos obtenerPermisosUsuario(String nick, long app) {
-		// TODO Auto-generated method stub
-		return null;
+		MensajePermisos mp = new MensajePermisos();
+		try {
+			mp.permisos = ul.obtenerPermisosUsuario(nick, app);
+			mp.codigo = 0;
+		} catch (Exception e) {
+			mp.codigo = Constantes.User_Exception_retrieving;
+			mp.descripcion = e.getMessage();
+		}
+		return mp;
 	}
 
-	@Override
-	public Mensaje agregarPermisoRol(String rol, long app, String p_permiso) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public Mensaje setearRolUsuario(String nick, long app, String p_rol) {
-		// TODO Auto-generated method stub
-		return null;
+		Mensaje msj;
+		try {
+			rl.asignarRolUsuario(1,1,nick,app,p_rol);
+			msj = new Mensaje(Constantes.Cte_Exito);
+			return msj;
+		} catch (Exception e) {
+			msj = new Mensaje(Constantes.User_Exception_retrieving);
+			msj.descripcion = e.getMessage();
+			return msj;
+		}
 	}
 
 	@Override
 	public Mensaje quitarRolUsuario(String nick, long app, String p_rol) {
-		// TODO Auto-generated method stub
-		return null;
+		Mensaje msj;
+		try {
+			rl.quitarRolUsuario(1,1,nick,app,p_rol);
+			msj = new Mensaje(Constantes.Cte_Exito);
+			return msj;
+		} catch (Exception e) {
+			msj = new Mensaje(Constantes.User_Exception_retrieving);
+			msj.descripcion = e.getMessage();
+			return msj;
+		}
 	}
 
 }

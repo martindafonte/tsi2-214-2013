@@ -41,10 +41,10 @@ public interface IUsersRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	public MensajePermisos obtenerPermisosUsuario(@PathParam("nick") String nick, @PathParam("app") long app);
 	
-	@POST
-	@Path("{app}/Permisos/{rol}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Mensaje agregarPermisoRol(@PathParam("rol") String rol, @PathParam("app") long app, @FormParam("permiso") String p_permiso);
+//	@POST
+//	@Path("{app}/Permisos/{rol}")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public Mensaje agregarPermisoRol(@PathParam("rol") String rol, @PathParam("app") long app, @FormParam("permiso") String p_permiso);
 	
 	@POST
 	@Path("{app}/{nick}/Permisos")
