@@ -6,6 +6,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import modelo.Aplicacion;
 import modelo.Canal;
@@ -66,7 +67,9 @@ public class PedidosDAO implements PedidosDAOLocal {
 	@Override
 	public void altaPedidoUMAplicacion(long app, PedidoUser p, String user) {
 		try{
-			Usuario u = em.find(Usuario.class, user);
+			Query q = em.createQuery("SELECT x FROM Usuario x WHERE x.nick = ?1 and aplicacion_id = ?2");
+			q.setParameter(1, user).setParameter(2, app);
+			Usuario u = (Usuario) q.getSingleResult();
 			p.setUsuario(u);
 			em.persist(p);
 			Aplicacion a = em.find(Aplicacion.class, app);
@@ -80,11 +83,15 @@ public class PedidosDAO implements PedidosDAOLocal {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public void altaPedidoMSJ(PedidoMsj p, String canId) {
+	public void altaPedidoMSJ(PedidoMsj p, String canId, long app) {
 		
 		try{
-			Canal c = em.find(Canal.class, canId);
+			Query q = em.createQuery("SELECT x FROM Canal x WHERE x.codigo = ?1 and app_id = ?2");
+			q.setParameter(1, canId).setParameter(2, app);
+			List<Canal> lc = q.getResultList();
+			Canal c = lc.get(0);
 			p.setCanal(c);
 			em.persist(p);
 			
