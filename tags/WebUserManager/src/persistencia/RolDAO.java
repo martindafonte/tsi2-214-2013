@@ -60,7 +60,7 @@ public class RolDAO implements RolDAOLocal {
 
 
 	@Override
-	public int asignarRolUsuario(long rolId, long userId) {
+	public int asignarRolUsuario(long rolId, long userId, String nick, long appid, String rol) {
 
 		try{
 			
@@ -78,7 +78,7 @@ public class RolDAO implements RolDAOLocal {
 
 
 	@Override
-	public int quitarRolUsuario(long rolId, long userId) {
+	public int quitarRolUsuario(long rolId, long userId, String nick, long appid, String rol) {
 	
 		try{
 			
