@@ -16,6 +16,7 @@ public class RolSesBean {
 	private String nombre;
 
 	private List<PermSesBean> perms;
+	private List<PermSesBean> permsDontHave;
 	
 	public List<PermSesBean> getPerms() {
 		return perms;
@@ -44,6 +45,14 @@ public class RolSesBean {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public List<PermSesBean> getPermsDontHave() {
+		return permsDontHave;
+	}
+
+	public void setPermsDontHave(List<PermSesBean> permsDontHave) {
+		this.permsDontHave = permsDontHave;
 	}
 	
 }
