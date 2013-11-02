@@ -13,5 +13,5 @@ public interface PedidosDAOLocal {
 	public void altaPedidoJSONAplicacion(long app, PedidoJson p);
 	public void altaPedidoPUSHAplicacion(long app, PedidoPush p);
 	public void altaPedidoUMAplicacion(long app, PedidoUser p, String user);
-	public void altaPedidoMSJ(PedidoMsj p, String canId);
+	public void altaPedidoMSJ(PedidoMsj p, String canId, long app);
 }
