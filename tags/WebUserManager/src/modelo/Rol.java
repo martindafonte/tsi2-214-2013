@@ -5,6 +5,8 @@ import java.lang.String;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.persistence.*;
 
@@ -28,7 +30,7 @@ public class Rol implements Serializable {
 	@ManyToOne(cascade={CascadeType.MERGE , CascadeType.REFRESH , CascadeType.PERSIST})
 	private Aplicacion aplicacion;
 	
-	@OneToMany
+	@ManyToMany
 	private List<Permiso> perms;
 	
 	public Aplicacion getAplicacion() {
@@ -69,21 +71,37 @@ public class Rol implements Serializable {
 	
 	public RolSesBean getRolSesBean(){
 		
+		Map<Long, PermSesBean> mperm = new TreeMap<Long,PermSesBean>();
+		Iterator<Permiso> itp = aplicacion.getPermisos().iterator();
+		PermSesBean pses = null;
+		Permiso p = null;
+		// agrego todos los permsesbean
+		while(itp.hasNext()){
+			
+			p = itp.next();
+			pses = p.getPermSesBean();
+			mperm.put(pses.getId(), pses);
+		}		
+		
 		RolSesBean r = new RolSesBean();
 		r.setId(id);
 		r.setNombre(nombre);
 		List<PermSesBean> lp = new ArrayList<PermSesBean>();
-		PermSesBean pses = null;
-		Permiso p = null;
-		Iterator<Permiso> itp = perms.iterator();
+		List<PermSesBean> lpdnh = new ArrayList<PermSesBean>();
+
+		itp = perms.iterator();
 		while(itp.hasNext()){
 			
 			p = itp.next();
 			pses = p.getPermSesBean();
 			lp.add(pses);
+			mperm.remove(pses.getId());
 		}
+
+		lpdnh.addAll(mperm.values());
 		
 		r.setPerms(lp);
+		r.setPermsDontHave(lpdnh);
 		
 		return r;
 		
