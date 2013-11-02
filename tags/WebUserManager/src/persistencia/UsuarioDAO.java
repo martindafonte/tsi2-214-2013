@@ -37,14 +37,13 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 	private EntityManager em;
 	
     public UsuarioDAO() {
-        // TODO Auto-generated constructor stub
+
     }
 
 	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public int altaUsuario(Usuario u, long appId) {
 		try{
-			
 			Canal c  = new Canal();
 			Aplicacion a = em.find(Aplicacion.class, appId);
 			c.setApp(a);
@@ -65,33 +64,55 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 		}catch(Throwable ex){
 			return ConstantesPersistencia.Error;
 		}
-		
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Usuario getUsuario(String nick, String pass) {
+	public Usuario chequearUsuario(String nick, String pass, long appId) {
 		try{
-			Query q = em.createQuery("SELECT x FROM Usuario x WHERE x.nick = ?1 and pass = ?2");
-			q.setParameter(1, nick).setParameter(2, pass);
+			Query q2 = em.createQuery("SELECT x FROM Aplicacion x WHERE x.id = ?1");
+			q2.setParameter(1, appId);
+			List<Aplicacion> la = q2.getResultList();
+			Query q = em.createQuery("SELECT x FROM Usuario x WHERE x.nick = ?1 and pass = ?2 and aplicacion = ?3");
+			q.setParameter(1, nick).setParameter(2, pass).setParameter(3, la.get(0));
 			List<Usuario> us = q.getResultList();
 			if (us.size() == 1 ){
-				Usuario u = us.remove(0);
+				Usuario u = us.get(0);
 				return u;
 				
-			}
-			
-			
+			}	
 		}catch(Exception e){
 			return null;
 			
 		}
 		return null;
 	}
-
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public Usuario obtenerUsuario(String nick,long appId) {
+		try{
+			Query q2 = em.createQuery("SELECT x FROM Aplicacion x WHERE x.id = ?1");
+			q2.setParameter(1, appId);
+			List<Aplicacion> la = q2.getResultList();
+			Query q = em.createQuery("SELECT x FROM Usuario x WHERE x.nick = ?1 and aplicacion = ?2");
+			q.setParameter(1, nick).setParameter(2, la.get(0));
+			List<Usuario> us = q.getResultList();
+			if (us.size() == 1 ){
+				Usuario u = us.get(0);
+				return u;
+				
+			}	
+		}catch(Exception e){
+			return null;
+			
+		}
+		return null;
+	}
+	
 	@Override
 	public int altaDesarrollador(Desarrollador u) {
-		// TODO Auto-generated method stub
+
 		try{
 			em.persist(u);
 			return ConstantesPersistencia.Exito;
@@ -104,19 +125,16 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Desarrollador getDesarrollador(String nick, String pass) {
-		// TODO Auto-generated method stub
+
 
 		try{
 			Query q = em.createQuery("SELECT x FROM Desarrollador x WHERE x.nick = ?1 and pass = ?2");
 			q.setParameter(1, nick).setParameter(2, pass);
 			List<Desarrollador> us = q.getResultList();
 			if (us.size() == 1 ){
-				Desarrollador d = us.remove(0);
+				Desarrollador d = us.get(0);
 				return d;
-				
 			}
-			
-			
 		}catch(Exception e){
 			return null;
 			
@@ -124,4 +142,86 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 		return null;
 	}
 
+	@Override
+	public List<Registro> obtenerRegistrosUsuario(String nick, long app_id) {
+		try{
+			Query q2 = em.createQuery("SELECT x FROM Aplicacion x WHERE x.id = ?1");
+			q2.setParameter(1, app_id);
+			@SuppressWarnings("unchecked")
+			List<Aplicacion> la = q2.getResultList();
+			Query q = em.createQuery("SELECT x FROM Usuario x WHERE x.nick = ?1 and x.aplicacion = ?2");
+			q.setParameter(1, nick).setParameter(2, la.get(0));
+			@SuppressWarnings("unchecked")
+			List<Usuario> us = q.getResultList();
+			if (us.size() == 1 ){
+				Usuario u = us.get(0);
+				List<Registro> registros = u.getCanal().getRegistrados();
+				registros.size();
+				return registros;	
+			}			
+		}catch(Exception e){
+			return null;
+		}
+		return null;
+	}
+
+	@Override
+	public int agregarRegistroUsuario(String nick, long app_id, String regid) {
+		try{
+			Query q2 = em.createQuery("SELECT x FROM Aplicacion x WHERE x.id = ?1");
+			q2.setParameter(1, app_id);
+			@SuppressWarnings("unchecked")
+			List<Aplicacion> la = q2.getResultList();
+			Query q = em.createQuery("SELECT x FROM Usuario x WHERE x.nick = ?1 and x.aplicacion = ?2");
+			q.setParameter(1, nick).setParameter(2, la.get(0));
+			@SuppressWarnings("unchecked")
+			List<Usuario> us = q.getResultList();
+			if (us.size() == 1 ){
+				Usuario u = us.get(0);
+				boolean existe = false;
+				for(Registro r:u.getCanal().getRegistrados()){
+					if(r.getRegistrer()==regid){
+						existe =true;
+						break;
+					}
+				}
+				if(!existe){
+					Registro nuevo_r = new Registro();
+					nuevo_r.setRegistrer(regid);
+					em.persist(nuevo_r);
+					u.getCanal().getRegistrados().add(nuevo_r);
+				}
+			}			
+		}catch(Exception e){
+			return 0;
+		}
+		return 0;
+	}
+	
+	@Override
+	public int quitarRegistroUsuario(String nick, long app_id, String regid) {
+		try{
+			Query q2 = em.createQuery("SELECT x FROM Aplicacion x WHERE x.id = ?1");
+			q2.setParameter(1, app_id);
+			@SuppressWarnings("unchecked")
+			List<Aplicacion> la = q2.getResultList();
+			Query q = em.createQuery("SELECT x FROM Usuario x WHERE x.nick = ?1 and x.aplicacion = ?2");
+			q.setParameter(1, nick).setParameter(2, la.get(0));
+			@SuppressWarnings("unchecked")
+			List<Usuario> us = q.getResultList();
+			if (us.size() == 1 ){
+				Usuario u = us.get(0);
+				for(Registro r:u.getCanal().getRegistrados()){
+					if(r.getRegistrer()==regid){
+						u.getCanal().quitarRegistro(r);
+						em.flush();
+					}
+				}
+			}			
+		}catch(Exception e){
+			return 0;
+		}
+		return 0;
+	}
+	
 }

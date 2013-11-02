@@ -1,5 +1,7 @@
 package persistencia;
 
+import java.util.List;
+
 import javax.ejb.Local;
 
 import modelo.Aplicacion;
@@ -17,5 +19,6 @@ public interface CanalDAOLocal {
 	public void quitarRegistroCanal(Canal c, Registro r);
 	public Aplicacion getAplicacionCanal(Canal c);
 	public Canal getCanal(String id);
+	public List<Registro> getRegistroCanal(String id);
 
 }

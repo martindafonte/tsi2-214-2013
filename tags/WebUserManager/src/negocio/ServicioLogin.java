@@ -1,17 +1,7 @@
 package negocio;
 
-import java.util.Iterator;
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
-
-import persistencia.AplicacionDAOLocal;
-import persistencia.UsuarioDAOLocal;
-import modelo.Aplicacion;
-import modelo.Usuario;
 
 /**
  * Session Bean implementation class ServicioLogin
@@ -24,7 +14,7 @@ public class ServicioLogin implements ServicioLoginLocal {
      * Default constructor. 
      */
 	
-	@EJB
+	/*@EJB
 	private UsuarioDAOLocal servuser;
 	
 	@EJB
@@ -93,5 +83,5 @@ public class ServicioLogin implements ServicioLoginLocal {
     	
     	return null;
     }
-
+*/
 }

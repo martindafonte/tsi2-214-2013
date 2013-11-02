@@ -101,11 +101,25 @@ public class CanalDAO implements CanalDAOLocal {
 	@SuppressWarnings("rawtypes")
 	@Override
 	public boolean existeCanal(String cod) {
-		// TODO Auto-generated method stub
 		Query q = em.createQuery("SELECT x FROM Canal x WHERE x.codigo = ?1");
 		q.setParameter(1, cod);
 		List l = q.getResultList();
 		return ((l != null) && (l.size() > 0));
+	}
+
+	@Override
+	public List<Registro> getRegistroCanal(String id) {
+		Query q = em.createQuery("SELECT x FROM Canal x WHERE x.codigo = ?1");
+		q.setParameter(1, id);
+		@SuppressWarnings("unchecked")
+		List<Canal> lc = q.getResultList();
+		if(lc.size() == 1){
+			Canal c = lc.iterator().next();
+			List<Registro> r = c.getRegistrados();
+			r.size();
+			return r;
+		}		
+		return null;
 	}
 
 

@@ -70,7 +70,7 @@ public class Servicios implements ServiciosLocal {
 		ul.altaUsuario(u, appId);
 	}
 
-	@Override
+	/*@Override
 	public Usuario getUsuario(String nick, String pass) {
 		
 		
@@ -84,7 +84,7 @@ public class Servicios implements ServiciosLocal {
 		}
 		
 		return false;
-	}
+	}*/
 
 	@Override
 	public void altaDesarrollador(String nick, String pass, String nombre,
@@ -256,7 +256,7 @@ public class Servicios implements ServiciosLocal {
 
 	@Override
 	public int agregarPermisoRol(String nombre, long rolId) {
-		// TODO Auto-generated method stub
+
 		try{
 			
 			Permiso p = new Permiso();
@@ -272,7 +272,7 @@ public class Servicios implements ServiciosLocal {
 
 	@Override
 	public int agregarRol(String nombre, long appId) {
-		// TODO Auto-generated method stub
+
 		try{
 			Rol r = new Rol();
 			r.setNombre(nombre);
