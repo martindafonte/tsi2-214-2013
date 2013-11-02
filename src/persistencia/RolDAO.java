@@ -49,7 +49,9 @@ public class RolDAO implements RolDAOLocal {
 			
 			em.persist(p);
 			Rol r = em.find(Rol.class, rolId);
+			Aplicacion a = r.getAplicacion();
 			r.getPerms().add(p);
+			a.getPermisos().add(p);
 			
 		}catch(Exception ex){
 			return 0;
