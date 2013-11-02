@@ -227,4 +227,34 @@ public class Aplicacion implements Serializable {
 		return lr;
 		
 	}
+	
+	public Usuario getUsuario(String nick){
+		
+		Usuario u = null;
+		Iterator<Usuario> itu = users.iterator();
+		while(itu.hasNext()){
+			
+			u = itu.next();
+			if (u.getNick().equals(nick)){
+				return u;
+			}
+			
+		}
+		return null;
+	}
+	
+	public Rol getRol(String nombre){
+		
+		Rol r = null;
+		Iterator<Rol> itr = roles.iterator();
+		while(itr.hasNext()){
+			
+			r = itr.next();
+			if (r.getNombre().equals(nombre)){
+				return r;
+			}
+			
+		}
+		return null;
+	}
 }

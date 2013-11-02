@@ -62,13 +62,23 @@ public class RolDAO implements RolDAOLocal {
 
 
 	@Override
-	public int asignarRolUsuario(long rolId, long userId, String nick, long appid, String rol) {
+	public int asignarRolUsuario(String nick, long appid, String rol) {
 
+		
 		try{
+			Aplicacion a = em.find(Aplicacion.class, appid);
+			if (a != null){
+				Usuario u = a.getUsuario(nick);
+				if( u != null){
+					Rol r = a.getRol(rol);
+					if( r != null){
+						u.agregarRolUsuario(r);
+					}
+					
+				}
+				
+			}
 			
-			Usuario u = em.find(Usuario.class, userId);
-			Rol r = em.find(Rol.class, rolId);
-			u.getRoles().add(r);
 			
 		}catch(Exception e){
 			
@@ -80,12 +90,21 @@ public class RolDAO implements RolDAOLocal {
 
 
 	@Override
-	public int quitarRolUsuario(long rolId, long userId, String nick, long appid, String rol) {
+	public int quitarRolUsuario(String nick, long appid, String rol) {
 	
 		try{
 			
-			Usuario u = em.find(Usuario.class, userId);
-			u.quitarRolUsuario(rolId);
+			Aplicacion a = em.find(Aplicacion.class, appid);
+			if (a != null){
+				Usuario u = a.getUsuario(nick);
+				if( u != null){
+					Rol r = a.getRol(rol);
+					if(r != null){
+						u.quitarRolUsuario(r.getId());
+					}
+				}
+				
+			}
 			
 		}catch(Exception e){
 			
