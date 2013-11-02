@@ -31,7 +31,7 @@ public interface IMongoPublico  {
 	@POST
 	@Consumes("application/json")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("listaJson/{apid}")
+	@Path("{apid}/listaJson")
 	public MensajeJson ObtenerListaJson( @PathParam("apid") int appid, String Json) throws UnknownHostException, JSONException;
 	
 	@POST
