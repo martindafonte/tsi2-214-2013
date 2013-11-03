@@ -447,7 +447,7 @@ public class Servicios implements ServiciosLocal {
 		try {
 			return pl.getPedidos(app);
 		} catch (Exception e) {}
-		return null;
+		return new ArrayList<PedSesBean>();
 	}
 	
 	@Override
