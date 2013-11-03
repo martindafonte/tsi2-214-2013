@@ -37,6 +37,7 @@ body {
 	<link rel="shortcut icon" href="resources/ico/favicon.png" />
 	<script src="http://code.jquery.com/jquery.js"></script>
 	<script src="resources/js/bootstrap.js"></script>
+	<script src="resources/js/limpiar.js"></script>
 </h:head>
 <body>
 	<ui:include src="/BannerTop.xhtml"></ui:include>
@@ -47,14 +48,14 @@ body {
 				<div class="control-group">
 					<label class="control-label" for="inputEmail">Nombre </label>
 					<div class="controls">
-						<h:inputText type="text" value="#{appBean.nombre}"
+						<h:inputText id="nombreA" type="text" value="#{appBean.nombre}"
 							placeholder="Ingrese un nick" />
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label" for="inputEmail">Descripción </label>
 					<div class="controls">
-						<h:inputText type="text" value="#{appBean.descripcion}"
+						<h:inputText id="descripcionA" type="text" value="#{appBean.descripcion}"
 							placeholder="Ingrese su apellido" />
 					</div>
 				</div>

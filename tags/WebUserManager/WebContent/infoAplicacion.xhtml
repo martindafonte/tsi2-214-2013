@@ -20,35 +20,50 @@
 			<div>
 				Descripcion: <h:outputText value="#{appSesBean.descripcion}" />
 			</div>
-		<c:forEach var="c" items="#{appSesBean.getCanales()}">
+			<c:forEach var="c" items="#{appSesBean.getCanales2()}">
 			<div>
 				<table border="1">
 					<tr>
 						<td>Codigo del Canal</td>
 						<td><h:outputText value="#{c.codigo}" /></td>
-						<td><h:commandButton action="#{c.borrarCanal()}" value="borrar"/></td>
+						<td><h:commandButton action="#{c.borrarCanal}" value="borrar"/></td>
 					</tr>
 					<tr>
 						<td>Cantidad de Registrados</td>
 						<td><h:outputText value="#{c.registrados}" /></td>
 					</tr>
+					<tr>
+						<td>Cantidad de Mensajes enviados</td>
+						<td><h:outputText value="#{c.getMensajes()}" /></td>
+					</tr>
 				</table>
 			</div>
-		</c:forEach>
+			</c:forEach>
 		</div>
-		
 		<div>
 			<h:inputText value="#{canalBean.codigo}" />
 			<h:commandButton action="#{canalBean.altaCanal()}" value="agregar" />
 		</div>
-			Single Login <h:selectBooleanCheckbox value="#{appSesBean.singleLogin}" />
-			<h:commandButton action="#{appSesBean.changeSingleLogin()}" value="guardar cambios" />
 		<div>
+			Single Login <h:selectBooleanCheckbox value="#{appSesBean.singleLogin}" />
+			<h:commandButton action="#{appSesBean.changeSingleLogin()}" value="guardar cambios" />		
 		</div>
-		
-		
-		
-		
+	</h:form>
+	<h:form>
+		<c:forEach var="p" items="#{appSesBean.getPedidos()}">
+			<div>
+				<table border="1">
+					<tr>
+						<td>URL del Servicio</td>
+						<td><h:outputText value="#{p.servicio}" /></td>
+					</tr>
+					<tr>
+						<td>Cantidad de Pedidos</td>
+						<td><h:outputText value="#{p.cantidad}" /></td>
+					</tr>
+				</table>
+			</div>
+		</c:forEach>
 	</h:form>
 
 </body> 
