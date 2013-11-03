@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:sql="http://java.sun.com/jsp/jstl/sql"
+	xmlns:permittedTaglibs="http://jakarta.apache.org/taglibs/standard/permittedTaglibs"
+	xmlns:scriptfree="http://jakarta.apache.org/taglibs/standard/scriptfree"
+	xmlns:mj="http://mojarra.dev.java.net/mojarra_ext">
+
+<h:head>
+	<title>Baas TSI2</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="Proyecto de baas 2013" />
+	<meta name="author" content="TSI214" />
+
+	<style type="text/css">
+body {
+	padding-top: 60px;
+	padding-bottom: 40px;
+}
+</style>
+
+	<!-- Bootstrap -->
+	<link href="resources/css/bootstrap-responsive.css" rel="stylesheet" />
+	<link href="resources/css/bootstrap.css" rel="stylesheet"
+		media="screen" />
+	<!-- Fav and touch icons -->
+	<link rel="apple-touch-icon-precomposed" sizes="144x144"
+		href="resources/ico/apple-touch-icon-144-precomposed.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="114x114"
+		href="resources/ico/apple-touch-icon-114-precomposed.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="72x72"
+		href="resources/ico/apple-touch-icon-72-precomposed.png" />
+	<link rel="apple-touch-icon-precomposed"
+		href="resources/ico/apple-touch-icon-57-precomposed.png" />
+	<link rel="shortcut icon" href="resources/ico/favicon.png" />
+	<script src="http://code.jquery.com/jquery.js"></script>
+	<script src="resources/js/bootstrap.js"></script>
+
+
+</h:head>
+<body>
+
+	<h:form>
+		<table class="table table-bordered" cellpadding="4">
+			<tr align="center">
+				<th>Permisos incluidos</th>
+				<th>Permisos no incluidos</th>
+				<th>Agregar Permiso</th>
+			</tr>
+			<tr align="center">
+				<td><c:forEach var="perm" items="#{rolSesBean.getPermsHave()}">
+						<li><h:outputText value="#{perm.nombre}" /> <h:commandButton
+								value="quitar" action="#{perm.quitar()}" /></li>
+					</c:forEach></td>
+				<td><c:forEach var="perm"
+						items="#{rolSesBean.getPermsDontHave()}">
+						<li><h:outputText value="#{perm.nombre}" /> <h:commandButton
+								value="agregar" action="#{perm.agregar()}" /></li>
+					</c:forEach></td>
+
+				<td valign="top"><h:inputText value="#{permBean.nombre}" /> <h:commandButton
+						value="nuevo" action="#{permBean.altaPermiso()}" /></td>
+			</tr>
+		</table>
+	</h:form>
+
+</body>
+</html>

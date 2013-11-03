@@ -48,41 +48,63 @@ body {
 </h:head>
 <body>
 
-	<div>
-		<h:form>
-			<h:inputText value="#{rolBean.nombre}" />
-			<h:commandButton value="agregar Rol" action="#{rolBean.altaRol()}" />
-		</h:form>
+	<ui:include src="/BannerTop.xhtml"></ui:include>
+	<div class="container-fluid">
+		<div class='row-fluid'>
+			<div class='span3'>
+				<div id="accordion" class="ui-accordion ui-widget ui-helper-reset">
+					<h4 id='aplicaciones'
+						class="ui-accordion-header ui-helper-reset ui-state-default ui-accordion-header-active ui-corner-top ui-accordion-icons">Aplicaciones:
+					</h4>
+					<div id="ui-accordion-accordion-panel-0"
+						class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom ui-accordion-content-active"
+						style="display: block; height: 534px;">
+						<h:form>
+							<c:forEach var="app" items="#{userLogin.getApps()}">
+								<div class="well">
+									<h:commandLink action="#{app.showAppInfo()}"
+										value="#{app.nombre}" />
+								</div>
+							</c:forEach>
+						</h:form>
+					</div>
+				</div>
+			</div>
 
-	</div>
-	<div>
-		<table class="table table-bordered">
-			<tr>
-				<h:form>
-					<td><c:forEach var="rol" items="#{appSesBean.getRoles()}">
-							<li><h:commandLink action="#{rol.showPerms()}"
-									value="#{rol.nombre}" /></li>
-						</c:forEach></td>
-					<c:if test="##{rolSesBean} != null">
-						<td><c:forEach var="perm" items="#{rolSesBean.permsHave()}">
-								<li><h:outputText value="#{perm.nombre}" /> <h:commandButton
-										value="quitar" action="#{perm.quitar()}" /></li>
-							</c:forEach></td>
-						<td><c:forEach var="perm"
-								items="#{rolSesBean.permsDontHave()}">
-								<li><h:outputText value="#{perm.nombre}" /> <h:commandButton
-										value="agregar" action="#{perm.agregar()}" /></li>
-							</c:forEach></td>
+			<div class="span8">
 
-						<td>Agregar Permiso
-								<h:inputText value="#{permBean.nombre}" />
-								<h:commandButton value="nuevo"
-									action="#{permBean.altaPermiso()}" />
-						</td>
-					</c:if>
-				</h:form>
-			</tr>
-		</table>
+				<div class="container-fluid">
+					<div class="span2">
+						<table class="table table-bordered">
+							<tr>
+								<h:form>
+									<td><c:forEach var="rol" items="#{appSesBean.getRoles()}">
+											<li><h:commandLink action="#{rol.showPerms()}"
+													value="#{rol.nombre}" /></li>
+										</c:forEach></td>
+								</h:form>
+							</tr>
+						</table>
+					</div>
+					<div class="span8">
+						<div>
+							<h:form>
+								<h:inputText value="#{rolBean.nombre}" />
+								<h:commandButton value="agregar Rol"
+									action="#{rolBean.altaRol()}" />
+							</h:form>
+						</div>
+						<div>
+							<ui:include src="/infoRol.xhtml" />
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
 	</div>
+
+
 </body>
 </html>
