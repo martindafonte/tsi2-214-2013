@@ -1,5 +1,8 @@
 package persistencia;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -101,37 +104,71 @@ public class PedidosDAO implements PedidosDAOLocal {
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<PedSesBean> getPedidos(long app) {
 		try{
-			Query q = em.createQuery("SELECT p.method, p.url, COUNT(p) FROM PedidosJson p WHERE aplicacion_id = ?1 GROUP BY p.url");
-			q.setParameter(1, app);
-			List<PedSesBean> lpj = q.getResultList();
-			q = em.createQuery("SELECT p.method, p.url, COUNT(p) FROM PedidosPush p WHERE aplicacion_id = ?1 GROUP BY p.url");
-			q.setParameter(1, app);
-			List<PedSesBean> lpp = q.getResultList();
-			q = em.createQuery("SELECT p.method, p.url, COUNT(p) FROM PedidosUser p WHERE aplicacion_id = ?1 GROUP BY p.url");
-			q.setParameter(1, app);
-			List<PedSesBean> lpu = q.getResultList();
-			lpp.addAll(lpu);
-			lpj.addAll(lpp);
-			return lpj;
+			Aplicacion a = em.find(Aplicacion.class, app);
+			ArrayList<PedSesBean> lp = new ArrayList<PedSesBean>();
+			HashMap<String,Integer> map = new HashMap<String,Integer>();
+			
+			Iterator<PedidoJson> it1 = a.getPedidosJson().iterator();
+			while (it1.hasNext()){
+				PedidoJson p = it1.next();
+				if (map.containsKey(p.getUrl())){
+					int cant = map.remove(p.getUrl());
+					map.put(p.getUrl(), cant++);
+				}
+				else map.put(p.getUrl(), 1);
+			}
+			Iterator<PedidoPush> it2 = a.getPedidosPush().iterator();
+			while (it2.hasNext()){
+				PedidoPush p = it2.next();
+				if (map.containsKey(p.getUrl())){
+					int cant = map.remove(p.getUrl());
+					map.put(p.getUrl(), cant++);
+				}
+				else map.put(p.getUrl(), 1);
+			}
+			Iterator<PedidoUser> it3 = a.getPedidosUM().iterator();
+			while (it3.hasNext()){
+				PedidoUser p = it3.next();
+				if (map.containsKey(p.getUrl())){
+					int cant = map.remove(p.getUrl());
+					map.put(p.getUrl(), cant++);
+				}
+				else map.put(p.getUrl(), 1);
+			}
+			
+			Iterator<String> it = map.keySet().iterator();
+			while (it.hasNext()){
+				String u = it.next();
+				PedSesBean p = new PedSesBean();
+				p.setServicio(u);
+				p.setCantidad(map.get(u));
+				lp.add(p);
+			}
+			
+			return lp;
 			
 		}catch(Throwable ex){
 			System.out.println("ERROR EN ALTA PEDIDO USER!!!");
 		}
-		return null;
+		return new ArrayList<PedSesBean>();
 	}
 	
 	@Override
 	public int getMensajes(long app, String canId) {
 		try{
-			Query q = em.createQuery("SELECT COUNT(p) FROM PedidosMsj p WHERE aplicacion_id = ?1 and x.codigo = ?2");
-			q.setParameter(1, app).setParameter(2, canId);
-			int msj = (int) q.getSingleResult();
-			return msj;
-			
+			Aplicacion a = em.find(Aplicacion.class, app);
+			int cant = 0;
+			Iterator<PedidoMsj> it = a.getPedidosMsj().iterator();
+			while (it.hasNext()){
+				PedidoMsj p = it.next();
+				if (p.getCanal().getCodigo().equals(canId)){
+					cant++;
+				}			
+			}
+			return cant;
 		}catch(Throwable ex){
 			System.out.println("ERROR EN ALTA PEDIDO USER!!!");
 		}
