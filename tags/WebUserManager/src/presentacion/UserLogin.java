@@ -21,8 +21,6 @@ public class UserLogin {
 	private java.lang.String pass;
 	private Integer appActual;
 
-//	private List<AppSesBean> apps;
-	
 	
 	private Boolean login = false;
 	
@@ -44,6 +42,7 @@ public class UserLogin {
 		if(la != null && la.size() > 0 ){
 			
 			AppSesBean ap = la.get(0);
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("appSesBean");
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("appSesBean", ap);
 		}
 		
@@ -166,6 +165,7 @@ public class UserLogin {
 		if(lr != null && lr.size() > 0){
 			
 			RolSesBean r = lr.get(0);
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("rolSesBean");
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("rolSesBean", r);
 		}
 		return lr;
@@ -198,6 +198,15 @@ public class UserLogin {
 		serv.quitarPermisoRol(permId, rolId);
 	}
 	
+	public int hayRol(){
+		RolSesBean r = (RolSesBean)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("rolSesBean"); 
+		if (r != null){
+			return 1;
+		}
+		return 0;
+		
+	}
+	
 	public List<PedSesBean> getPedidos(long appId){
 		return serv.getPedidos(appId);
 	}
@@ -205,4 +214,5 @@ public class UserLogin {
 	public Integer getMensajes(long app, String codigo){
 		return serv.getMensajes(app, codigo);
 	}
+	
 }
