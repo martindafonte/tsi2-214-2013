@@ -9,6 +9,7 @@ import presentacion.AppSesBean;
 import presentacion.CanalSesBean;
 import presentacion.PermSesBean;
 import presentacion.RolSesBean;
+import presentacion.PedSesBean;
 import modelo.Canal;
 import modelo.Desarrollador;
 import modelo.Aplicacion;
@@ -80,6 +81,9 @@ public interface ServiciosLocal {
 	
 	@Asynchronous
 	public int crearPedidoMsj(long app,	String canId);
+	
+	public List<PedSesBean> getPedidos(long app);
+	public int getMensajes(long app, String  canId);
 
 	
 }
