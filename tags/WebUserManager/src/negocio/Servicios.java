@@ -208,8 +208,8 @@ public class Servicios implements ServiciosLocal {
 				lc.add(ca);
 				
 			}
-			ap.setRoles(a.getRolSesBeans());
-			ap.setCanales(lc);
+//			ap.setRoles(a.getRolSesBeans());
+//			ap.setCanales(lc);
 			la.add(ap);			
 		}
 		
