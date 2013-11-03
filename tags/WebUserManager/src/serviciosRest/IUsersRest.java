@@ -19,6 +19,11 @@ public interface IUsersRest {
     @Produces(MediaType.APPLICATION_JSON)
 	public Mensaje login(@PathParam("nick") String user, @FormParam("pass")String pass, @FormParam("regid")String regid,@PathParam("app")long app);
 	
+	@GET
+	@Path("{app}/{nick}/login")
+    @Produces(MediaType.APPLICATION_JSON)
+	public Mensaje checkStatus(@PathParam("nick") String user,@PathParam("app")long app);
+	
 	@POST
 	@Path("{app}")
 	@Produces(MediaType.APPLICATION_JSON)

@@ -21,4 +21,5 @@ public abstract class Constantes {
 	public static final int User_Error_loginfail = 300;
 	public static final int User_Error_registration = 301;
 	public static final int User_Exception_retrieving = 302;
+	public static final int User_session_expired = 303;
 }
