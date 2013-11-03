@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import presentacion.PedSesBean;
 import modelo.Aplicacion;
 import modelo.Canal;
 import modelo.PedidoJson;
@@ -98,5 +99,42 @@ public class PedidosDAO implements PedidosDAOLocal {
 		}catch(Throwable ex){
 			System.out.println("ERROR EN ALTA PEDIDO MSJ!!!");
 		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<PedSesBean> getPedidos(long app) {
+		try{
+			Query q = em.createQuery("SELECT p.method, p.url, COUNT(p) FROM PedidosJson p WHERE aplicacion_id = ?1 GROUP BY p.url");
+			q.setParameter(1, app);
+			List<PedSesBean> lpj = q.getResultList();
+			q = em.createQuery("SELECT p.method, p.url, COUNT(p) FROM PedidosPush p WHERE aplicacion_id = ?1 GROUP BY p.url");
+			q.setParameter(1, app);
+			List<PedSesBean> lpp = q.getResultList();
+			q = em.createQuery("SELECT p.method, p.url, COUNT(p) FROM PedidosUser p WHERE aplicacion_id = ?1 GROUP BY p.url");
+			q.setParameter(1, app);
+			List<PedSesBean> lpu = q.getResultList();
+			lpp.addAll(lpu);
+			lpj.addAll(lpp);
+			return lpj;
+			
+		}catch(Throwable ex){
+			System.out.println("ERROR EN ALTA PEDIDO USER!!!");
+		}
+		return null;
+	}
+	
+	@Override
+	public int getMensajes(long app, String canId) {
+		try{
+			Query q = em.createQuery("SELECT COUNT(p) FROM PedidosMsj p WHERE aplicacion_id = ?1 and x.codigo = ?2");
+			q.setParameter(1, app).setParameter(2, canId);
+			int msj = (int) q.getSingleResult();
+			return msj;
+			
+		}catch(Throwable ex){
+			System.out.println("ERROR EN ALTA PEDIDO USER!!!");
+		}
+		return 0;
 	}
 }
