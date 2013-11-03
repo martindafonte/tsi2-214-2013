@@ -181,6 +181,11 @@
   <managed-bean-name>rolBean</managed-bean-name>
   <managed-bean-class>presentacion.RolBean</managed-bean-class>
   <managed-bean-scope>request</managed-bean-scope>
+  <managed-property>
+   <property-name>nombre</property-name>
+   <property-class>java.lang.String</property-class>
+   <value/>
+  </managed-property>
  </managed-bean>
  <managed-bean>
   <managed-bean-name>permBean</managed-bean-name>
