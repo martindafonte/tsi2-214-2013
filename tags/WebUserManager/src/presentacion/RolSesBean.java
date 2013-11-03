@@ -59,8 +59,11 @@ public class RolSesBean {
 	
 	public void showPerms(){
 
+		RolSesBean r = new RolSesBean();
+		r.setId(id);
+		r.setNombre(nombre);
 		FacesContext context = FacesContext.getCurrentInstance();
-		context.getExternalContext().getSessionMap().put("rolSesBean", this);
+		context.getExternalContext().getSessionMap().put("rolSesBean", r);
 		
 	}
 	
