@@ -3,10 +3,8 @@
  */
 package presentacion;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
@@ -42,18 +40,20 @@ public class UserLogin {
 	
 	public List<AppSesBean> getApps(){
 		
-		return serv.getAplicaciones(nick, pass);
+		List<AppSesBean> la =  serv.getAplicaciones(nick, pass);
+		if(la != null && la.size() > 0 ){
+			
+			AppSesBean ap = la.get(0);
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("appSesBean", ap);
+		}
+		
+		return la;
 	}
 	
 
 	public UserLogin() {
 	}
 	
-	@PostConstruct
-	private void init(){
-//		apps = new ArrayList<AppSesBean>();
-	}
-
 	public java.lang.String getNick() {
 		return nick;
 	}
@@ -160,5 +160,42 @@ public class UserLogin {
 		
 	}
 	
+	public List<RolSesBean> getRoles(long id){
+		
+		List<RolSesBean> lr = serv.getRoles(id);
+		if(lr != null && lr.size() > 0){
+			
+			RolSesBean r = lr.get(0);
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("rolSesBean", r);
+		}
+		return lr;
+		
+	}
+
+	
+	public List<CanalSesBean> getCanales(long id){
+		
+		return serv.getCanales(id);
+	}
+	
+	public List<PermSesBean> getPermsDontHave(long rolId){
+
+		return serv.getPermsDontHave(rolId);
+	}
+	
+	public List<PermSesBean> getPermsHave(long rolId){
+		
+		return serv.getPermsHave(rolId);
+	}
+	
+	public void agregarPermiso(long permId, long rolId){
+		
+		serv.agregarPermisoRol(permId, rolId);
+	}
+	
+	public void quitarPermiso(long permId, long rolId){
+		
+		serv.quitarPermisoRol(permId, rolId);
+	}
 	
 }

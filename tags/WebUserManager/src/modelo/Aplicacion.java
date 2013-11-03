@@ -257,4 +257,18 @@ public class Aplicacion implements Serializable {
 		}
 		return null;
 	}
+	
+	public Permiso getPermiso(String nombre){
+		
+		Iterator<Permiso> itp = permisos.iterator();
+		while(itp.hasNext()){
+			
+			if(nombre.equals(itp.next().getNombre())){
+				
+				return itp.next();
+			}
+			
+		}	
+		return null;
+	}
 }

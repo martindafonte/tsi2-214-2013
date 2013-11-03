@@ -20,13 +20,13 @@
 			<div>
 				Descripcion: <h:outputText value="#{appSesBean.descripcion}" />
 			</div>
-		<c:forEach var="c" items="#{appSesBean.canales}">
+		<c:forEach var="c" items="#{appSesBean.getCanales()}">
 			<div>
 				<table border="1">
 					<tr>
 						<td>Codigo del Canal</td>
 						<td><h:outputText value="#{c.codigo}" /></td>
-						<td><h:commandButton action="#{c.borrarCanal}" value="borrar"/></td>
+						<td><h:commandButton action="#{c.borrarCanal()}" value="borrar"/></td>
 					</tr>
 					<tr>
 						<td>Cantidad de Registrados</td>
