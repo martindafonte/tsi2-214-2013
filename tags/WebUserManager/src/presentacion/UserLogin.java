@@ -198,4 +198,11 @@ public class UserLogin {
 		serv.quitarPermisoRol(permId, rolId);
 	}
 	
+	public List<PedSesBean> getPedidos(long appId){
+		return serv.getPedidos(appId);
+	}
+	
+	public Integer getMensajes(long app, String codigo){
+		return serv.getMensajes(app, codigo);
+	}
 }
