@@ -92,7 +92,7 @@ public class AppSesBean {
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.getExternalContext().getSessionMap().put("appSesBean", app);
 		
-		return null;
+		return "/WebUserManager/showAplicaciones.xhtml";
 	}
 
 	public List<CanalSesBean> getCanales() {
