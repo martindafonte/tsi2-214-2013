@@ -18,6 +18,7 @@ import presentacion.AppSesBean;
 import presentacion.CanalSesBean;
 import presentacion.PermSesBean;
 import presentacion.RolSesBean;
+import presentacion.PedSesBean;
 import modelo.Aplicacion;
 import modelo.Canal;
 import modelo.Desarrollador;
@@ -210,7 +211,7 @@ public class Servicios implements ServiciosLocal {
 				lc.add(ca);
 				
 			}
-//			ap.setRoles(a.getRolSesBeans());null
+//			ap.setRoles(a.getRolSesBeans());
 //			ap.setCanales(lc);
 			la.add(ap);			
 		}
@@ -220,7 +221,25 @@ public class Servicios implements ServiciosLocal {
 		
 	}
 
-
+	@Override
+	public List<CanalSesBean> getCanales(long id) {
+		
+		List<CanalSesBean> lc = new ArrayList<CanalSesBean>();
+		Aplicacion a = al.getAplicacion(id);
+		Iterator<Canal> itc = a.getCanales().iterator();
+		Canal c;
+		CanalSesBean ca;
+		while(itc.hasNext()){
+			
+			c = itc.next();
+			ca = new CanalSesBean();
+			ca.setCodigo(c.getCodigo());
+			ca.setRegistrados(c.getRegistrados().size());
+			lc.add(ca);
+		}
+			
+		return lc;
+	}
 
 	@Override
 	public void crearCanal(String codigo, AppSesBean app) {
@@ -336,21 +355,6 @@ public class Servicios implements ServiciosLocal {
 			return 0;
 		}
 	}
-
-	
-	
-	
-	@Override
-	public List<CanalSesBean> getCanales(long id) {
-		
-		Aplicacion a = al.getAplicacion(id);
-		if(a != null){
-			return a.getCanalesAppSes();
-		}
-		
-		return new ArrayList<CanalSesBean>();
-	}
-	
 	
 	
 	@Override
@@ -400,7 +404,6 @@ public class Servicios implements ServiciosLocal {
 
 	@Override
 	public int quitarPermisoRol(long permId, long rolId) {
-		// TODO Auto-generated method stub
 		
 		int res; 
 		
@@ -439,5 +442,19 @@ public class Servicios implements ServiciosLocal {
 	}
 
 	
-
+	@Override
+	public List<PedSesBean> getPedidos(long app) {
+		try {
+			return pl.getPedidos(app);
+		} catch (Exception e) {}
+		return null;
+	}
+	
+	@Override
+	public int getMensajes(long app, String  canId) {
+		try {
+			return pl.getMensajes(app, canId);
+		} catch (Exception e) {}
+		return 0;
+	}
 }
