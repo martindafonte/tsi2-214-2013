@@ -48,46 +48,41 @@ body {
 </h:head>
 <body>
 
-	<table class="table table-bordered">
-		<tr>
-			<td>
+	<div>
+		<h:form>
+			<h:inputText value="#{rolBean.nombre}" />
+			<h:commandButton value="agregar Rol" action="#{rolBean.altaRol()}" />
+		</h:form>
+
+	</div>
+	<div>
+		<table class="table table-bordered">
+			<tr>
 				<h:form>
-					<c:forEach var="rol" items="#{appSesBean.getRoles()}">
-						<li>
-							<h:commandLink action="#{rol.showPerms()}"
-								value="#{rol.nombre}" />
-						</li>
-					</c:forEach>
+					<td><c:forEach var="rol" items="#{appSesBean.getRoles()}">
+							<li><h:commandLink action="#{rol.showPerms()}"
+									value="#{rol.nombre}" /></li>
+						</c:forEach></td>
+					<c:if test="##{rolSesBean} != null">
+						<td><c:forEach var="perm" items="#{rolSesBean.permsHave()}">
+								<li><h:outputText value="#{perm.nombre}" /> <h:commandButton
+										value="quitar" action="#{perm.quitar()}" /></li>
+							</c:forEach></td>
+						<td><c:forEach var="perm"
+								items="#{rolSesBean.permsDontHave()}">
+								<li><h:outputText value="#{perm.nombre}" /> <h:commandButton
+										value="agregar" action="#{perm.agregar()}" /></li>
+							</c:forEach></td>
+
+						<td>Agregar Permiso
+								<h:inputText value="#{permBean.nombre}" />
+								<h:commandButton value="nuevo"
+									action="#{permBean.altaPermiso()}" />
+						</td>
+					</c:if>
 				</h:form>
-			</td>
-			<td>
-				<h:form>
-					<c:forEach var="perm" items="#{rolSesBean.permsHave()}">
-						<li>
-							<h:outputText value="#{perm.nombre}" />
-							<h:commandButton value="quitar" action="#{perm.quitar()}" />
-						</li>
-					</c:forEach>
-				</h:form>
-			</td>
-			<td>
-				<h:form>
-					<c:forEach var="perm" items="#{rolSesBean.permsDontHave()}">
-						<li>
-							<h:outputText value="#{perm.nombre}" />
-							<h:commandButton value="agregar" action="#{perm.agregar()}" />
-						</li>
-					</c:forEach>
-				</h:form>
-			</td>
-			<td>
-				Agregar Rol
-				<h:form>
-					<h:inputText value="#{permBean.nombre}" />
-					<h:commandButton value="nuevo" action="#{permBean.altaPermiso()}" />
-				</h:form>
-			</td>
-		</tr>
-	</table>
+			</tr>
+		</table>
+	</div>
 </body>
 </html>
