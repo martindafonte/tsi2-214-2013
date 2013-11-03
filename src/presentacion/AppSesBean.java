@@ -33,6 +33,7 @@ public class AppSesBean {
 			
 			RolSesBean r = lr.get(0);
 			FacesContext context = FacesContext.getCurrentInstance();
+			context.getExternalContext().getSessionMap().remove("rollSesBean");
 			context.getExternalContext().getSessionMap().put("rolSesBean",r);
 			
 		}
@@ -94,7 +95,7 @@ public class AppSesBean {
 		return null;
 	}
 
-	public List<CanalSesBean> getCanales2() {
+	public List<CanalSesBean> getCanales() {
 		UserLogin user = this.getUserLogin();
 		return user.getCanales(aplicacionid);
 	}
