@@ -1,17 +1,12 @@
-  	#map_canvas{
-		margin-top: 25px !important;
-	    overflow: visible;
-	    position: relative;
-	    width: 100% !important;
-    }
   	.span4{
   		width: 22% !important;
   		padding-top: 5px !important;
   		margin-left: 5px !important;
   	}
   	.span8{
-		width: 76.81% !important;;    	
-		margin: 0 5px !important;
+		width: 75.0% !important;    	
+		margin: 0px !important;
+		float: right !important
   	}
   	.navbar{
   		margin-bottom: 0px !important;
@@ -21,47 +16,10 @@
     background-image: linear-gradient(to bottom, #EE7F00, #EFA227);
    	border: 1px solid #EE7F00;
   	}
-  	.logo_img{
-  		height: 50px;
-  		float: left;
-  	}
-    .logo_img2{
-        float: left;
-        width: 29px; 
-        height: 36px;
-        margin-top: 8px;
-    }
   	.brand{
   		margin: 0px !important;
   		text-shadow: 0px !important;
-  	}
-  	a.pin_text {
-	    float: left;
-	    font-size: 12px;
-	    margin: 0 5px 10px;
-        cursor: pointer;
-	}
-    a.pin_text_inhabilitado {
-        float: left;
-        font-size: 12px;
-        margin: 0 5px 10px; 
-        color: #808080;
-        pointer-events: none;
-        cursor: not-allowed;
-    }
-	.pin_img{
-		float:left;
-	}
-	
-	.span8{
-		float: left; 
-	}
-		
-		
-	.origen_destino{
-		float: left;
-	}	
-	
+  	}	
 	
 	.well{
 	 	float: left;
@@ -86,50 +44,6 @@
 	    padding: 2px;
 	    min-height: 25px;
 	    margin-bottom: 0;
-	}
-	.well .origen_destino_switch{
-		float: left;
-    	padding: 11px 0;
-		margin-left: -2px;
-        margin-right: 4px;
-		height: 21px; 
-        width: 16px;	
-        cursor: pointer;
-        padding-top: 9px;
-	}	
-
-    .well .origen_destino_switch_deshabilitado{
-        float: left;
-        padding: 11px 0;
-        margin-left: -2px;
-        margin-right: 4px;
-        height: 21px; 
-        width: 16px;  
-        pointer-events: none;
-        padding-top: 9px;
-    }   
-
-	.well .origen_destino_container{
-		float: left;
-        height: 43px;
-        width: 80%;
-	}
-	.well .origen_destino_container .origen_destino{
-		float: left;
-		width: 198px;
-	}	
-	
-	.well .origen_destino_container .origen_destino_bullet{
-		float: left;
-    	padding: 6px 2px;
-	}
-	.menuholder .menu.slide{
-		padding: 0 10px;
-	}	
-	
-	.well .origen_dest_pins{
-		padding-top: 8px;
-        height: 18px;
 	}
 	
 	.container-fluid{
