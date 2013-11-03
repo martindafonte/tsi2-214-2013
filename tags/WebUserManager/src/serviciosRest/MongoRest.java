@@ -36,8 +36,11 @@ public class MongoRest implements IMongoPublico  {
 	public MensajeJsonId IngresarJson(int appid, String jsonString) throws UnknownHostException {
 		
 		MensajeJsonId msj = m.IngresarJson(appid, jsonString);
+		
+		
 		int jsonId = (int) msj.getJsonId();
 		serv.crearPedidoJson("/MongoServicios/apid", "POST", appid, jsonId);
+		
 		return msj;
 	}
 
@@ -64,10 +67,10 @@ public class MongoRest implements IMongoPublico  {
 	}
 
 	@Override
-	public MensajeJson ObtenerListaJson(int appid, String Json) throws UnknownHostException, JSONException {
+	public MensajeJson ObtenerListaJson(int appid, String Json, int desde, int cant) throws UnknownHostException, JSONException {
 
 		serv.crearPedidoJson("/MongoServicios/listaJson/apid", "POST", appid, -1);
-		return m.ObtenerListaJson(appid, Json);
+		return m.ObtenerListaJson(appid, Json,desde,cant);
 	}
 
 	

@@ -21,5 +21,5 @@ public interface MongoLocal {
 	public boolean ExisteCliente(String nombreDB, int clienteId) throws UnknownHostException;
 	public Mensaje ActualizarJson(int appid, String json, int jsonId) throws UnknownHostException;
 	public Mensaje EliminarJson(int appid, int jsonId) throws UnknownHostException;
-	public MensajeJson ObtenerListaJson(int appid,String Json) throws JSONException, UnknownHostException;
+	public MensajeJson ObtenerListaJson(int appid,String Json, int desde, int cant) throws JSONException, UnknownHostException;
 }
