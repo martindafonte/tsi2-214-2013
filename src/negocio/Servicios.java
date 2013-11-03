@@ -16,6 +16,8 @@ import persistencia.PedidosDAOLocal;
 import persistencia.UsuarioDAOLocal;
 import presentacion.AppSesBean;
 import presentacion.CanalSesBean;
+import presentacion.PermSesBean;
+import presentacion.RolSesBean;
 import modelo.Aplicacion;
 import modelo.Canal;
 import modelo.Desarrollador;
@@ -208,7 +210,7 @@ public class Servicios implements ServiciosLocal {
 				lc.add(ca);
 				
 			}
-//			ap.setRoles(a.getRolSesBeans());
+//			ap.setRoles(a.getRolSesBeans());null
 //			ap.setCanales(lc);
 			la.add(ap);			
 		}
@@ -218,25 +220,7 @@ public class Servicios implements ServiciosLocal {
 		
 	}
 
-	@Override
-	public List<CanalSesBean> getCanales(long id) {
-		
-		List<CanalSesBean> lc = new ArrayList<CanalSesBean>();
-		Aplicacion a = al.getAplicacion(id);
-		Iterator<Canal> itc = a.getCanales().iterator();
-		Canal c;
-		CanalSesBean ca;
-		while(itc.hasNext()){
-			
-			c = itc.next();
-			ca = new CanalSesBean();
-			ca.setCodigo(c.getCodigo());
-			ca.setRegistrados(c.getRegistrados().size());
-			lc.add(ca);
-		}
-			
-		return lc;
-	}
+
 
 	@Override
 	public void crearCanal(String codigo, AppSesBean app) {
@@ -352,6 +336,108 @@ public class Servicios implements ServiciosLocal {
 			return 0;
 		}
 	}
+
+	
+	
+	
+	@Override
+	public List<CanalSesBean> getCanales(long id) {
+		
+		Aplicacion a = al.getAplicacion(id);
+		if(a != null){
+			return a.getCanalesAppSes();
+		}
+		
+		return new ArrayList<CanalSesBean>();
+	}
+	
+	
+	
+	@Override
+	public List<RolSesBean> getRoles(long id) {
+		
+		
+		Aplicacion a = al.getAplicacion(id);
+		if(a != null){
+			return a.getRolSesBeans();
+		}
+		
+		return new ArrayList<RolSesBean>();
+	}
+
+	@Override
+	public List<PermSesBean> getPermsHave(long rolId) {
+		// TODO Auto-generated method stub
+		
+		return rl.getPermsHave(rolId);
+		
+	}
+
+	@Override
+	public List<PermSesBean> getPermsDontHave(long rolId) {
+
+		return rl.getPermsDontHave(rolId);
+		
+	}
+
+	@Override
+	public int agregarPermisoRol(long permId, long rolId) {
+
+		int res; 
+		
+		try{
+			
+			res = rl.agregarPermRol(permId, rolId);
+			
+			
+		}catch(Exception ex){
+			
+			return 0;
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int quitarPermisoRol(long permId, long rolId) {
+		// TODO Auto-generated method stub
+		
+		int res; 
+		
+		try{
+			
+			res = rl.quitarPermRol(permId, rolId);
+			
+			
+		}catch(Exception ex){
+			
+			return 0;
+		}
+		
+		return res;
+		
+	}
+
+	@Override
+	public int quitarPermisoRol(String nombre, long rolId) {
+		// TODO Auto-generated method stub
+		
+		int res; 
+		
+		try{
+
+			res = rl.quitarPermRol(nombre, rolId);
+			
+			
+		}catch(Exception ex){
+			
+			return 0;
+		}
+		
+		return res;
+		
+	}
+
 	
 
 }

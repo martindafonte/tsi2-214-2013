@@ -5,6 +5,8 @@ package presentacion;
 
 import java.util.List;
 
+import javax.faces.context.FacesContext;
+
 /**
  * @author bruno
  *
@@ -15,17 +17,7 @@ public class RolSesBean {
 	private Long id;
 	private String nombre;
 
-	private List<PermSesBean> perms;
-	private List<PermSesBean> permsDontHave;
 	
-	public List<PermSesBean> getPerms() {
-		return perms;
-	}
-
-	public void setPerms(List<PermSesBean> perms) {
-		this.perms = perms;
-	}
-
 	public RolSesBean() {
 	}
 
@@ -48,11 +40,28 @@ public class RolSesBean {
 	}
 
 	public List<PermSesBean> getPermsDontHave() {
-		return permsDontHave;
-	}
 
-	public void setPermsDontHave(List<PermSesBean> permsDontHave) {
-		this.permsDontHave = permsDontHave;
+		UserLogin user = this.getUserLogin();
+		return user.getPermsDontHave(id);
+	}
+	
+	public List<PermSesBean> getPermsHave(){
+		
+		UserLogin user = this.getUserLogin();
+		return user.getPermsHave(id);
+	}
+	
+	private UserLogin getUserLogin(){
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		return (UserLogin)context.getExternalContext().getSessionMap().get("userLogin");
+	}
+	
+	public void showPerms(){
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getSessionMap().put("rolSesBean", this);
+		
 	}
 	
 }

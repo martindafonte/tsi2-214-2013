@@ -50,5 +50,5 @@ public class Permiso implements Serializable {
 		return p;
 		
 	}
-   
+	   
 }
