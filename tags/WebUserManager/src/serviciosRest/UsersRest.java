@@ -28,7 +28,7 @@ public class UsersRest implements IUsersRest {
 
 	@EJB
 	private UsuarioDAOLocal ul;
-	
+
 	@EJB
 	private RolDAOLocal rl;
 
@@ -106,14 +106,17 @@ public class UsersRest implements IUsersRest {
 		return mp;
 	}
 
-
 	@Override
 	public Mensaje setearRolUsuario(String nick, long app, String p_rol) {
 		Mensaje msj;
 		try {
-			rl.asignarRolUsuario(nick,app,p_rol);
-			msj = new Mensaje(Constantes.Cte_Exito);
-			return msj;
+			if (rl.asignarRolUsuario(nick, app, p_rol)==1) {
+				msj = new Mensaje(Constantes.Cte_Exito);
+				return msj;
+			}else{
+				msj = new Mensaje(Constantes.User_Exception_retrieving);
+				return msj;
+			}
 		} catch (Exception e) {
 			msj = new Mensaje(Constantes.User_Exception_retrieving);
 			msj.descripcion = e.getMessage();
@@ -125,7 +128,7 @@ public class UsersRest implements IUsersRest {
 	public Mensaje quitarRolUsuario(String nick, long app, String p_rol) {
 		Mensaje msj;
 		try {
-			rl.quitarRolUsuario(nick,app,p_rol);
+			rl.quitarRolUsuario(nick, app, p_rol);
 			msj = new Mensaje(Constantes.Cte_Exito);
 			return msj;
 		} catch (Exception e) {
