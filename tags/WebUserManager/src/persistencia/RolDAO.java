@@ -240,6 +240,31 @@ public class RolDAO implements RolDAOLocal {
 		
 		return 1;
 	}
+
+
+	@Override
+	public int altaPermiso(String nombre, long appId) {
+		// TODO Auto-generated method stub
+		
+		try{
+			
+			
+			Aplicacion a = em.find(Aplicacion.class, appId);
+			if (a!= null && !a.existePermiso(nombre)){
+			
+				Permiso p = new Permiso();
+				p.setNombre(nombre);
+				em.persist(p);
+				a.agregarPermiso(p);
+			}
+			
+		}catch(Exception ex){
+			
+			return 0;
+		}
+		
+		return 1;
+	}
     
     
     

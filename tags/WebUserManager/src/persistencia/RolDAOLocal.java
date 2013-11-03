@@ -13,6 +13,8 @@ public interface RolDAOLocal {
 
 	public int altaRolAplicacion(Rol r, long appId);
 	
+	public int altaPermiso(String nombre, long appId);	
+	
 	public int agregarPermRol(Permiso p, long rolId);
 	public int agregarPermRol(String nombre, long rolId);
 	public int agregarPermRol(long permId, long rolId);
