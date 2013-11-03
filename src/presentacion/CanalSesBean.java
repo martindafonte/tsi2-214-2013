@@ -15,17 +15,18 @@ import negocio.ServiciosLocal;
 public class CanalSesBean {
 	
 	
-	@EJB
-	private ServiciosLocal serv;
-	
 	private java.lang.String codigo;
 	private Integer registrados;
 
 	public CanalSesBean() {
 	}
 
-	public Integer getMensajes(long app) {
-		return serv.getMensajes(app, codigo);
+	public Integer getMensajes() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		AppSesBean app = (AppSesBean) context.getExternalContext().getSessionMap().get("appSesBean");
+		UserLogin ul= (UserLogin)context.getExternalContext().getSessionMap().get("userLogin");
+
+		return ul.getMensajes(app.getAplicacionid(), codigo);
 	}
 
 	public java.lang.String getCodigo() {
