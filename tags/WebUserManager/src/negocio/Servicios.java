@@ -457,4 +457,19 @@ public class Servicios implements ServiciosLocal {
 		} catch (Exception e) {}
 		return 0;
 	}
+
+	@Override
+	public int altaPermiso(String nombre, long appId) {
+		// TODO Auto-generated method stub
+		try{
+		
+			rl.altaPermiso(nombre, appId);
+			
+		}catch(Exception ex){
+			
+			return 0;
+		}
+		
+		return 1;
+	}
 }

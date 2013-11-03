@@ -161,6 +161,16 @@ public class UserLogin {
 		
 	}
 	
+	public void altaPermiso(String nombre, long appId){
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		AppSesBean ap = (AppSesBean)context.getExternalContext().getSessionMap().get("appSesBean");
+		if ( ap != null ){
+			
+			serv.altaPermiso(nombre, ap.getAplicacionid().longValue());
+		}
+	}
+	
 	public List<RolSesBean> getRoles(long id){
 		
 		List<RolSesBean> lr = serv.getRoles(id);

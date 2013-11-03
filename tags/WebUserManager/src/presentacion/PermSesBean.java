@@ -41,7 +41,7 @@ public class PermSesBean {
 
 	}
 	
-	public void qutar(){
+	public void quitar(){
 		
 		RolSesBean r = this.getRolSesBean();
 		UserLogin user = this.getUserLogin();

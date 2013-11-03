@@ -271,4 +271,27 @@ public class Aplicacion implements Serializable {
 		}	
 		return null;
 	}
+	
+	
+	public boolean existePermiso(String nombre){
+		
+		Iterator<Permiso> itp = permisos.iterator();
+		while(itp.hasNext()){
+			if(itp.next().getNombre().equals(nombre)){
+				
+				return true;
+			}
+			
+		}
+		return false;
+	}
+	
+	
+	//precondicion no existe otro permiso con mismo nombre
+	public void agregarPermiso(Permiso p){
+		
+		permisos.add(p);
+		
+	}
+	
 }

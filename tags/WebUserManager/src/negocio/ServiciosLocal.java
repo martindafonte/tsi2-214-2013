@@ -56,6 +56,8 @@ public interface ServiciosLocal {
 	public List<Canal> getCanales(Aplicacion a);
 	
 	
+	public int altaPermiso(String nombre, long appId);
+	
 	public int agregarPermisoRol(String nombre, long rolId);
 	
 	public int agregarPermisoRol(long permId, long rolId);
