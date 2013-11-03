@@ -31,6 +31,8 @@ public class UsersRest implements IUsersRest {
 
 	@EJB
 	private RolDAOLocal rl;
+	
+	private boolean logeado = false;
 
 	public UsersRest() {
 	}
@@ -49,6 +51,7 @@ public class UsersRest implements IUsersRest {
 		}
 		serv.crearPedidoUser("/Users", "POST", appId, nick);
 		ul.agregarRegistroUsuario(nick, appId, regid);
+		logeado = true;
 		return msj1;
 	}
 
@@ -90,6 +93,7 @@ public class UsersRest implements IUsersRest {
 	public Mensaje logout(String nick, long appId, String regid) {
 		ul.quitarRegistroUsuario(nick, appId, regid);
 		Mensaje msj = new Mensaje(Constantes.Cte_Exito);
+		logeado = false;
 		return msj;
 	}
 
@@ -136,6 +140,17 @@ public class UsersRest implements IUsersRest {
 			msj.descripcion = e.getMessage();
 			return msj;
 		}
+	}
+
+	@Override
+	public Mensaje checkStatus(String user, long app) {
+		Mensaje m = new Mensaje();
+		if(logeado){
+			m.codigo = 0;
+		}else{
+			m.codigo = Constantes.User_session_expired;
+		}
+		return m;
 	}
 
 }
