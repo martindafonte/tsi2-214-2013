@@ -26,8 +26,8 @@ body {
 
 	<!-- Bootstrap -->
 	<link href="resources/css/bootstrap-responsive.css" rel="stylesheet" />
-	<link href="resources/css/bootstrap.css" rel="stylesheet"
-		media="screen" />
+	<link href="resources/css/bootstrap.css" rel="stylesheet" media="screen" />
+	<link href="resources/css/newStyles.css" rel="stylesheet" />	
 	<!-- Fav and touch icons -->
 	<link rel="apple-touch-icon-precomposed" sizes="144x144"
 		href="resources/ico/apple-touch-icon-144-precomposed.png" />
@@ -40,33 +40,35 @@ body {
 	<link rel="shortcut icon" href="resources/ico/favicon.png" />
 	<script src="http://code.jquery.com/jquery.js"></script>
 	<script src="resources/js/bootstrap.js"></script>
+	<script src="resources/js/limpiar.js"></script>
 
 </h:head>
 <body>
 
 	<ui:include src="/BannerTop.xhtml"></ui:include>
 	<div class="container-fluid">
-
-		<div class="span2">
-			<div class="row-fluid">
-				<div class="well sidebar-nav">
-					<ul class="nav nav-list">
+		<div class='row-fluid'>
+			<div class='span3'>	
+				<div id="accordion" class="ui-accordion ui-widget ui-helper-reset">
+					<h4 id='aplicaciones' class="ui-accordion-header ui-helper-reset ui-state-default ui-accordion-header-active ui-corner-top ui-accordion-icons" >Aplicaciones: </h4>
+					<div id="ui-accordion-accordion-panel-0" class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom ui-accordion-content-active" style="display: block; height: 534px;">
 						<h:form>
 							<c:forEach var="app" items="#{userLogin.getApps()}">
-								<li>	
-								<h:commandLink action="#{app.showAppInfo()}"
-									value="#{app.nombre}" />
-								</li>
+								<div class="well">	
+									<h:commandLink action="#{app.showAppInfo()}"
+										value="#{app.nombre}" />
+								</div>
 							</c:forEach>
-							
 						</h:form>
-					</ul>
+					</div>
 				</div>
 			</div>
-		</div>
 
 <!-- 		agregar cosas aca -->
-		<div class="span10"></div>
+			<div class="span8">
+				<ui:include src="/infoAplicacion.xhtml"></ui:include>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
