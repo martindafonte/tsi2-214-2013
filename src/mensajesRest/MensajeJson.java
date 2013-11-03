@@ -5,7 +5,10 @@ package mensajesRest;
 public class MensajeJson  extends Mensaje  {
 	
 	public String json;
+	public int cant;
 
+
+	
 
 	public MensajeJson() {
 		super();
@@ -17,6 +20,14 @@ public class MensajeJson  extends Mensaje  {
 
 	public void setJson(String json) {
 		this.json = json;
+	}
+	
+	public int getCant() {
+		return cant;
+	}
+
+	public void setCant(int cant) {
+		this.cant = cant;
 	}
 
 }

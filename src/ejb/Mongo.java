@@ -69,7 +69,7 @@ public class Mongo implements MongoLocal {
 		try{			
 			MongoProperties mprop = new MongoProperties();
 			MongoClient mongoClient = new MongoClient(mprop.hostname,mprop.port);
-			DB base = mongoClient.getDB(nombreDB);  
+			DB base = mongoClient.getDB(nombreDB.toLowerCase());  
 			DBCollection collection = base.getCollection("Json");
 			// Ingreso algo en la base porque si no no me la ingresa.
 			if (!ExisteCliente(nombreDB, clienteId )){
@@ -104,7 +104,7 @@ public class Mongo implements MongoLocal {
 		if (app == null){
 			return  MensajeErrorApp();
 		}	
-		String nombreDB = Integer.toString(appid).concat("_").concat(app.getNombre().replace(" ", ""));
+		String nombreDB = Integer.toString(appid).concat("_").concat(app.getNombre().replace(" ", "").toLowerCase());
 		MongoProperties mprop = new MongoProperties();
 		MongoClient mongoClient = new MongoClient(mprop.hostname,mprop.port);
 		mongoClient.dropDatabase(nombreDB);
@@ -118,11 +118,13 @@ public class Mongo implements MongoLocal {
 
 	@Override
 	public MensajeJsonId IngresarJson(int appid, String json) throws UnknownHostException {
+		
 		Aplicacion app = aplicacion.getAplicacion(appid);
 		if (app == null){
 			return  MensajeErrorAppJsonId();
 		}
-		String nombreDB = Integer.toString(appid).concat("_").concat(app.getNombre().replace(" ", ""));
+		
+		String nombreDB = Integer.toString(appid).concat("_").concat(app.getNombre().replace(" ", "").toLowerCase());
 		int jsonId =(int) app.getJSONID();
 		
 		// conectar con BAse
@@ -130,8 +132,11 @@ public class Mongo implements MongoLocal {
 		MongoClient mongoClient = new MongoClient(mprop.hostname,mprop.port);
 		DB base = mongoClient.getDB(nombreDB); 
 		
-        DBCollection collection = base.getCollection("Json");
+	
+		DBCollection collection = base.getCollection("Json");
         
+		
+		
         DBObject dbObject = (DBObject)JSON.parse(json.toString());
         
         dbObject.put("_id",jsonId);
@@ -149,7 +154,7 @@ public class Mongo implements MongoLocal {
 		if (app == null){
 			return  MensajeErrorAppJson();
 		}
-		String nombreDB = Integer.toString(appid).concat("_").concat(app.getNombre().replace(" ", ""));	
+		String nombreDB = Integer.toString(appid).concat("_").concat(app.getNombre().replace(" ", "").toLowerCase());	
 		
 		MongoProperties mprop = new MongoProperties();
 		MongoClient mongoClient = new MongoClient(mprop.hostname,mprop.port);
@@ -174,18 +179,17 @@ public class Mongo implements MongoLocal {
         
         m.codigo = Constantes.Cte_Exito;
         m.json =  objeto.toString();
-        System.out.println(m.json);
-        
+
         return m ;
 	}
 	
-	public MensajeJson ObtenerListaJson(int appid, String filtro) throws JSONException, UnknownHostException{
+	public MensajeJson ObtenerListaJson(int appid, String filtro, int desde, int cant) throws JSONException, UnknownHostException{
 
 		Aplicacion app = aplicacion.getAplicacion(appid);
 		if (app == null){
 			return  MensajeErrorAppJson();
 		}
-		String nombreDB = Integer.toString(appid).concat("_").concat(app.getNombre().replace(" ", ""));	
+		String nombreDB = Integer.toString(appid).concat("_").concat(app.getNombre().replace(" ", "").toLowerCase());	
 		
 		MongoProperties mprop = new MongoProperties();
 		MongoClient mongoClient = new MongoClient(mprop.hostname,mprop.port);
@@ -204,31 +208,31 @@ public class Mongo implements MongoLocal {
 			
 			query.put(o.toString(),jsonFiltro.get(o.toString()).toString());
 		}
+		query.put("_id", new BasicDBObject("$gte", desde));
+		
+		
 		
 		DBCursor cursor;
-//		if (jsonFiltro.isNull("todos")){
-		cursor = collection.find(query);
-//		}
-//		else{
-//			cursor = collection.find();
-//		}
+		cursor = collection.find(query).limit(cant);
+		
+		
 		if (cursor.size() == 0){
 			m.codigo = Constantes.Cte_Error_Buscar_Id;
 			m.descripcion = "No hay datos para la consulta";
 			return m;
 		}
 			
-
-		//ArrayList array = new ArrayList(cursor.size());
 		JSONArray array = new JSONArray();
 		
 		while (cursor.hasNext()){
 			DBObject o = cursor.next();
-			o.removeField("_id");
 			array.put(o);
+			
+			
 		}	
 		m.json = array.toString();
 		m.codigo = Constantes.Cte_Exito;
+		m.cant = collection.find().count();
 		
 		
 		return m;
@@ -240,7 +244,7 @@ public class Mongo implements MongoLocal {
 		if (app == null){
 			return  MensajeErrorApp();
 		}
-		String nombreDB = Integer.toString(appid).concat("_").concat(app.getNombre().replace(" ", ""));	
+		String nombreDB = Integer.toString(appid).concat("_").concat(app.getNombre().replace(" ", "").toLowerCase());	
 		Mensaje m = new Mensaje();
 		if (!ExisteCliente(nombreDB, jsonId)){	
 			m.codigo = Constantes.Cte_Error_Buscar_Id ;
@@ -276,7 +280,7 @@ public class Mongo implements MongoLocal {
 		if (app == null){
 			return  MensajeErrorApp();
 		}
-		String nombreDB = Integer.toString(appid).concat("_").concat(app.getNombre().replace(" ", ""));	
+		String nombreDB = Integer.toString(appid).concat("_").concat(app.getNombre().replace(" ", "").toLowerCase());	
 		
 	//no existe el id		
 		Mensaje m = new Mensaje();
