@@ -38,6 +38,7 @@ public class PermBean {
 		
 		FacesContext context = FacesContext.getCurrentInstance();
 		UserLogin user = (UserLogin)context.getExternalContext().getSessionMap().get("userLogin");
-		user.agregarPermiso(nombre, rolId);
+		AppSesBean app = (AppSesBean)context.getExternalContext().getSessionMap().get("appSesBean");
+		user.altaPermiso(nombre, app.getAplicacionid().longValue());
 	}
 }
