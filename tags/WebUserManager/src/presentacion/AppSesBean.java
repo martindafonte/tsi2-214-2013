@@ -5,10 +5,8 @@ package presentacion;
 
 import java.util.List;
 
-import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 
-import negocio.ServiciosLocal;
 
 /**
  * @author bruno
@@ -17,15 +15,14 @@ import negocio.ServiciosLocal;
 
 public class AppSesBean {
 	
-	@EJB
-	private ServiciosLocal serv;
 	
 	private Long aplicacionid;
 	private String nombre;
 	private Integer num;
 	
 	public List<PedSesBean> getPedidos() {
-		return serv.getPedidos(aplicacionid);
+		UserLogin u = getUserLogin();
+		return u.getPedidos(aplicacionid);
 	}
 
 	public List<RolSesBean> getRoles() {
@@ -94,10 +91,10 @@ public class AppSesBean {
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.getExternalContext().getSessionMap().put("appSesBean", app);
 		
-		return "/infoAplicacion.xhtml";
+		return null;
 	}
 
-	public List<CanalSesBean> getCanales() {
+	public List<CanalSesBean> getCanales2() {
 		UserLogin user = this.getUserLogin();
 		return user.getCanales(aplicacionid);
 	}

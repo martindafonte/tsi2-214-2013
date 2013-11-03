@@ -9,19 +9,12 @@ public class PedSesBean {
 	@EJB
 	private ServiciosLocal serv;
 	
-	private String metodo;
 	private String servicio;
 	private Integer cantidad;
 	
 	public PedSesBean() {
 	}
 	
-	public String getMetodo() {
-		return metodo;
-	}
-	public void setMetodo(String metodo) {
-		this.metodo = metodo;
-	}
 	public String getServicio() {
 		return servicio;
 	}
