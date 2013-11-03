@@ -23,18 +23,9 @@ public class UserLogin {
 	private java.lang.String pass;
 	private Integer appActual;
 
-	private List<AppSesBean> apps;
+//	private List<AppSesBean> apps;
 	
 	
-	public List<AppSesBean> getApps() {
-		return apps;
-	}
-
-	public void setApps(List<AppSesBean> apps) {
-		this.apps = apps;
-	}
-
-
 	private Boolean login = false;
 	
 	public Boolean getLogin() {
@@ -49,13 +40,18 @@ public class UserLogin {
 	@EJB
 	private ServiciosLocal serv; 
 	
+	public List<AppSesBean> getApps(){
+		
+		return serv.getAplicaciones(nick, pass);
+	}
+	
 
 	public UserLogin() {
 	}
 	
 	@PostConstruct
 	private void init(){
-		apps = new ArrayList<AppSesBean>();
+//		apps = new ArrayList<AppSesBean>();
 	}
 
 	public java.lang.String getNick() {
@@ -81,7 +77,7 @@ public class UserLogin {
 			return "errorPage.xhtml";			
 		}
 		login = true;
-		apps = serv.getAplicaciones(nick, pass);
+//		apps = serv.getAplicaciones(nick, pass);
 
 		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		String ret = req.getRequestURL().toString();
@@ -132,7 +128,7 @@ public class UserLogin {
 	
 	public void borrarCanal(String codigo, AppSesBean app){
 		serv.borrarCanal(codigo, app);
-		apps = serv.getAplicaciones(nick, pass);
+//		apps = serv.getAplicaciones(nick, pass);
 	}
 	
 	public void cambiarSingleLogin(long id , boolean valor){
@@ -142,7 +138,7 @@ public class UserLogin {
 	
 	public void refresh(){
 		
-		apps = serv.getAplicaciones(nick, pass);
+//		apps = serv.getAplicaciones(nick, pass);
 	}
 	
 	public void refresh(AppSesBean app){

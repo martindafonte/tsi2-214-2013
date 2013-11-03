@@ -40,23 +40,23 @@ public class CanalSesBean {
 		
 		FacesContext context = FacesContext.getCurrentInstance();
 		AppSesBean app = (AppSesBean) context.getExternalContext().getSessionMap().get("appSesBean");
-		List<CanalSesBean> lc = app.getCanales();
-		List<CanalSesBean> lcAux = new ArrayList<CanalSesBean>();
-		Iterator<CanalSesBean> itlc = lc.iterator();
-		while(itlc.hasNext()){
-			CanalSesBean cc =itlc.next();
-			CanalSesBean ccAux;
-			if(! cc.getCodigo().equals(this.codigo)){
-				ccAux = new CanalSesBean();
-				ccAux.setCodigo(cc.codigo);
-				ccAux.setRegistrados(new Integer(cc.registrados));
-				lcAux.add(ccAux);
-			}
-		}
+//		List<CanalSesBean> lc = app.getCanales();
+//		List<CanalSesBean> lcAux = new ArrayList<CanalSesBean>();
+//		Iterator<CanalSesBean> itlc = lc.iterator();
+//		while(itlc.hasNext()){
+//			CanalSesBean cc =itlc.next();
+//			CanalSesBean ccAux;
+//			if(! cc.getCodigo().equals(this.codigo)){
+//				ccAux = new CanalSesBean();
+//				ccAux.setCodigo(cc.codigo);
+//				ccAux.setRegistrados(new Integer(cc.registrados));
+//				lcAux.add(ccAux);
+//			}
+//		}
 		
 		context.getExternalContext().getSessionMap().remove("canalSesBean");
 		UserLogin user = (UserLogin)context.getExternalContext().getSessionMap().get("userLogin");
-		app.setCanales(lcAux);
+//		app.setCanales(lcAux);
 		user.borrarCanal(codigo, app);
 		
 	}
