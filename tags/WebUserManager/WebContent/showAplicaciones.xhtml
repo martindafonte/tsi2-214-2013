@@ -52,7 +52,7 @@ body {
 				<div class="well sidebar-nav">
 					<ul class="nav nav-list">
 						<h:form>
-							<c:forEach var="app" items="#{userLogin.apps}">
+							<c:forEach var="app" items="#{userLogin.getApps()}">
 								<li>	
 								<h:commandLink action="#{app.showAppInfo()}"
 									value="#{app.nombre}" />
