@@ -38,12 +38,10 @@ public class RolDAO implements RolDAOLocal {
 			Aplicacion a = em.find(Aplicacion.class, appId);
 			r.setAplicacion(a);
 			a.getRoles().add(r);
-			
+			return 1;
 		}catch(Exception ex){
 			return 0;
 		}
-		
-		return 1;
 	}
 
 
@@ -56,12 +54,10 @@ public class RolDAO implements RolDAOLocal {
 			Aplicacion a = r.getAplicacion();
 			r.getPerms().add(p);
 			a.getPermisos().add(p);
-			
+			return 1;
 		}catch(Exception ex){
 			return 0;
 		}
-		
-		return 1;
 	}
 
 
@@ -77,19 +73,15 @@ public class RolDAO implements RolDAOLocal {
 					Rol r = a.getRol(rol);
 					if( r != null){
 						u.agregarRolUsuario(r);
+						return 1;
 					}
-					
 				}
-				
 			}
-			
-			
+			return 0;
 		}catch(Exception e){
 			
 			return 0;
 		}
-		
-		return 1;
 	}
 
 
@@ -105,16 +97,15 @@ public class RolDAO implements RolDAOLocal {
 					Rol r = a.getRol(rol);
 					if(r != null){
 						u.quitarRolUsuario(r.getId());
+						return 1;
 					}
 				}
-				
 			}
-			
+			return 0;
 		}catch(Exception e){
 			
 			return 0;
 		}
-		return 1;
 	}
 
 
