@@ -24,6 +24,10 @@ public class CanalSesBean {
 	public CanalSesBean() {
 	}
 
+	public Integer getMensajes(long app) {
+		return serv.getMensajes(app, codigo);
+	}
+
 	public java.lang.String getCodigo() {
 		return codigo;
 	}
@@ -64,8 +68,6 @@ public class CanalSesBean {
 	public void setRegistrados(Integer registrados) {
 		this.registrados = registrados;
 	}
-	
-	
 	
 	
 }
