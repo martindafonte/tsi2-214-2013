@@ -39,11 +39,13 @@ public class UserLogin {
 	public List<AppSesBean> getApps(){
 		
 		List<AppSesBean> la =  serv.getAplicaciones(nick, pass);
-		if(la != null && la.size() > 0 ){
+		if((la != null && la.size() > 0 )&&
+		  (! FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey("appSesBean"))){
 			
 			AppSesBean ap = la.get(0);
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("appSesBean");
+//			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("appSesBean");
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("appSesBean", ap);
+				
 		}
 		
 		return la;
@@ -162,10 +164,10 @@ public class UserLogin {
 	public List<RolSesBean> getRoles(long id){
 		
 		List<RolSesBean> lr = serv.getRoles(id);
-		if(lr != null && lr.size() > 0){
+		if((lr != null && lr.size() > 0)&&(! FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey("rolSesBean")))
+		{
 			
 			RolSesBean r = lr.get(0);
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("rolSesBean");
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("rolSesBean", r);
 		}
 		return lr;
