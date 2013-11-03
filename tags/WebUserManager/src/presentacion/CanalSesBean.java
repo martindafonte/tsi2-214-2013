@@ -3,10 +3,6 @@
  */
 package presentacion;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 

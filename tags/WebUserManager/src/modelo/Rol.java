@@ -71,6 +71,32 @@ public class Rol implements Serializable {
 	
 	public RolSesBean getRolSesBean(){
 		
+				
+		
+		RolSesBean r = new RolSesBean();
+		r.setId(id);
+		r.setNombre(nombre);
+
+		
+		return r;
+		
+	}
+	
+	public List<PermSesBean> getPermsHave(){
+		
+		List<PermSesBean> lp = new ArrayList<PermSesBean>();
+		Iterator<Permiso> itp = perms.iterator();
+		while(itp.hasNext()){
+			
+			lp.add(itp.next().getPermSesBean());			
+		}
+		
+		return lp;
+				
+	}
+	
+	public List<PermSesBean> getPermsDontHave(){
+		
 		Map<Long, PermSesBean> mperm = new TreeMap<Long,PermSesBean>();
 		Iterator<Permiso> itp = aplicacion.getPermisos().iterator();
 		PermSesBean pses = null;
@@ -81,11 +107,8 @@ public class Rol implements Serializable {
 			p = itp.next();
 			pses = p.getPermSesBean();
 			mperm.put(pses.getId(), pses);
-		}		
+		}
 		
-		RolSesBean r = new RolSesBean();
-		r.setId(id);
-		r.setNombre(nombre);
 		List<PermSesBean> lp = new ArrayList<PermSesBean>();
 		List<PermSesBean> lpdnh = new ArrayList<PermSesBean>();
 
@@ -100,11 +123,65 @@ public class Rol implements Serializable {
 
 		lpdnh.addAll(mperm.values());
 		
-		r.setPerms(lp);
-		r.setPermsDontHave(lpdnh);
+		return lpdnh;
+
 		
-		return r;
+	}
+	
+	public void agregarPermiso(Permiso p){
 		
+		
+		boolean esta = false;
+		Iterator<Permiso> itp = perms.iterator();
+		while(itp.hasNext()){
+			
+			if(itp.next().getId() == p.getId()){
+				
+				esta = true;
+				break;
+			}
+			
+		}
+		
+		if(!esta){
+			perms.add(p);
+		}
+		
+		
+	}
+	
+	public void quitarPermiso(Permiso p){
+		
+		Iterator<Permiso> itp = perms.iterator();
+		List<Permiso> lp = new ArrayList<>();
+		Permiso pAux = null;
+		while(itp.hasNext()){
+			pAux = itp.next();
+			if(pAux.getId() != p.getId()){
+				
+				lp.add(pAux);
+			}
+			
+		}
+		
+		perms = lp;
+	}
+	
+	public void quitarPermiso(String nombre){
+		
+		Iterator<Permiso> itp = perms.iterator();
+		List<Permiso> lp = new ArrayList<>();
+		Permiso pAux = null;
+		while(itp.hasNext()){
+			pAux = itp.next();
+			if(! nombre.equals(pAux.getNombre())){
+				
+				lp.add(pAux);
+			}
+			
+		}
+		
+		perms = lp;
 	}
    
 }

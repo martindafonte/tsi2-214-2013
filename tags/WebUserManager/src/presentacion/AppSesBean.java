@@ -3,9 +3,11 @@
  */
 package presentacion;
 
-import java.util.Iterator;
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
+
 import negocio.ServiciosLocal;
 
 /**
@@ -22,17 +24,22 @@ public class AppSesBean {
 	private String nombre;
 	private Integer num;
 	
-//	private List<CanalSesBean> canales;
-//	private List<RolSesBean> roles;
-//	
-//	public List<RolSesBean> getRoles() {
-//		return roles;
-//	}
-//
-//	public void setRoles(List<RolSesBean> roles) {
-//		this.roles = roles;
-//	}
 
+	public List<RolSesBean> getRoles() {
+		
+		UserLogin user = this.getUserLogin();
+		List<RolSesBean> lr =  user.getRoles(aplicacionid);
+		if(lr!= null && lr.size() > 0){
+			
+			RolSesBean r = lr.get(0);
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.getExternalContext().getSessionMap().put("rolSesBean",r);
+			
+		}
+		return lr;
+	}
+
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -87,18 +94,14 @@ public class AppSesBean {
 		return "/infoAplicacion.xhtml";
 	}
 
-//	public List<CanalSesBean> getCanales() {
-//		return ;
-//	}
-//
-//	public void setCanales(List<CanalSesBean> canales) {
-//		this.canales = canales;
-//	}
+	public List<CanalSesBean> getCanales() {
+		UserLogin user = this.getUserLogin();
+		return user.getCanales(aplicacionid);
+	}
 	
 	public void changeSingleLogin(){
 		
-		FacesContext context = FacesContext.getCurrentInstance();
-		UserLogin user = (UserLogin)context.getExternalContext().getSessionMap().get("userLogin");
+		UserLogin user = this.getUserLogin();
 		user.cambiarSingleLogin(aplicacionid , singleLogin);
 		this.refresh();
 	}
@@ -112,41 +115,22 @@ public class AppSesBean {
 		app.nombre = new String(nombre);
 		app.num = num;
 		app.singleLogin = new Boolean(singleLogin.booleanValue());
-		CanalSesBean ca = null;
-		CanalSesBean c = null;
-//		app.canales = new ArrayList<CanalSesBean>();
-//		Iterator<CanalSesBean> itc = canales.iterator();
-//		while(itc.hasNext()){
-//			c = itc.next();
-//			ca = new CanalSesBean();
-//			ca.setCodigo(c.getCodigo());
-//			ca.setRegistrados(c.getRegistrados());
-////			app.canales.add(ca);
-//		}
-//		
-//		app.roles = new ArrayList<RolSesBean>(this.roles);
 		
 		return app;
 		
 	}
 	
+	
 	public void refresh(){
 		
-		FacesContext context = FacesContext.getCurrentInstance();
-		UserLogin user = (UserLogin)context.getExternalContext().getSessionMap().get("userLogin");
+		UserLogin user = this.getUserLogin();
 		user.refresh();
-		Iterator<AppSesBean> ita = user.getApps().iterator();
-		AppSesBean ap = null;
-		while(ita.hasNext()){
-			
-			ap = ita.next();
-			if(ap.getAplicacionid().longValue() == aplicacionid.longValue()){
-				
-//				canales = new ArrayList<CanalSesBean>(ap.getCanales());
-//				roles = new ArrayList<RolSesBean>(ap.getRoles());
-			}
-			
-		}
 		
+	}
+	
+	private UserLogin getUserLogin(){
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		return (UserLogin)context.getExternalContext().getSessionMap().get("userLogin");
 	}
 }

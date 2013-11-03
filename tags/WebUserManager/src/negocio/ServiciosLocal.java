@@ -7,6 +7,8 @@ import javax.ejb.Local;
 
 import presentacion.AppSesBean;
 import presentacion.CanalSesBean;
+import presentacion.PermSesBean;
+import presentacion.RolSesBean;
 import modelo.Canal;
 import modelo.Desarrollador;
 import modelo.Aplicacion;
@@ -34,6 +36,14 @@ public interface ServiciosLocal {
 	
 	public List<CanalSesBean> getCanales(long id);
 	
+	public List<RolSesBean> getRoles(long id);
+	
+	public List<PermSesBean> getPermsHave(long rolId);
+	
+	public List<PermSesBean> getPermsDontHave(long rolId);
+	
+	
+	
 	public void crearCanal(String codigo, AppSesBean app);
 	
 	public void borrarCanal(String codigo, AppSesBean app);
@@ -46,6 +56,13 @@ public interface ServiciosLocal {
 	
 	
 	public int agregarPermisoRol(String nombre, long rolId);
+	
+	public int agregarPermisoRol(long permId, long rolId);
+	
+	public int quitarPermisoRol(long permId, long rolId);
+	
+	public int quitarPermisoRol(String nombre, long rolId);
+	
 	public int agregarRol(String nombre, long appId);
 	
 	
