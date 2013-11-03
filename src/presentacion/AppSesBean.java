@@ -24,6 +24,9 @@ public class AppSesBean {
 	private String nombre;
 	private Integer num;
 	
+	public List<PedSesBean> getPedidos() {
+		return serv.getPedidos(aplicacionid);
+	}
 
 	public List<RolSesBean> getRoles() {
 		
@@ -115,6 +118,7 @@ public class AppSesBean {
 		app.nombre = new String(nombre);
 		app.num = num;
 		app.singleLogin = new Boolean(singleLogin.booleanValue());
+	
 		
 		return app;
 		
