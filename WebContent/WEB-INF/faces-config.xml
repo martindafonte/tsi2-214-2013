@@ -106,11 +106,6 @@
    <property-class>java.lang.Integer</property-class>
    <value/>
   </managed-property>
-  <managed-property>
-   <property-name>canales</property-name>
-   <property-class>java.util.List</property-class>
-   <value/>
-  </managed-property>
  </managed-bean>
  <managed-bean>
   <managed-bean-name>canalBean</managed-bean-name>
