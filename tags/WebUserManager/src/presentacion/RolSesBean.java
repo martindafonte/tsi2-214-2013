@@ -3,9 +3,11 @@
  */
 package presentacion;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.context.FacesContext;
+import javax.swing.text.StyledEditorKit.BoldAction;
 
 /**
  * @author bruno
@@ -16,6 +18,7 @@ public class RolSesBean {
 	
 	private Long id;
 	private String nombre;
+//	private boolean load = false;
 
 	
 	public RolSesBean() {
@@ -40,15 +43,21 @@ public class RolSesBean {
 	}
 
 	public List<PermSesBean> getPermsDontHave() {
-
-		UserLogin user = this.getUserLogin();
-		return user.getPermsDontHave(id);
+		
+		if (id != null){
+			UserLogin user = this.getUserLogin();
+			return user.getPermsDontHave(id);
+		}
+		return new ArrayList<PermSesBean>();
 	}
 	
 	public List<PermSesBean> getPermsHave(){
 		
-		UserLogin user = this.getUserLogin();
-		return user.getPermsHave(id);
+		if (id != null){
+			UserLogin user = this.getUserLogin();
+			return user.getPermsHave(id);
+		}
+		return new ArrayList<PermSesBean>();
 	}
 	
 	private UserLogin getUserLogin(){
