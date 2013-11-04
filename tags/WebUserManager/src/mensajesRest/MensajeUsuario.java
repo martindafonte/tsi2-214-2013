@@ -14,6 +14,8 @@ public class MensajeUsuario extends Mensaje {
 	public String nombre;
 	@XmlElement
 	public String apellido;
+	@XmlElement
+	public String codigoCanal;
 
 	
 	public MensajeUsuario() {		
@@ -26,6 +28,7 @@ public class MensajeUsuario extends Mensaje {
 		nick = u.getNick();
 		nombre = u.getNombre();
 		apellido = u.getApellido();
+		codigoCanal = u.getCanal().getCodigo();
 	}
 
 }
