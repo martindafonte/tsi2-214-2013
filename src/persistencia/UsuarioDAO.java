@@ -102,6 +102,7 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 			List<Usuario> us = q.getResultList();
 			if (us.size() == 1 ){
 				Usuario u = us.get(0);
+				u.getCanal().getCodigo();
 				return u;
 				
 			}	
