@@ -8,11 +8,17 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:c="http://java.sun.com/jsp/jstl/core"> 
 
-<h:head></h:head> 
+<h:head>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script src="resources/js/limpiar.js"></script>
+
+</h:head> 
 <body>
-	
-	
-	<h:form>
+<!-- 	<c:out value = "var datosMagicos = #{appSesBean.getPedidosJson()};"/>	 -->
+<!-- 	<script>   -->
+<!--   		var datosMagicos = <c:out value= "#{appSesBean.getPedidosJson()}"/>; -->
+<!-- </script> -->
+	<h:form class="span3">
 		<div>
 			<div>
 				Nombre: <h:outputText value="#{appSesBean.nombre}" />
@@ -40,6 +46,7 @@
 			</div>
 			</c:forEach>
 		</div>
+		
 		<div>
 			<h:inputText value="#{canalBean.codigo}" />
 			<h:commandButton action="#{canalBean.altaCanal()}" value="agregar" />
@@ -49,7 +56,8 @@
 			<h:commandButton action="#{appSesBean.changeSingleLogin()}" value="guardar cambios" />		
 		</div>
 	</h:form>
-	<h:form>
+	<div class="span4" id="chart_div"></div>
+	<h:form class="span2">
 		<c:forEach var="p" items="#{appSesBean.getPedidos()}">
 			<div>
 				<table border="1">
