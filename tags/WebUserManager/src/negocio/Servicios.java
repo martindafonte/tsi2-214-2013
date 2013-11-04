@@ -9,6 +9,8 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import com.google.gson.JsonObject;
+
 import persistencia.AplicacionDAOLocal;
 import persistencia.CanalDAOLocal;
 import persistencia.RolDAOLocal;
@@ -448,6 +450,14 @@ public class Servicios implements ServiciosLocal {
 			return pl.getPedidos(app);
 		} catch (Exception e) {}
 		return new ArrayList<PedSesBean>();
+	}
+	
+	@Override
+	public JsonObject getPedidosJson(long app) {
+		try {
+			return pl.getPedidosJson(app);
+		} catch (Exception e) {}
+		return new JsonObject();
 	}
 	
 	@Override
