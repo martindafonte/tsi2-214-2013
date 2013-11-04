@@ -1,22 +1,6 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"> 
-      
-<!-- 	<div> -->
-	<h:form>
-		<p class="navbar-text pull-right">
-              Logged in as <a href="#" class="navbar-link">
-              <h:outputText value="#{userLogin.nick}"/></a>
-              <h:commandButton class="btn" action="#{userLogin.logout2()}" value="log out" />
-    	</p>
+<div xmlns:h="http://java.sun.com/jsf/html">
+	<h:form class="navbar-form pull-right">
+              <h:outputText value="#{userLogin.nick}"/>
+              <h:commandButton class="btn btn-primary" action="#{userLogin.logout2()}" value="log out" />
      </h:form>
-<!-- 		<h:form class="form-inline"> -->
-<!-- 				<h:outputText class="span2" type="text" value="#{userLogin.nick}" /> -->
-<!-- 				<h:commandButton class="btn" action="#{userLogin.logout()}" value="log out" /> -->
-<!-- 		</h:form> -->
-<!-- 	</div> -->
-	
-</html>
+</div>
