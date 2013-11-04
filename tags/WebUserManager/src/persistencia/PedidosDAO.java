@@ -11,6 +11,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import com.google.gson.JsonObject;
+
 import presentacion.PedSesBean;
 import modelo.Aplicacion;
 import modelo.Canal;
@@ -154,6 +156,54 @@ public class PedidosDAO implements PedidosDAOLocal {
 			System.out.println("ERROR EN ALTA PEDIDO USER!!!");
 		}
 		return new ArrayList<PedSesBean>();
+	}
+	
+	@Override
+	public JsonObject getPedidosJson(long app) {
+		try{
+			Aplicacion a = em.find(Aplicacion.class, app);
+			JsonObject pj= new JsonObject();
+			HashMap<String,Integer> map = new HashMap<String,Integer>();
+			
+			Iterator<PedidoJson> it1 = a.getPedidosJson().iterator();
+			while (it1.hasNext()){
+				PedidoJson p = it1.next();
+				if (map.containsKey(p.getUrl())){
+					int cant = map.remove(p.getUrl());
+					map.put(p.getUrl(), cant++);
+				}
+				else map.put(p.getUrl(), 1);
+			}
+			Iterator<PedidoPush> it2 = a.getPedidosPush().iterator();
+			while (it2.hasNext()){
+				PedidoPush p = it2.next();
+				if (map.containsKey(p.getUrl())){
+					int cant = map.remove(p.getUrl());
+					map.put(p.getUrl(), cant++);
+				}
+				else map.put(p.getUrl(), 1);
+			}
+			Iterator<PedidoUser> it3 = a.getPedidosUM().iterator();
+			while (it3.hasNext()){
+				PedidoUser p = it3.next();
+				if (map.containsKey(p.getUrl())){
+					int cant = map.remove(p.getUrl());
+					map.put(p.getUrl(), cant++);
+				}
+				else map.put(p.getUrl(), 1);
+			}
+			
+			Iterator<String> it = map.keySet().iterator();
+			while (it.hasNext()){
+				String u = it.next();
+				pj.addProperty(u, map.get(u));
+			}
+			return pj;
+			
+		}catch(Throwable ex){
+			System.out.println("ERROR EN ALTA PEDIDO USER!!!");
+		}
+		return new JsonObject();
 	}
 	
 	@Override
