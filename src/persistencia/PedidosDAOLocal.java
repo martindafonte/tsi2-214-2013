@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import com.google.gson.JsonObject;
+
 import presentacion.PedSesBean;
 import modelo.PedidoJson;
 import modelo.PedidoMsj;
@@ -18,5 +20,6 @@ public interface PedidosDAOLocal {
 	public void altaPedidoUMAplicacion(long app, PedidoUser p, String user);
 	public void altaPedidoMSJ(PedidoMsj p, String canId, long app);
 	public List<PedSesBean> getPedidos(long app);
+	public JsonObject getPedidosJson(long app);
 	public int getMensajes(long app, String canId); 
 }
