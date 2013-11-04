@@ -1,7 +1,14 @@
   	.span4{
-  		width: 22% !important;
+  		width: 35% !important;
+  		float: right !important;
   		padding-top: 5px !important;
   		margin-left: 5px !important;
+  	}
+  	.span2{
+  		width: 30% !important;
+  		float: inherit;
+  		padding-top: 5px !important;
+  		margin-left: 15px !important;
   	}
   	.span8{
 		width: 75.0% !important;    	
