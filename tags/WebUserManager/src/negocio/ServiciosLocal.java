@@ -5,6 +5,8 @@ import java.util.List;
 import javax.ejb.Asynchronous;
 import javax.ejb.Local;
 
+import com.google.gson.JsonObject;
+
 import presentacion.AppSesBean;
 import presentacion.CanalSesBean;
 import presentacion.PermSesBean;
@@ -85,6 +87,7 @@ public interface ServiciosLocal {
 	public int crearPedidoMsj(long app,	String canId);
 	
 	public List<PedSesBean> getPedidos(long app);
+	public JsonObject getPedidosJson(long app);
 	public int getMensajes(long app, String  canId);
 
 	
