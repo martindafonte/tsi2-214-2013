@@ -9,6 +9,8 @@ import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
+import com.google.gson.JsonObject;
+
 import negocio.ServiciosLocal;
 
 /**
@@ -221,6 +223,10 @@ public class UserLogin {
 	
 	public List<PedSesBean> getPedidos(long appId){
 		return serv.getPedidos(appId);
+	}
+	
+	public JsonObject getPedidosJson(long appId){
+		return serv.getPedidosJson(appId);
 	}
 	
 	public Integer getMensajes(long app, String codigo){
