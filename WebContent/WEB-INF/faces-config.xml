@@ -148,21 +148,6 @@
   </managed-property>
  </managed-bean>
  <managed-bean>
-  <managed-bean-name>rolSesBean</managed-bean-name>
-  <managed-bean-class>presentacion.RolSesBean</managed-bean-class>
-  <managed-bean-scope>session</managed-bean-scope>
-  <managed-property>
-   <property-name>nombre</property-name>
-   <property-class>String</property-class>
-   <value/>
-  </managed-property>
-  <managed-property>
-   <property-name>id</property-name>
-   <property-class>java.lang.Long</property-class>
-   <value/>
-  </managed-property>
- </managed-bean>
- <managed-bean>
   <managed-bean-name>permSesBean</managed-bean-name>
   <managed-bean-class>presentacion.PermSesBean</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
@@ -193,12 +178,17 @@
   <managed-bean-scope>request</managed-bean-scope>
  </managed-bean>
  <managed-bean>
-  <managed-bean-name>pruebaChart</managed-bean-name>
-  <managed-bean-class>presentacion.PruebaChart</managed-bean-class>
+  <managed-bean-name>rolSesBean</managed-bean-name>
+  <managed-bean-class>presentacion.RolSesBean</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
   <managed-property>
-   <property-name>pieModel</property-name>
-   <property-class>org.primefaces.model.chart.PieChartModel</property-class>
+   <property-name>id</property-name>
+   <property-class>java.lang.Long</property-class>
+   <value/>
+  </managed-property>
+  <managed-property>
+   <property-name>nombre</property-name>
+   <property-class>java.lang.String</property-class>
    <value/>
   </managed-property>
  </managed-bean>
