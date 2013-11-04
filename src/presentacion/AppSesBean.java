@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.faces.context.FacesContext;
 
+import com.google.gson.JsonObject;
+
 
 /**
  * @author bruno
@@ -23,6 +25,11 @@ public class AppSesBean {
 	public List<PedSesBean> getPedidos() {
 		UserLogin u = getUserLogin();
 		return u.getPedidos(aplicacionid);
+	}
+	
+	public JsonObject getPedidosJson() {
+		UserLogin u = getUserLogin();
+		return u.getPedidosJson(aplicacionid);
 	}
 
 	public List<RolSesBean> getRoles() {
