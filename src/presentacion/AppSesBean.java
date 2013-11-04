@@ -61,8 +61,13 @@ public class AppSesBean {
 
 			RolSesBean r = lr.get(0);
 			FacesContext context = FacesContext.getCurrentInstance();
-			context.getExternalContext().getSessionMap().remove("rollSesBean");
-			context.getExternalContext().getSessionMap().put("rolSesBean", r);
+			if (!context.getExternalContext().getSessionMap().containsKey("rolSesBean")) {
+						
+				context.getExternalContext().getSessionMap()
+						.remove("rolSesBean");
+				context.getExternalContext().getSessionMap()
+						.put("rolSesBean", r);
+			}
 
 		}
 		return lr;
@@ -116,6 +121,7 @@ public class AppSesBean {
 		AppSesBean app = this.clone();
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.getExternalContext().getSessionMap().put("appSesBean", app);
+		context.getExternalContext().getSessionMap().remove("rolSesBean");
 
 		return "/WebUserManager/showAplicaciones.xhtml";
 	}
