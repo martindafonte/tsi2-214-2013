@@ -1,81 +1,88 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:a4j="http://richfaces.org/a4j"
-      xmlns:rich="http://richfaces.org/rich"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:head>
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script src="resources/js/limpiar.js"></script>
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script src="resources/js/limpiar.js"></script>
 
-</h:head> 
+</h:head>
 <body>
-<!-- 	<c:out value = "var datosMagicos = #{appSesBean.getPedidosJson()};"/>	 -->
-<!-- 	<script>   -->
-<!--   		var datosMagicos = <c:out value= "#{appSesBean.getPedidosJson()}"/>; -->
-<!-- </script> -->
+	<!-- 	<c:out value = "var datosMagicos = #{appSesBean.getPedidosJson()};"/>	 -->
+	<!-- 	<script>   -->
+	<!--   		var datosMagicos = <c:out value= "#{appSesBean.getPedidosJson()}"/>; -->
+	<!-- </script> -->
 
 	<h:form class="span3">
 		<div>
 			<div>
-				Nombre: <h:outputText value="#{appSesBean.nombre}" />
+				Nombre:
+				<h:outputText value="#{appSesBean.nombre}" />
 			</div>
 			<div>
-				Descripcion: <h:outputText value="#{appSesBean.descripcion}" />
+				Descripcion:
+				<h:outputText value="#{appSesBean.descripcion}" />
 			</div>
-			<c:forEach var="c" items="#{appSesBean.getCanales()}">
-			<div>
-				<table border="1">
-					<tr>
-						<td>Codigo del Canal</td>
-						<td><h:outputText value="#{c.codigo}" /></td>
-						<td><h:commandButton action="#{c.borrarCanal}" value="borrar"/></td>
-					</tr>
-					<tr>
-						<td>Cantidad de Registrados</td>
-						<td><h:outputText value="#{c.registrados}" /></td>
-					</tr>
-					<tr>
-						<td>Cantidad de Mensajes enviados</td>
-						<td><h:outputText value="#{c.getMensajes()}" /></td>
-					</tr>
-				</table>
-			</div>
-			</c:forEach>
+			<table class="table table-bordered" cellpadding="4">
+				<tr align="center">
+					<th>Codigo del Canal</th>
+					<th>Cantidad de Registrados</th>
+					<th>Cantidad de Mensajes enviados</th>
+					<th>Borrar Canal</th>
+				</tr>
+				<tr align="center">
+					<c:forEach var="c" items="#{appSesBean.getCanales()}">
+						<tr>
+							<td><h:outputText value="#{c.codigo}" /></td>
+
+							<td><h:outputText value="#{c.registrados}" /></td>
+
+							<td><h:outputText value="#{c.getMensajes()}" /></td>
+
+							<td><h:commandButton action="#{c.borrarCanal}"
+									value="borrar" /></td>
+						</tr>
+					</c:forEach>
+				</tr>
+			</table>
 		</div>
-		
+
 		<div>
 			<h:inputText value="#{canalBean.codigo}" />
 			<h:commandButton action="#{canalBean.altaCanal()}" value="agregar" />
 		</div>
 		<div>
-			Single Login <h:selectBooleanCheckbox value="#{appSesBean.singleLogin}" />
-			<h:commandButton action="#{appSesBean.changeSingleLogin()}" value="guardar cambios" />		
+			Single Login
+			<h:selectBooleanCheckbox value="#{appSesBean.singleLogin}" />
+			<h:commandButton action="#{appSesBean.changeSingleLogin()}"
+				value="guardar cambios" />
 		</div>
 	</h:form>
 	<div class="span4" id="chart_div"></div>
-	<h:form class="span2">
-		<c:forEach var="p" items="#{appSesBean.getPedidos()}">
-			<div>
-				<table border="1">
-					<tr>
-						<td>URL del Servicio</td>
-						<td><h:outputText value="#{p.servicio}" /></td>
-					</tr>
-					<tr>
-						<td>Cantidad de Pedidos</td>
-						<td><h:outputText value="#{p.cantidad}" /></td>
-					</tr>
-				</table>
-			</div>
-		</c:forEach>
-	</h:form>
-	
+	<!-- 	<h:form class="span2"> -->
+	<!-- 		<c:forEach var="p" items="#{appSesBean.getPedidos()}"> -->
+	<!-- 			<div> -->
+	<!-- 				<table border="1"> -->
+	<!-- 					<tr> -->
+	<!-- 						<td>URL del Servicio</td> -->
+	<!-- 						<td><h:outputText value="#{p.servicio}" /></td> -->
+	<!-- 					</tr> -->
+	<!-- 					<tr> -->
+	<!-- 						<td>Cantidad de Pedidos</td> -->
+	<!-- 						<td><h:outputText value="#{p.cantidad}" /></td> -->
+	<!-- 					</tr> -->
+	<!-- 				</table> -->
+	<!-- 			</div> -->
+	<!-- 		</c:forEach> -->
+	<!-- 	</h:form> -->
+
 	<a href="/WebUserManager/showRoles.xhtml">roles</a>
-	
-</body> 
+
+</body>
 </html>
