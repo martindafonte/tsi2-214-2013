@@ -192,6 +192,16 @@
   <managed-bean-class>presentacion.PermBean</managed-bean-class>
   <managed-bean-scope>request</managed-bean-scope>
  </managed-bean>
+ <managed-bean>
+  <managed-bean-name>pruebaChart</managed-bean-name>
+  <managed-bean-class>presentacion.PruebaChart</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+  <managed-property>
+   <property-name>pieModel</property-name>
+   <property-class>org.primefaces.model.chart.PieChartModel</property-class>
+   <value/>
+  </managed-property>
+ </managed-bean>
  <!--  <navigation-rule> 
    <from-view-id>/showAplicaciones.xhtml</from-view-id> 
    <navigation-case> 

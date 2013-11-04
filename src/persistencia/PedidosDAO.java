@@ -118,7 +118,8 @@ public class PedidosDAO implements PedidosDAOLocal {
 				PedidoJson p = it1.next();
 				if (map.containsKey(p.getUrl())){
 					int cant = map.remove(p.getUrl());
-					map.put(p.getUrl(), cant++);
+					cant = cant  + 1;
+					map.put(p.getUrl(), cant);
 				}
 				else map.put(p.getUrl(), 1);
 			}
@@ -127,7 +128,8 @@ public class PedidosDAO implements PedidosDAOLocal {
 				PedidoPush p = it2.next();
 				if (map.containsKey(p.getUrl())){
 					int cant = map.remove(p.getUrl());
-					map.put(p.getUrl(), cant++);
+					cant = cant  + 1;
+					map.put(p.getUrl(), cant);
 				}
 				else map.put(p.getUrl(), 1);
 			}
@@ -136,7 +138,8 @@ public class PedidosDAO implements PedidosDAOLocal {
 				PedidoUser p = it3.next();
 				if (map.containsKey(p.getUrl())){
 					int cant = map.remove(p.getUrl());
-					map.put(p.getUrl(), cant++);
+					cant = cant  + 1;
+					map.put(p.getUrl(), cant);
 				}
 				else map.put(p.getUrl(), 1);
 			}
