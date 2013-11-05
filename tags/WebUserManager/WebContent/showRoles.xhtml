@@ -50,62 +50,78 @@ body {
 	<div>
 		<ui:include src="/BannerTop.xhtml"></ui:include>
 	</div>
-	<div class="container-fluid">
-		<div class='row-fluid'>
-			<div class='span2'>
-				<div id="accordion" class="ui-accordion ui-widget ui-helper-reset">
-					<h4 id='aplicaciones'
-						class="ui-accordion-header ui-helper-reset ui-state-default ui-accordion-header-active ui-corner-top ui-accordion-icons">Aplicaciones:
-					</h4>
-					<div id="ui-accordion-accordion-panel-0"
-						class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom ui-accordion-content-active"
-						style="display: block; height: 534px;">
-						<h:form>
-							<c:forEach var="app" items="#{userLogin.getApps()}">
-								<div class="well">
-									<h:commandLink action="#{app.showAppInfo()}"
-										value="#{app.nombre}" />
-								</div>
-							</c:forEach>
-						</h:form>
-					</div>
-				</div>
-			</div>
+	<!-- 	<div class="container-fluid"> -->
+	<div class="container">
+		<div class="span2 container-fluid">
+			<!-- 		<div class="span2 bs-docs-sidebar"> -->
+			<ul class="nav nav-list bs-docs-sidenav affix">
+				<li class="nav-header">Aplicaciones</li>
+				<h:form>
+					<c:forEach var="app" items="#{userLogin.getApps()}">
+						<li><h:commandLink action="#{app.showAppInfo()}"
+								value="#{app.nombre}">
+								<i class="icon-chevron-right"></i>
+							</h:commandLink></li>
+					</c:forEach>
+				</h:form>
+			</ul>
+		</div>
 
-			<div class="span8">
+		<div class="span9">
+
+			<div class="span3">
 
 				<div class="container-fluid">
-					<div class="span2">
-						<table class="table table-bordered">
-							<tr>
-								<h:form>
-									<td><c:forEach var="rol" items="#{appSesBean.getRoles()}">
+
+					<table class="table table-bordered">
+
+						<tr>
+
+							<th></th>
+							<th><h:form>
+									<table border="0">
+										<tr>
+											<td><h:inputText value="#{rolBean.nombre}" /></td>
+											<td><h:commandButton class="btn btn-primary"
+													data-loading-text="loading..." value="agregar rol"
+													action="#{rolBean.altaRol()}" /></td>
+										</tr>
+									</table>
+								</h:form></th>
+
+						</tr>
+						<tr>
+							<h:form>
+								<td>
+									<ul class="nav nav-list ">
+										<li class="nav-header">Roles</li>
+										<c:forEach var="rol" items="#{appSesBean.getRoles()}">
 											<li><h:commandLink action="#{rol.showPerms()}"
 													value="#{rol.nombre}" /></li>
-										</c:forEach></td>
-								</h:form>
-							</tr>
-						</table>
-					</div>
-					<div class="span8">
-						<div>
-							<h:form>
-								<h:inputText value="#{rolBean.nombre}" />
-								<h:commandButton value="agregar Rol"
-									action="#{rolBean.altaRol()}" />
-							</h:form>
-						</div>
-						<div>
-							<ui:include src="/infoRol.xhtml" />
-						</div>
-					</div>
+										</c:forEach>
+									</ul>
 
+								</td>
+								<td><ui:include src="/infoRol.xhtml" /></td>
+							</h:form>
+						</tr>
+
+					</table>
 				</div>
 
-			</div>
-		</div>
-	</div>
+				<!-- 				<div class="span8"> -->
 
+				<!-- 					<div> -->
+				<!-- 						<ui:include src="/infoRol.xhtml" /> -->
+				<!-- 					</div> -->
+				<!-- 				</div> -->
+
+
+			</div>
+
+		</div>
+
+	</div>
 
 </body>
 </html>
