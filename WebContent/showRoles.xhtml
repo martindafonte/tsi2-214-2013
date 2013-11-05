@@ -43,17 +43,15 @@ body {
 		href="resources/ico/apple-touch-icon-57-precomposed.png" />
 	<link rel="shortcut icon" href="resources/ico/favicon.png" />
 	<script src="http://code.jquery.com/jquery.js"></script>
-	<script src="resources/js/bootstrap.js"></script>
+<!-- 	<script src="resources/js/bootstrap.js"></script> -->
 
 </h:head>
 <body>
-	<div>
-		<ui:include src="/BannerTop.xhtml"></ui:include>
-	</div>
-	<!-- 	<div class="container-fluid"> -->
+
+	<ui:include src="/BannerTop.xhtml"></ui:include>
+
 	<div class="container">
-		<div class="span2 container-fluid">
-			<!-- 		<div class="span2 bs-docs-sidebar"> -->
+		<div class="span2">
 			<ul class="nav nav-list bs-docs-sidenav affix">
 				<li class="nav-header">Aplicaciones</li>
 				<h:form>
@@ -69,7 +67,7 @@ body {
 
 		<div class="span9">
 
-			<div class="span3">
+			<div>
 
 				<div class="container-fluid">
 
@@ -79,7 +77,7 @@ body {
 
 							<th></th>
 							<th><h:form>
-									<table border="0">
+									<table class="table-bordered" >
 										<tr>
 											<td><h:inputText value="#{rolBean.nombre}" /></td>
 											<td><h:commandButton class="btn btn-primary"
@@ -109,13 +107,7 @@ body {
 					</table>
 				</div>
 
-				<!-- 				<div class="span8"> -->
-
-				<!-- 					<div> -->
-				<!-- 						<ui:include src="/infoRol.xhtml" /> -->
-				<!-- 					</div> -->
-				<!-- 				</div> -->
-
+	
 
 			</div>
 
