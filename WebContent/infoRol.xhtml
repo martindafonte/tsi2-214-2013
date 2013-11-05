@@ -45,28 +45,65 @@ body {
 </h:head>
 <body>
 
-	<h:form>
-		<table class="table table-bordered" cellpadding="4">
+	<h:form with="500px">
+		<table class="table table-bordered">
+			<tr>
+				<th>
+					<h5><h:outputText value="Configuración: #{rolSesBean.nombre}" /></h5>
+				</th>
+			</tr>
+			
 			<tr align="center">
 				<th>Permisos incluidos</th>
 				<th>Permisos no incluidos</th>
 				<th>Agregar Permiso</th>
 			</tr>
 			<tr align="center">
-				<td><c:forEach var="perm" items="#{rolSesBean.getPermsHave()}">
-						<li><h:outputText value="#{perm.nombre}" /> <h:commandButton
-								value="quitar" action="#{perm.quitar()}" /></li>
-					</c:forEach></td>
-				<td><c:forEach var="perm"
-						items="#{rolSesBean.getPermsDontHave()}">
-						<li><h:outputText value="#{perm.nombre}" /> <h:commandButton
-								value="agregar" action="#{perm.agregar()}" /></li>
-					</c:forEach></td>
+				<td>
+					<table>
+						<c:forEach var="perm" items="#{rolSesBean.getPermsHave()}">
 
-				<td valign="top"><h:inputText value="#{permBean.nombre}" /> <h:commandButton
-						value="nuevo" action="#{permBean.altaPermiso()}" /></td>
+							<tr>
+								<td><h:outputText value="#{perm.nombre}" /></td>
+								<td><h:commandButton class="btn btn-small btn-danger"
+										data-loading-text="loading..." value="quitar" action="#{perm.quitar()}" /></td>
+							</tr>
+
+						</c:forEach>
+					</table>
+				</td>
+				
+				<td>
+				<table border="0"  bordercolor= "transparent">
+				<c:forEach var="perm"
+						items="#{rolSesBean.getPermsDontHave()}">
+						
+						<tr>
+							<td>
+								<h:outputText value="#{perm.nombre}" />
+							</td>
+							<td> 
+								<h:commandButton
+								data-loading-text="loading..." value="agregar" class="btn btn-small btn-success"
+								action="#{perm.agregar()}" />
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
+				</td>
+
+				<td valign="top">
+						<div>
+								<h:inputText value="#{permBean.nombre}" />
+						</div>
+						<div>
+								<h:commandButton class="btn btn-primary" value="nuevo"
+							action="#{permBean.altaPermiso()}" />
+						</div>
+				</td>
 			</tr>
 		</table>
+
 	</h:form>
 
 </body>
