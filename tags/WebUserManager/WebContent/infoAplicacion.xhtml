@@ -15,16 +15,47 @@
 
 </h:head>
 <body>
-	<h:form class="span3">
+	<!-- 	<div class="span3"> -->
+	<h:form>
 		<div>
 			<div>
-				Nombre:
-				<h:outputText value="#{appSesBean.nombre}" />
+				<table class="table table-bordered">
+					<tr>
+
+						<th>Nombre</th>
+						<th>Descripcion</th>
+					</tr>
+					<tr>
+						<td><h:outputText value="#{appSesBean.nombre}" /></td>
+						<td><h:outputText value="#{appSesBean.descripcion}" /></td>
+					</tr>
+				</table>
 			</div>
 			<div>
-				Descripcion:
-				<h:outputText value="#{appSesBean.descripcion}" />
+				<table class="table table-bordered">
+					<tr>
+						<th>Agregar Canal</th>
+					</tr>
+					<tr>
+						<td>
+							<table class="table-bordered">
+								<tr>
+									<td><h:inputText value="#{canalBean.codigo}" /></td>
+									<td><h:commandButton action="#{canalBean.altaCanal()}"
+											class="btn btn-primary" value="agregar" /></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
 			</div>
+			<!-- 			<div> -->
+			<!-- 				Single Login -->
+			<!-- 				<h:selectBooleanCheckbox value="#{appSesBean.singleLogin}" /> -->
+			<!-- 				<h:commandButton action="#{appSesBean.changeSingleLogin()}" -->
+			<!-- 					value="guardar cambios" /> -->
+			<!-- 			</div> -->
+
 			<table class="table table-bordered" cellpadding="4">
 				<tr align="center">
 					<th>Codigo del Canal</th>
@@ -41,34 +72,26 @@
 
 							<td><h:outputText value="#{c.getMensajes()}" /></td>
 
-							<td><h:commandButton action="#{c.borrarCanal}"
-									value="borrar" /></td>
+							<td><h:commandButton class="btn btn-danger"
+									action="#{c.borrarCanal}" value="borrar" /></td>
 						</tr>
 					</c:forEach>
 				</tr>
 			</table>
 		</div>
 
-		<div>
-			<h:inputText value="#{canalBean.codigo}" />
-			<h:commandButton action="#{canalBean.altaCanal()}" value="agregar" />
-		</div>
-		<div>
-			Single Login
-			<h:selectBooleanCheckbox value="#{appSesBean.singleLogin}" />
-			<h:commandButton action="#{appSesBean.changeSingleLogin()}"
-				value="guardar cambios" />
-		</div>
-	</h:form>
-	
-	<div class="span4">
-	<!-- 	<div class="span4" id="chart_div"></div> -->
-	<h:form prependId="false">
-		<gc:googleChart model="#{appSesBean.getPedidos()}" height="500px"
-			width="500px" />
-	</h:form>
-	</div>
-	<a href="/WebUserManager/showRoles.xhtml">roles</a>
 
+	</h:form>
+
+	<!-- 	<div class="span4"> -->
+	<!-- 	<div class="span4" id="chart_div"></div> -->
+	<div>
+		<h:form prependId="false">
+			<gc:googleChart model="#{appSesBean.getPedidos()}" height="500px"
+				width="500px" />
+		</h:form>
+	</div>
+<!-- 	<a href="/WebUserManager/showRoles.xhtml">roles</a> -->
+<!-- 	</div> -->
 </body>
 </html>
