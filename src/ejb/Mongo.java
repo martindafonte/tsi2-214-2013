@@ -208,17 +208,14 @@ public class Mongo implements MongoLocal {
 			
 			query.put(o.toString(),jsonFiltro.get(o.toString()).toString());
 		}
-		query.put("_id", new BasicDBObject("$gte", desde));
-		
-		
-		
 		DBCursor cursor;
-		cursor = collection.find(query).limit(cant);
+		cursor = collection.find(query).skip(desde).limit(cant);
 		
 		
 		if (cursor.size() == 0){
 			m.codigo = Constantes.Cte_Error_Buscar_Id;
 			m.descripcion = "No hay datos para la consulta";
+			m.cant = collection.find().count();
 			return m;
 		}
 			
