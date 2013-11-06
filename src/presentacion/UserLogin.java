@@ -82,9 +82,9 @@ public class UserLogin {
 		login = true;
 //		apps = serv.getAplicaciones(nick, pass);
 
-		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-		String ret = req.getRequestURL().toString();
-		return ret;
+//		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+//		String ret = req.getRequestURL().toString();
+		return "/showAplicaciones.xhtml";
 		
 	}
 	
@@ -100,9 +100,9 @@ public class UserLogin {
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.getExternalContext().getSessionMap().remove("userLogin");
 		login = false;
-		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-		String ret = req.getRequestURL().toString();
-		return ret;
+//		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+//		String ret = req.getRequestURL().toString();
+		return "/index.xhtml";
 		
 	}
 	

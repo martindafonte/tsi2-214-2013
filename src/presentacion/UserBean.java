@@ -4,6 +4,7 @@
 package presentacion;
 
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 
 import negocio.ServiciosLocal;
 
@@ -58,7 +59,15 @@ public class UserBean {
 	
 	public String go(){
 		
-		serv.altaDesarrollador(nick, pass, nombre, apellido);
-		return "/WebUserManager/index.xhtml";	
+		if (serv.altaDesarrollador(nick, pass, nombre, apellido) == 0){
+			FacesContext context = FacesContext.getCurrentInstance();
+			UserLogin u = (UserLogin) context.getExternalContext().getSessionMap().get("userLogin");
+			u.setNick(nick);
+			u.setPass(pass);
+			u.setLogin(true);
+			
+			return "/showAplicaciones.xhtml";
+		}
+		else return "/index.xhtml";	
 	}
 }
