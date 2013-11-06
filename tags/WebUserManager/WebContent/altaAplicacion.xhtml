@@ -25,6 +25,7 @@ body {
 	<link href="resources/css/bootstrap-responsive.css" rel="stylesheet" />
 	<link href="resources/css/bootstrap.css" rel="stylesheet"
 		media="screen" />
+	<link href="resources/css/newStyles.css" rel="stylesheet" />
 	<!-- Fav and touch icons -->
 	<link rel="apple-touch-icon-precomposed" sizes="144x144"
 		href="resources/ico/apple-touch-icon-144-precomposed.png" />
@@ -40,50 +41,38 @@ body {
 	<script src="resources/js/limpiar.js"></script>
 </h:head>
 <body>
-	<ui:include src="/BannerTop.xhtml"></ui:include>
 	<div>
-		<!-- 	<div class="container"> -->
-		<!-- 		<h:form  class="form-horizontal"> -->
-		<!-- 			<fieldset> -->
-		<!-- 				<legend>Alta Aplicacion</legend> -->
-		<!-- 				<div class="control-group"> -->
-		<!-- 					<label class="control-label" for="inputEmail">Nombre </label> -->
-		<!-- 					<div class="controls"> -->
-		<!-- 						<h:inputText id="nombreA" type="text" value="#{appBean.nombre}" -->
-		<!-- 							placeholder="Ingrese un nick" autocomplete="off" /> -->
-		<!-- 					</div> -->
-		<!-- 				</div> -->
-		<!-- 				<div class="control-group"> -->
-		<!-- 					<label class="control-label" for="inputEmail">Descripción </label> -->
-		<!-- 					<div class="controls"> -->
-		<!-- 						<h:inputText id="descripcionA" type="text" value="#{appBean.descripcion}" -->
-		<!-- 							placeholder="Ingrese su apellido" autocomplete="off" /> -->
-		<!-- 					</div> -->
-		<!-- 				</div> -->
-		<!-- 				<div class="control-group"> -->
-		<!-- 					<div class="controls"> -->
-		<!-- 						<h:commandButton value="Agregar" action="#{appBean.altaAplicacion()}" class="btn"/> -->
-		<!-- 					</div> -->
-		<!-- 				</div> -->
-		<!-- 			</fieldset> -->
-		<!-- 		</h:form> -->
-		<form role="form">
-			<label class="control-label"  style="font-weight: bold !important">Alta de aplicaciones</label>
-			<div class="form-group">
-				<label class="control-label" for="inputEmail" style="font-weight: bold !important">Nombre </label>
-				<h:inputText id="nombreA" type="text" value="#{appBean.nombre}"
-					class="form-control" placeholder="Ingrese un nick" autocomplete="off" 
-					style="width: 180px !important"/>
-			</div>
-			<div class="form-group">
-				<label class="control-label" for="inputEmail"  style="font-weight: bold !important">Descripción </label>
-				<h:inputText id="descripcionA" type="text" value="#{appBean.descripcion}"
-					class="form-control" placeholder="Ingrese su apellido" autocomplete="off" 
-					style="width: 180px !important"/>
-			</div>
-			<h:commandButton value="Agregar" action="#{appBean.altaAplicacion()}" class="btn btn-default"/>
-		</form>
+		<div class="container" style="width: 180px !important">
+			<h:form class="form-horizontal">
+				<fieldset>
+					<label style= "font-weight: bold !important">Alta
+						Aplicacion</label>
+					<div>
+						<label for="inputEmail">Nombre </label>
+						<div>
+							<h:inputText id="nombreA" type="text" value="#{appBean.nombre}"
+								placeholder="Ingrese un nick" autocomplete="off"
+								style="width: 180px !important" />
+						</div>
+					</div>
+					<div>
+						<label for="inputEmail">Descripción</label>
+						<div>
+							<h:inputText id="descripcionA" type="text"
+								value="#{appBean.descripcion}" placeholder="Ingrese su apellido"
+								autocomplete="off" style="width: 180px !important" />
+						</div>
+					</div>
+					<div>
+						<div>
+							<h:commandButton value="Agregar"
+								action="#{appBean.altaAplicacion()}" class="btn"/>
+						</div>
+					</div>
+				</fieldset>
+			</h:form>
+		</div>
 	</div>
-
 </body>
+
 </html>
