@@ -40,9 +40,8 @@ body {
 		href="resources/ico/apple-touch-icon-57-precomposed.png" />
 	<link rel="shortcut icon" href="resources/ico/favicon.png" />
 	<script src="http://code.jquery.com/jquery.js"></script>
-	<script src="resources/js/bootstrap.js"></script>
+<!-- 	<script src="resources/js/bootstrap.js"></script> -->
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-	<script src="resources/js/limpiar.js"></script>
 
 </h:head>
 <body>
@@ -50,7 +49,7 @@ body {
 	<ui:include src="/BannerTop.xhtml"></ui:include>
 	<div class="container">
 		<div class="span2">
-			<ul class="nav nav-list bs-docs-sidenav affix" >
+			<ul class="nav nav-list bs-docs-sidenav affix">
 				<li class="nav-header">Aplicaciones</li>
 				<h:form>
 					<c:forEach var="app" items="#{userLogin.getApps()}">
@@ -60,17 +59,15 @@ body {
 							</h:commandLink></li>
 					</c:forEach>
 				</h:form>
-				<li class="nav-footer">
-					<ui:include src="/altaAplicacion.xhtml"></ui:include>
+				<li class="nav-footer" style="width: 180px !important"><ui:include src="/altaAplicacion.xhtml"></ui:include>
 				</li>
 			</ul>
 		</div>
 
-		<!-- 		agregar cosas aca -->
 		<div>
-		<div class="span8">
-			<ui:include src="/infoAplicacion.xhtml"></ui:include>
-		</div>
+			<div class="span8">
+				<ui:include src="/infoAplicacion.xhtml"></ui:include>
+			</div>
 		</div>
 	</div>
 	<!-- 	</div> -->
