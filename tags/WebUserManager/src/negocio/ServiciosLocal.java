@@ -19,7 +19,7 @@ import modelo.Aplicacion;
 @Local
 public interface ServiciosLocal {
 
-	public void altaDesarrollador(String nick, String pass, String nombre, String apellido);
+	public int altaDesarrollador(String nick, String pass, String nombre, String apellido);
 	public void altaUsuario(String nick, String pass, String nombre, String apellido, long appId);
 	public Desarrollador getDesarrollador(String nick, String pass);
 /*	public Usuario getUsuario(String nick, String pass);

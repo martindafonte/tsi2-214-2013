@@ -92,7 +92,7 @@ public class Servicios implements ServiciosLocal {
 	}*/
 
 	@Override
-	public void altaDesarrollador(String nick, String pass, String nombre,
+	public int altaDesarrollador(String nick, String pass, String nombre,
 			String apellido) {
 		
 		Desarrollador u = new Desarrollador();
@@ -101,7 +101,7 @@ public class Servicios implements ServiciosLocal {
 		u.setNombre(nombre);
 		u.setPass(pass);
 		u.setApellido(apellido);
-		ul.altaDesarrollador(u);
+		return ul.altaDesarrollador(u);
 	}
 
 	@Override
