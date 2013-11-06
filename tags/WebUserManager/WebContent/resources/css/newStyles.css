@@ -26,6 +26,15 @@
   	.brand{
   		margin: 0px !important;
   		text-shadow: 0px !important;
+  	}
+  	
+  	.nom-login{
+  		color : #FFFFFF !important;
+  		font-size: large !important;
+  		height: 15px !important;
+  		margin-right: 10px !important;
+  		margin-top: 5px !important;
+  		width: 71px !important;
   	}	
 	
 	.well{
