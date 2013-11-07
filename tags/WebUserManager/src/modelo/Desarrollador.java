@@ -22,7 +22,7 @@ public class Desarrollador implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "des_seq_gen")
-	@SequenceGenerator(name = "des_seq_gen", sequenceName = "des_id_seq")
+	@SequenceGenerator(name = "des_seq_gen", sequenceName = "des_id_seq", allocationSize=1)
 	private long id;
 	
 	private String nick;

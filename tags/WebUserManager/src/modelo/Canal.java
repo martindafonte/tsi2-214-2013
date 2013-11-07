@@ -17,7 +17,7 @@ public class Canal implements Serializable {
 	   
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "canal_seq_gen")
-	@SequenceGenerator(name = "canal_seq_gen", sequenceName = "canal_id_seq")
+	@SequenceGenerator(name = "canal_seq_gen", sequenceName = "canal_id_seq", allocationSize=1)
 	private long id;
 	
 	
