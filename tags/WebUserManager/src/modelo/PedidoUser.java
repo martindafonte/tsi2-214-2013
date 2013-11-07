@@ -10,7 +10,7 @@ public class PedidoUser implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pedidouser_seq_gen")
-	@SequenceGenerator(name = "pedidouser_seq_gen", sequenceName = "pedidouser_id_seq")
+	@SequenceGenerator(name = "pedidouser_seq_gen", sequenceName = "pedidouser_id_seq", allocationSize=1)
 	private long id;
 	private String url;
 	private String method;

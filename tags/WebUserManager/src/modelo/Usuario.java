@@ -22,7 +22,7 @@ public class Usuario implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq_gen")
-	@SequenceGenerator(name = "user_seq_gen", sequenceName = "user_id_seq")
+	@SequenceGenerator(name = "user_seq_gen", sequenceName = "user_id_seq", allocationSize=1)
 	private long id;
 	private String nick;
 	private String pass;
