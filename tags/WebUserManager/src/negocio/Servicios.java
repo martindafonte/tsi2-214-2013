@@ -222,21 +222,12 @@ public class Servicios implements ServiciosLocal {
 	@Override
 	public List<CanalSesBean> getCanales(long id) {
 
-		List<CanalSesBean> lc = new ArrayList<CanalSesBean>();
 		Aplicacion a = al.getAplicacion(id);
-		Iterator<Canal> itc = a.getCanales().iterator();
-		Canal c;
-		CanalSesBean ca;
-		while (itc.hasNext()) {
-
-			c = itc.next();
-			ca = new CanalSesBean();
-			ca.setCodigo(c.getCodigo());
-			ca.setRegistrados(c.getRegistrados().size());
-			lc.add(ca);
+		if(a != null){
+			return a.getCanalesAppSes();
 		}
 
-		return lc;
+		return new ArrayList<CanalSesBean>();
 	}
 
 	@Override

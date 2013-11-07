@@ -51,7 +51,7 @@ public class CanalBean {
 		if(ret == ConstantesPersistencia.Error){
 			
 			context = FacesContext.getCurrentInstance();
-			FacesMessage msg = new FacesMessage("Error, ya existe un canal con ese nombre", "Error");
+			FacesMessage msg = new FacesMessage("Ya existe un canal con ese nombre para "+app.getNombre(), "Error");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			context = FacesContext.getCurrentInstance();
 			context.addMessage("canalForm:canalNom", msg);

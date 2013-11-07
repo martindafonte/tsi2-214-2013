@@ -56,7 +56,7 @@ public class AppBean {
 			return null;
 		}else{
 			
-			FacesMessage msg = new FacesMessage("Error, ya tienes una aplicaciones con ese nombre", "Error");
+			FacesMessage msg = new FacesMessage("Ya tienes una aplicación con ese nombre", "Error");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			context = FacesContext.getCurrentInstance();
 			context.addMessage("appForm:nombreA", msg);
