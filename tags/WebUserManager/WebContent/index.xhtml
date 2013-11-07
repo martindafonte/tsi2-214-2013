@@ -35,7 +35,7 @@ body {
 
 
 <body>
-	<ui:include src="/BannerTop.xhtml"></ui:include>
+	<ui:include src="/BannerTopWL.xhtml"></ui:include>
 	<div class="container-fluid">
 		<div class="row-fluid">
 			<div class="span4">
@@ -66,48 +66,66 @@ body {
 					tiempo de puesta en producción y la capacidad de crecimiento.</p>
 			</div>
 			<div class="span4 offset2">
-
+				
 				<h:form class="form-horizontal.span4">
 					<div class="hero-unit">
 						<fieldset>
 							<legend>Alta Usuario</legend>
+							<div class="alert-danger">
+								<h:messages showSummary="true" showDetail="true"/>
+							</div>
 							<div class="control-group">
 								<label class="control-label" for="inputEmail">Nick </label>
 								<div class="controls">
 									<h:inputText id="nickU" type="text" value="#{userBean.nick}"
-										placeholder="Ingrese un nick" autocomplete="off"/>
+										placeholder="Ingrese un nick" autocomplete="off"
+										required="true" requiredMessage="debe ingresar un nick"
+										>
+<!-- 										<f:validator validatorId="userBeanVal"/> -->
+									</h:inputText>
+									<h:message id="nickUMsg" for="nickU" style="color: red"/>
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label" for="inputEmail">Password </label>
 								<div class="controls">
-									<h:inputSecret type="password" value="#{userBean.pass}"
-										placeholder="Password" />
+									<h:inputSecret id="passU" value="#{userBean.pass}"
+										placeholder="Password" 
+										required="true" requiredMessage="debe ingresar un pass"
+										/>
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label" for="inputEmail">Nombre </label>
 								<div class="controls">
 									<h:inputText id="nombreU" type="text" value="#{userBean.nombre}"
-										placeholder="Ingrese su nombre" autocomplete="off"/>
+										placeholder="Ingrese su nombre" autocomplete="off"
+										required="true" requiredMessage="debe ingresar su nombre"
+										/>
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label" for="inputEmail">Apellido </label>
 								<div class="controls">
 									<h:inputText id="apellidoU" type="text" value="#{userBean.apellido}"
-										placeholder="Ingrese su apellido" autocomplete="off"/>
+										placeholder="Ingrese su apellido" autocomplete="off"
+										required="true" requiredMessage="debe ingresar su apellido"
+										/>
 								</div>
 							</div>
 							<div class="control-group">
 								<div class="controls">
 									<h:commandButton value="Aceptar" class="btn"
-										action="#{userBean.go()}" />
+										action="#{userBean.go()}">
+<!-- 										<f:ajax execute="nickU passU nombreU apellidoU"/> -->
+									</h:commandButton>
 								</div>
 							</div>
+
 						</fieldset>
 					</div>
 				</h:form>
+				
 			</div>
 		</div>
 	</div>
