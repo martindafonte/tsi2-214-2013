@@ -4,7 +4,10 @@
 package presentacion;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+
+import persistencia.ConstantesPersistencia;
 import negocio.ServiciosLocal;
 
 /**
@@ -47,9 +50,20 @@ public class AppBean {
 			return "/WebUserManager/index.xhtml";			
 		}
 		
-		serv.altaAplicacion(nombre, descripcion, user.getNick(), user.getPass());
-		user.refresh();
-		return "";
+		if( serv.altaAplicacion(nombre, descripcion, user.getNick(), user.getPass()) == ConstantesPersistencia.Exito){
+			
+			user.refresh();
+			return null;
+		}else{
+			
+			FacesMessage msg = new FacesMessage("Error, ya tienes una aplicaciones con ese nombre", "Error");
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			context = FacesContext.getCurrentInstance();
+			context.addMessage("erroApp", msg);
+			return null;
+			
+		}
+		
 		
 	}
 	
