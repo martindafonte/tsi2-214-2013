@@ -9,6 +9,8 @@ import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
+import persistencia.ConstantesPersistencia;
+
 import com.google.gson.JsonObject;
 
 import negocio.ServiciosLocal;
@@ -149,10 +151,10 @@ public class UserLogin {
 	}
 	
 	
-	public void agregarRol(String nombre, long appId){
+	public int agregarRol(String nombre, long appId){
 		
 //		int res = serv.agregarRol(nombre, appId);
-		serv.agregarRol(nombre, appId);
+		return serv.agregarRol(nombre, appId);
 		
 	}
 	
@@ -163,14 +165,16 @@ public class UserLogin {
 		
 	}
 	
-	public void altaPermiso(String nombre, long appId){
+	public int altaPermiso(String nombre, long appId){
 		
 		FacesContext context = FacesContext.getCurrentInstance();
 		AppSesBean ap = (AppSesBean)context.getExternalContext().getSessionMap().get("appSesBean");
 		if ( ap != null ){
 			
-			serv.altaPermiso(nombre, ap.getAplicacionid().longValue());
+			return serv.altaPermiso(nombre, ap.getAplicacionid().longValue());
 		}
+		
+		return ConstantesPersistencia.Error;
 	}
 	
 	public List<RolSesBean> getRoles(long id){

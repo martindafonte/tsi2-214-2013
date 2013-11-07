@@ -4,7 +4,10 @@
 package presentacion;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+
+import persistencia.ConstantesPersistencia;
 import negocio.ServiciosLocal;
 
 /**
@@ -36,22 +39,25 @@ public class CanalBean {
 		
 		FacesContext context = FacesContext.getCurrentInstance();
 		AppSesBean app = (AppSesBean)context.getExternalContext().getSessionMap().get("appSesBean");
-		serv.crearCanal(codigo, app);
-//		CanalSesBean capp = new CanalSesBean();
-//		capp.setCodigo(codigo);
-//		capp.setRegistrados(0);
-//		context.getExternalContext().getSessionMap().put("canalSesBean", capp);
-//		if(app.getCanales() == null){
-//			List<CanalSesBean> lc = new ArrayList<CanalSesBean>();
-//			app.setCanales(lc);
-//		}
-//		app.getCanales().add(capp);
+		
+		
+		int ret = serv.crearCanal(codigo, app);
 		
 		UserLogin user = (UserLogin)context.getExternalContext().getSessionMap().get("userLogin");
 		user.refresh();
 		context.getExternalContext().getSessionMap().put("userLogin", user);
 		app.refresh();
 		context.getExternalContext().getSessionMap().put("appSesBean", app);
+		if(ret == ConstantesPersistencia.Error){
+			
+			context = FacesContext.getCurrentInstance();
+			FacesMessage msg = new FacesMessage("Error, ya existe un canal con ese nombre", "Error");
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			context = FacesContext.getCurrentInstance();
+			context.addMessage("canalForm:canalNom", msg);
+			
+			
+		}
 
 	}
 }
