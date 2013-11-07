@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import persistencia.ConstantesPersistencia;
 import presentacion.CanalSesBean;
 import presentacion.PermSesBean;
 import presentacion.RolSesBean;
@@ -294,4 +295,34 @@ public class Aplicacion implements Serializable {
 		
 	}
 	
+	public int existeRol(Rol r){
+		
+		for(Iterator<Rol> itr = roles.iterator(); itr.hasNext();){
+			
+			if (itr.next().getNombre().equals(r.getNombre())){
+				
+				return ConstantesPersistencia.Error;
+				
+			}
+			
+		}
+		
+		return ConstantesPersistencia.Exito;
+	}
+	
+	public int existeCanal(Canal c){
+		
+		for(Iterator<Canal> itc = canales.iterator(); itc.hasNext();){
+			
+			if (itc.next().getCodigo().equals(c.getCodigo())){
+				
+				return ConstantesPersistencia.Error;
+				
+			}
+			
+		}
+		
+		return ConstantesPersistencia.Exito;
+		
+	}
 }
