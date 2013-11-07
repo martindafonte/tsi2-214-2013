@@ -37,7 +37,7 @@ body {
 		href="resources/ico/apple-touch-icon-57-precomposed.png" />
 	<link rel="shortcut icon" href="resources/ico/favicon.png" />
 	<script src="http://code.jquery.com/jquery.js"></script>
-	<script src="resources/js/bootstrap.js"></script>
+<!-- 	<script src="resources/js/bootstrap.js"></script> -->
 	<script src="resources/js/limpiar.js"></script>
 </h:head>
 <body>
@@ -48,11 +48,16 @@ body {
 					<label style= "font-weight: bold !important">Alta
 						Aplicacion</label>
 					<div>
+						<div class="alert-danger">
+							<h:messages />
+						</div>
 						<label for="inputEmail">Nombre </label>
 						<div>
 							<h:inputText class="span3" id="nombreA" type="text" value="#{appBean.nombre}"
-								placeholder="Ingrese un nick" autocomplete="off"/>
-<!-- 								style="height: 30px !important; width: 180px !important; margin-bottom : 5px !important"  -->
+								placeholder="Ingrese un nick" autocomplete="off"
+								style="height: 30px !important; width: 180px !important; margin-bottom : 5px !important"
+								required="true" requiredMessage="debe ingresar un nombre"
+								/> 
 								
 						</div>
 					</div>
@@ -61,8 +66,10 @@ body {
 						<div>
 							<h:inputTextarea class="span3" id="descripcionA" type="text"
 								value="#{appBean.descripcion}" placeholder="Ingrese su apellido"
-								autocomplete="off"/>
-<!-- 								style="width: 180px !important; margin-bottom : 5px !important"  -->
+								autocomplete="off"
+								style="width: 180px !important; margin-bottom : 5px !important"
+								required="true" requiredMessage="debe ingresar una descripción" 
+								/>
 								
 						</div>
 					</div>
