@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:mj="http://mojarra.dev.java.net/mojarra_ext"
+	xmlns:p="http://primefaces.org/ui">
+<!--       xmlns:b="http://richfaces.org/sandbox/bootstrap" -->
+
+<h:head>
+	<title>Baas TSI2</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="Proyecto de baas 2013" />
+	<meta name="author" content="TSI214" />
+
+	<style type="text/css">
+body {
+	padding-top: 60px;
+	padding-bottom: 40px;
+}
+</style>
+
+
+	<!-- Bootstrap -->
+	<link href="resources/css/bootstrap-responsive.css" rel="stylesheet" />
+	<link href="resources/css/bootstrap.css" rel="stylesheet"
+		media="screen" />
+	<link href="resources/css/newStyles.css" rel="stylesheet" />
+	<script src="http://code.jquery.com/jquery.js"></script>
+	<script src="resources/js/bootstrap.js"></script>
+	<script src="resources/js/limpiar.js"></script>
+</h:head>
+
+
+<body>
+	<ui:include src="/BannerTopWL.xhtml"></ui:include>
+	<div class="alert alert-danger">
+ 		<strong>Error!</strong>
+ 		Debes estar logueado para acceder
+	</div> 	
+	<div class="container-fluid">
+
+		<h:form>
+			<div class="control-group">
+				<label class="control-label" for="inputEmail">Nick</label>
+					<h:inputText value="#{userLogin.nick}" /> 
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputPassword">Password</label>
+				<div class="controls">
+					<h:inputSecret value="#{userLogin.pass}" />
+				</div>
+			</div>
+			<div class="control-group">
+					<h:commandButton  class="btn btn-primary" value="login" action="#{userLogin.login()}" />
+			</div>
+		</h:form>
+
+	</div>
+</body>
+</html>
+
