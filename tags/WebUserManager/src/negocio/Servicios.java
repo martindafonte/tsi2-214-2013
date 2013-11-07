@@ -373,7 +373,6 @@ public class Servicios implements ServiciosLocal {
 
 	@Override
 	public List<PermSesBean> getPermsHave(long rolId) {
-		// TODO Auto-generated method stub
 		
 		return rl.getPermsHave(rolId);
 		
@@ -425,7 +424,6 @@ public class Servicios implements ServiciosLocal {
 
 	@Override
 	public int quitarPermisoRol(String nombre, long rolId) {
-		// TODO Auto-generated method stub
 		
 		int res; 
 		
@@ -470,7 +468,6 @@ public class Servicios implements ServiciosLocal {
 
 	@Override
 	public int altaPermiso(String nombre, long appId) {
-		// TODO Auto-generated method stub
 		try{
 		
 			rl.altaPermiso(nombre, appId);
