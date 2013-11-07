@@ -11,59 +11,70 @@
 
 <h:head>
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<!-- 	<script src="resources/js/bootstrap.js"></script> -->
 	<script src="resources/js/limpiar.js"></script>
 
 </h:head>
 <body>
 	<!-- 	<div class="span3"> -->
-	<h:form>
+
+	<div>
 		<div>
-			<div>
+			<h:form rendered="#{userLogin.showAplicaciones()}">
 				<table class="table table-bordered">
 					<tr>
-
 						<th>Nombre</th>
 						<th>Descripcion</th>
 					</tr>
 					<tr>
+
 						<td><h:outputText value="#{appSesBean.nombre}" /></td>
 						<td><h:outputText value="#{appSesBean.descripcion}" /></td>
+
 					</tr>
 				</table>
-			</div>
-			<div>
-				<table class="table table-bordered">
-					<tr>
-						<th>Agregar Canal</th>
-					</tr>
-					<tr>
-						<td>
+			</h:form>
+		</div>
+		<div>
+			<table class="table table-bordered">
+				<tr>
+					<th>Agregar Canal</th>
+				</tr>
+				<tr>
+					<td><h:form>
 							<table class="table-bordered">
 								<tr>
-									<td><h:inputText value="#{canalBean.codigo}" /></td>
+									<td><h:inputText value="#{canalBean.codigo}"
+											style="height: 30px !important" /></td>
 									<td><h:commandButton action="#{canalBean.altaCanal()}"
 											class="btn btn-primary" value="agregar" /></td>
+									<td>
+										<div class="alert-danger">
+											<h:messages />
+										</div>
+									</td>
 								</tr>
 							</table>
-						</td>
-					</tr>
-				</table>
-			</div>
-			<!-- 			<div> -->
-			<!-- 				Single Login -->
-			<!-- 				<h:selectBooleanCheckbox value="#{appSesBean.singleLogin}" /> -->
-			<!-- 				<h:commandButton action="#{appSesBean.changeSingleLogin()}" -->
-			<!-- 					value="guardar cambios" /> -->
-			<!-- 			</div> -->
-
-			<table class="table table-bordered" cellpadding="4">
-				<tr align="center">
-					<th>Codigo del Canal</th>
-					<th>Cantidad de Registrados</th>
-					<th>Cantidad de Mensajes enviados</th>
-					<th>Borrar Canal</th>
+						</h:form></td>
 				</tr>
-				<tr align="center">
+			</table>
+		</div>
+		<!-- 			<div> -->
+		<!-- 				Single Login -->
+		<!-- 				<h:selectBooleanCheckbox value="#{appSesBean.singleLogin}" /> -->
+		<!-- 				<h:commandButton action="#{appSesBean.changeSingleLogin()}" -->
+		<!-- 					value="guardar cambios" /> -->
+		<!-- 			</div> -->
+
+		<table class="table table-bordered" cellpadding="4">
+			<tr align="center">
+				<th>Codigo del Canal</th>
+				<th>Cantidad de Registrados</th>
+				<th>Cantidad de Mensajes enviados</th>
+				<th>Borrar Canal</th>
+			</tr>
+			<tr align="center">
+				<h:form rendered="#{appSesBean.showCanales()}">
 					<c:forEach var="c" items="#{appSesBean.getCanales()}">
 						<tr>
 							<td><h:outputText value="#{c.codigo}" /></td>
@@ -76,12 +87,12 @@
 									action="#{c.borrarCanal}" value="borrar" /></td>
 						</tr>
 					</c:forEach>
-				</tr>
-			</table>
-		</div>
+				</h:form>
+			</tr>
+		</table>
+	</div>
 
 
-	</h:form>
 
 	<!-- 	<div class="span4"> -->
 	<!-- 	<div class="span4" id="chart_div"></div> -->
@@ -91,7 +102,7 @@
 				width="500px" />
 		</h:form>
 	</div>
-<!-- 	<a href="/WebUserManager/showRoles.xhtml">roles</a> -->
-<!-- 	</div> -->
+	<!-- 	<a href="/WebUserManager/showRoles.xhtml">roles</a> -->
+	<!-- 	</div> -->
 </body>
 </html>
