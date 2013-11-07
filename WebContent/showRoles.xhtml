@@ -44,7 +44,7 @@ body {
 		href="resources/ico/apple-touch-icon-57-precomposed.png" />
 	<link rel="shortcut icon" href="resources/ico/favicon.png" />
 	<script src="http://code.jquery.com/jquery.js"></script>
-	<!-- 	<script src="resources/js/bootstrap.js"></script> -->
+	<script src="resources/js/bootstrap.js"></script>
 
 </h:head>
 <body>
@@ -52,54 +52,11 @@ body {
 	<ui:include src="/BannerTop.xhtml"></ui:include>
 
 	<div class="container">
-		<div class="span2">
-			<ul class="nav nav-list bs-docs-sidenav affix">
-				<li class="nav-header">Aplicaciones</li>
-				<h:form>
-					<c:forEach var="app" items="#{userLogin.getApps()}">
-						<li><h:commandLink action="#{app.showAppInfo()}"
-								value="#{app.nombre}">
-								<i class="icon-chevron-right"></i>
-							</h:commandLink></li>
-					</c:forEach>
-				</h:form>
-			</ul>
-		</div>
-
+		<ui:include src="/MasterPage/lateralMenu.xhtml"></ui:include>
 		<div class="span8">
-
-			<div>
-				<div class="container-fluid">
-					<table class="table table-bordered">
-						<tr>
-							<th><h:form>
-									<table class="table-bordered">
-										<tr>
-											<td><h:inputText value="#{rolBean.nombre}" /></td>
-											<td><h:commandButton class="btn btn-primary"
-													data-loading-text="loading..." value="agregar rol"
-													action="#{rolBean.altaRol()}" /></td>
-										</tr>
-									</table>
-								</h:form></th>
-						</tr>
-						<tr>
-							<h:form>
-								<td>
-									<ul class="nav nav-list ">
-										<li class="nav-header">Roles</li>
-										<c:forEach var="rol" items="#{appSesBean.getRoles()}">
-											<li><h:commandLink action="#{rol.showPerms()}"
-													value="#{rol.nombre}" /></li>
-										</c:forEach>
-									</ul>
-								</td>
-								<td><ui:include src="/infoRol.xhtml" /></td>
-							</h:form>
-						</tr>
-					</table>
-				</div>
-			</div>
+			
+			<ui:include src="#{navBean.showRoles()}"></ui:include>
+			
 		</div>
 	</div>
 
