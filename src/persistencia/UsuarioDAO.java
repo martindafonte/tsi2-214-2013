@@ -197,6 +197,7 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 					nuevo_r.setRegistrer(regid);
 					em.persist(nuevo_r);
 					u.getCanal().getRegistrados().add(nuevo_r);
+					em.flush();
 				}
 			}			
 		}catch(Exception e){
