@@ -39,7 +39,7 @@ public class AplicacionDAO implements AplicacionDAOLocal {
 	public int altaApliacion(Aplicacion a, Desarrollador d) {
 		try{
 			boolean esta = false;
-			for(Iterator<Aplicacion> ita = d.getLa().iterator(); ita.hasNext() ; ita.next()){
+			for(Iterator<Aplicacion> ita = d.getLa().iterator(); ita.hasNext();){
 				if(ita.next().getNombre().equals(a.getNombre())){
 					esta = true;
 					break;
