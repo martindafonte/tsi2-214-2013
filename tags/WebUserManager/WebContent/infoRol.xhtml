@@ -38,14 +38,14 @@ body {
 	<link rel="apple-touch-icon-precomposed"
 		href="resources/ico/apple-touch-icon-57-precomposed.png" />
 	<link rel="shortcut icon" href="resources/ico/favicon.png" />
-	<script src="http://code.jquery.com/jquery.js"></script>
-	<script src="resources/js/bootstrap.js"></script>
+	<!-- 	<script src="http://code.jquery.com/jquery.js"></script> -->
+	<!-- 	<script src="resources/js/bootstrap.js"></script> -->
 
 
 </h:head>
 <body>
 
-	<h:form with="500px">
+	<h:form rendered="#{appSesBean.showRoles()}">
 		<table class="table table-bordered  table-condensed">
 			<tr>
 				<th>
@@ -55,53 +55,59 @@ body {
 				</th>
 			</tr>
 			<tr>
-			<table class="table table-bordered ">
-				<tr align="center">
-					<th>Permisos incluidos</th>
-					<th>Permisos no incluidos</th>
-					<th>Agregar Permiso</th>
-				</tr>
-				<tr align="center">
-					<td>
-						<table class="table-bordered ">
-							<c:forEach var="perm" items="#{rolSesBean.getPermsHave()}">
+				<table class="table table-bordered ">
+					<tr align="center">
+						<th>Permisos incluidos</th>
+						<th>Permisos no incluidos</th>
+						<th>Agregar Permiso</th>
+					</tr>
+					<tr align="center">
+						<td>
+							<table class="table-bordered ">
+								<c:forEach var="perm" items="#{rolSesBean.getPermsHave()}">
 
-								<tr>
-									<td><h:outputText value="#{perm.nombre}" /></td>
-									<td><h:commandButton class="btn btn-small btn-danger"
-											data-loading-text="loading..." value="quitar"
-											action="#{perm.quitar()}" /></td>
-								</tr>
+									<tr>
+										<td><h:outputText value="#{perm.nombre}" /></td>
+										<td><h:commandButton class="btn btn-small btn-danger"
+												data-loading-text="loading..." value="quitar"
+												action="#{perm.quitar()}" /></td>
 
-							</c:forEach>
-						</table>
-					</td>
+									</tr>
 
-					<td>
-						<table class="table-bordered ">
-							<c:forEach var="perm" items="#{rolSesBean.getPermsDontHave()}">
+								</c:forEach>
+							</table>
+						</td>
 
-								<tr>
-									<td><h:outputText value="#{perm.nombre}" /></td>
-									<td><h:commandButton data-loading-text="loading..."
-											value="agregar" class="btn btn-small btn-success"
-											action="#{perm.agregar()}" /></td>
-								</tr>
-							</c:forEach>
-						</table>
-					</td>
+						<td>
+							<table class="table-bordered ">
+								<c:forEach var="perm" items="#{rolSesBean.getPermsDontHave()}">
 
-					<td valign="top">
-						<div>
-							<h:inputText value="#{permBean.nombre}" />
-						</div>
-						<div>
-							<h:commandButton class="btn btn-primary" value="nuevo"
-								action="#{permBean.altaPermiso()}" />
-						</div>
-					</td>
-				</tr>
-			</table>
+									<tr>
+										<td><h:outputText value="#{perm.nombre}" /></td>
+										<td><h:commandButton data-loading-text="loading..."
+												value="agregar" class="btn btn-small btn-success"
+												action="#{perm.agregar()}" /></td>
+									</tr>
+								</c:forEach>
+							</table>
+						</td>
+
+						<td valign="top">
+							<div>
+								<h:inputText value="#{permBean.nombre}" required="true"
+									requiredMessage="debe ingresar un nombre" />
+							</div>
+							<div>
+								<h:commandButton class="btn btn-primary" value="nuevo"
+									action="#{permBean.altaPermiso()}" />
+							</div>
+
+							<div class="alert-danger">
+								<h:message id="errorPerm" />
+							</div>
+						</td>
+					</tr>
+				</table>
 			</tr>
 		</table>
 
