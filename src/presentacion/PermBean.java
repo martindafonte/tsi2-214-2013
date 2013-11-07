@@ -3,7 +3,10 @@
  */
 package presentacion;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+
+import persistencia.ConstantesPersistencia;
 
 /**
  * @author bruno
@@ -16,7 +19,7 @@ public class PermBean {
 	
 	private String nombre;
 	private Long id;
-	private Long rolId;
+//	private Long rolId;
 
 	public String getNombre() {
 		return nombre;
@@ -39,6 +42,14 @@ public class PermBean {
 		FacesContext context = FacesContext.getCurrentInstance();
 		UserLogin user = (UserLogin)context.getExternalContext().getSessionMap().get("userLogin");
 		AppSesBean app = (AppSesBean)context.getExternalContext().getSessionMap().get("appSesBean");
-		user.altaPermiso(nombre, app.getAplicacionid().longValue());
+		if ( user.altaPermiso(nombre, app.getAplicacionid().longValue()) == ConstantesPersistencia.Error){
+						
+			FacesMessage msg = new FacesMessage("Error, ya existe un permiso con ese nombre", "Error");
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			context = FacesContext.getCurrentInstance();
+			context.addMessage("infoRolForm:permNom", msg);	
+
+		}
+		
 	}
 }
