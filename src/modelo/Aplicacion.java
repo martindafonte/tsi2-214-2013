@@ -186,7 +186,7 @@ public class Aplicacion implements Serializable {
 			Iterator<Canal> itc = canales.iterator();
 			while (itc.hasNext()) {
 				Canal ca = itc.next();
-				if (!ca.isPropietario()) {
+				if (! ca.isPropietario()) {
 					CanalSesBean cs = new CanalSesBean();
 					cs.setCodigo(ca.getCodigo());
 					cs.setRegistrados(ca.getRegistrados().size());

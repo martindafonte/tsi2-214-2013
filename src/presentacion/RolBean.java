@@ -47,7 +47,7 @@ public class RolBean {
 			if (user.agregarRol(nombre, app.getAplicacionid().longValue()) == ConstantesPersistencia.Error){
 
 				FacesContext context = FacesContext.getCurrentInstance();
-				FacesMessage msg = new FacesMessage("Error, ya tienes un rol con ese nombre", "Error");
+				FacesMessage msg = new FacesMessage("Ya tienes un rol con ese nombre para "+app.getNombre(), "Error");
 				msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 				context = FacesContext.getCurrentInstance();
 				context.addMessage("rolForm:rolNom", msg);
@@ -56,7 +56,7 @@ public class RolBean {
 		}else{
 			
 			FacesContext context = FacesContext.getCurrentInstance();
-			FacesMessage msg = new FacesMessage("Error, ya tienes un rol con ese nombre", "Error");
+			FacesMessage msg = new FacesMessage("[ERROR!] No estas logueado, o la no has seleccionado una Aplicación", "Error");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			context = FacesContext.getCurrentInstance();
 			context.addMessage("rolForm:rolNom", msg);
