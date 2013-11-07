@@ -118,6 +118,9 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 	public int altaDesarrollador(Desarrollador u) {
 
 		try{
+			if(existeDesarrollador(u.getNick())){
+				return ConstantesPersistencia.Error;
+			}
 			em.persist(u);
 			return ConstantesPersistencia.Exito;
 		}catch(Exception ex){
@@ -252,6 +255,14 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 		}catch(Exception e){
 			return null;
 		}
+	}
+
+	@Override
+	public boolean existeDesarrollador(String nick) {
+		// TODO Auto-generated method stub
+		Query q = em.createQuery("SELECT x FROM Desarrollador x WHERE x.nick = ?1");
+		q.setParameter(1, nick);
+		return (q.getResultList().size() > 0);
 	}
 	
 }

@@ -36,14 +36,25 @@ public class AplicacionDAO implements AplicacionDAOLocal {
 
 
 	@Override
-	public void altaApliacion(Aplicacion a, Desarrollador d) {
+	public int altaApliacion(Aplicacion a, Desarrollador d) {
 		try{
-			d.getLa().add(a);
-			em.persist(a);
-			a.setD(d);
+			boolean esta = false;
+			for(Iterator<Aplicacion> ita = d.getLa().iterator(); ita.hasNext() ; ita.next()){
+				if(ita.next().getNombre().equals(a.getNombre())){
+					esta = true;
+					break;
+				}
+			}
+			if(!esta){
+				d.getLa().add(a);
+				em.persist(a);
+				a.setD(d);
+				return ConstantesPersistencia.Exito;
+			}
+			return ConstantesPersistencia.Error;
 			
 		}catch(Throwable ex){
-			System.out.println("ERROR EN ALTA APLICACION!!!");
+			return ConstantesPersistencia.Error;
 			
 		}
 		
