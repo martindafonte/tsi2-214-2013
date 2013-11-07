@@ -37,9 +37,9 @@ public interface IUsersRest {
 
 		
 	@DELETE
-	@Path("{app}/{nick}/login")
+	@Path("{app}/{nick}/{regid}/login")
     @Produces(MediaType.APPLICATION_JSON)
-	public Mensaje logout(@PathParam("nick") String user, @PathParam("app")long app, @FormParam("regid") String regid);
+	public Mensaje logout(@PathParam("nick") String user, @PathParam("app")long app, @PathParam("regid") String regid);
 	
 	@GET
 	@Path("{app}/{nick}/Permisos")
