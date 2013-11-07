@@ -233,4 +233,11 @@ public class UserLogin {
 		return serv.getMensajes(app, codigo);
 	}
 	
+	
+	public Boolean showAplicaciones(){
+		
+		return new Boolean(this.getApps().size() > 0);
+	}
+		
+	
 }
