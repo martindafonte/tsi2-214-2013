@@ -32,7 +32,7 @@ public class Aplicacion implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "app_seq_gen")
-	@SequenceGenerator(name = "app_seq_gen", sequenceName = "app_id_seq")
+	@SequenceGenerator(name = "app_seq_gen", sequenceName = "app_id_seq", allocationSize=1)
 	private long id;
 
 	private long jsonid;

@@ -10,7 +10,7 @@ public class PedidoMsj implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pedidomsj_seq_gen")
-	@SequenceGenerator(name = "pedidomsj_seq_gen", sequenceName = "pedidomsj_id_seq")
+	@SequenceGenerator(name = "pedidomsj_seq_gen", sequenceName = "pedidomsj_id_seq", allocationSize=1)
 	private long id;
 	private Timestamp time;
 	private static final long serialVersionUID = 1L;

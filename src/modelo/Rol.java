@@ -22,7 +22,7 @@ public class Rol implements Serializable {
 	   
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "rol_seq_gen")
-	@SequenceGenerator(name = "rol_seq_gen", sequenceName = "rol_id_seq")
+	@SequenceGenerator(name = "rol_seq_gen", sequenceName = "rol_id_seq", allocationSize=1)
 	private long id;
 	private String nombre;
 	private static final long serialVersionUID = 1L;
