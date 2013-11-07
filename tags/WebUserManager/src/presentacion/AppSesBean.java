@@ -60,13 +60,16 @@ public class AppSesBean {
 		if (lr != null && lr.size() > 0) {
 
 			RolSesBean r = lr.get(0);
+			RolSesBean rAux = new RolSesBean();
+			rAux.setId(new Long(r.getId().longValue()));
+			rAux.setNombre(new String(r.getNombre().getBytes()));
 			FacesContext context = FacesContext.getCurrentInstance();
 			if (!context.getExternalContext().getSessionMap().containsKey("rolSesBean")) {
 						
 				context.getExternalContext().getSessionMap()
 						.remove("rolSesBean");
 				context.getExternalContext().getSessionMap()
-						.put("rolSesBean", r);
+						.put("rolSesBean", rAux);
 			}
 
 		}
@@ -163,5 +166,15 @@ public class AppSesBean {
 		FacesContext context = FacesContext.getCurrentInstance();
 		return (UserLogin) context.getExternalContext().getSessionMap()
 				.get("userLogin");
+	}
+	
+	public Boolean showCanales(){
+		
+		return new Boolean(this.getCanales().size() > 0);
+	}
+	
+	public Boolean showRoles(){
+		
+		return new Boolean(this.getRoles().size() > 0);
 	}
 }
