@@ -45,7 +45,7 @@ body {
 </h:head>
 <body>
 
-	<h:form rendered="#{appSesBean.showRoles()}">
+	<h:form rendered="#{appSesBean.showRoles()}" id="infoRolForm">
 		<table class="table table-bordered  table-condensed">
 			<tr>
 				<th>
@@ -94,8 +94,8 @@ body {
 
 						<td valign="top">
 							<div>
-								<h:inputText value="#{permBean.nombre}" required="true"
-									requiredMessage="debe ingresar un nombre" />
+								<h:inputText id="permNom" value="#{permBean.nombre}"
+									required="true" requiredMessage="debe ingresar un nombre" />
 							</div>
 							<div>
 								<h:commandButton class="btn btn-primary" value="nuevo"
@@ -103,7 +103,8 @@ body {
 							</div>
 
 							<div class="alert-danger">
-								<h:message id="errorPerm" />
+								<strong><h:message for="permNom" showDetail="false"
+										showSummary="true" /></strong>
 							</div>
 						</td>
 					</tr>

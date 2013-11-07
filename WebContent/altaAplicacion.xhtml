@@ -37,28 +37,29 @@ body {
 		href="resources/ico/apple-touch-icon-57-precomposed.png" />
 	<link rel="shortcut icon" href="resources/ico/favicon.png" />
 	<script src="http://code.jquery.com/jquery.js"></script>
-<!-- 	<script src="resources/js/bootstrap.js"></script> -->
+	<!-- 	<script src="resources/js/bootstrap.js"></script> -->
 	<script src="resources/js/limpiar.js"></script>
 </h:head>
 <body>
 	<div>
 		<div class="container" style="width: 180px !important">
-			<h:form class="form-horizontal">
+			<h:form class="form-horizontal" id="appForm">
 				<fieldset>
-					<label style= "font-weight: bold !important">Alta
-						Aplicacion</label>
+					<label style="font-weight: bold !important">Alta Aplicacion</label>
 					<div>
 						<div class="alert-danger">
-							<h:messages />
+							<strong> <h:message for="nombreA" showDetail="false"
+									showSummary="true" />
+							</strong>
 						</div>
 						<label for="inputEmail">Nombre </label>
 						<div>
-							<h:inputText class="span3" id="nombreA" type="text" value="#{appBean.nombre}"
-								placeholder="Ingrese un nick" autocomplete="off"
+							<h:inputText class="span3" id="nombreA" type="text"
+								value="#{appBean.nombre}" placeholder="Ingrese un nick"
+								autocomplete="off"
 								style="height: 30px !important; width: 180px !important; margin-bottom : 5px !important"
-								required="true" requiredMessage="debe ingresar un nombre"
-								/> 
-								
+								required="true" requiredMessage="debe ingresar un nombre" />
+
 						</div>
 					</div>
 					<div>
@@ -68,15 +69,14 @@ body {
 								value="#{appBean.descripcion}" placeholder="Ingrese su apellido"
 								autocomplete="off"
 								style="width: 180px !important; margin-bottom : 5px !important"
-								required="true" requiredMessage="debe ingresar una descripción" 
-								/>
-								
+								required="true" requiredMessage="debe ingresar una descripción" />
+
 						</div>
 					</div>
 					<div>
 						<div>
 							<h:commandButton value="Agregar"
-								action="#{appBean.altaAplicacion()}" class="btn btn-primary"/>
+								action="#{appBean.altaAplicacion()}" class="btn btn-primary" />
 						</div>
 					</div>
 				</fieldset>

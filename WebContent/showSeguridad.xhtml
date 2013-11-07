@@ -54,42 +54,46 @@ body {
 		<div class="container-fluid">
 			<table class="table table-bordered">
 				<tr>
-					<th><h:form>
+					<th><h:form id="rolForm">
 							<table class="table-bordered">
 								<tr>
-									<td><h:inputText value="#{rolBean.nombre}" required="true"
-											requiredMessage="debe ingresar un nombre" /></td>
+									<td><h:inputText value="#{rolBean.nombre}" id="rolNom"
+											required="true" requiredMessage="debe ingresar un nombre" /></td>
 									<td><h:commandButton class="btn btn-primary"
 											data-loading-text="loading..." value="agregar rol"
 											action="#{rolBean.altaRol()}" /></td>
 									<td>
-										<td>
-											<div class="alert-danger">
-												<h:message id="errorRol" />
-											</div>
-									</td>
+										<div class="alert-danger">
+											<strong><h:message for="rolNom" showDetail="false"
+													showSummary="true" /> </strong>
+										</div>
 									</td>
 								</tr>
 							</table>
 						</h:form></th>
 				</tr>
 				<tr>
+					<td>
+						<table>
+							<tr>
+								<td width="50px !important">
+									<ul class="nav nav-list">
+										<li class="nav-header">Roles</li>
+										<h:form class="span2">
+											<c:forEach var="rol" items="#{appSesBean.getRoles()}">
 
-					<td><h:form>
-							<ul class="nav nav-list">
-								<li class="nav-header">Roles</li>
+												<li><h:commandLink action="#{rol.showPerms()}"
+														value="#{rol.nombre}" /></li>
 
-								<c:forEach var="rol" items="#{appSesBean.getRoles()}">
+											</c:forEach>
+										</h:form>
+									</ul>
+								</td>
+								<td><ui:include src="/infoRol.xhtml" /></td>
 
-									<li><h:commandLink action="#{rol.showPerms()}"
-											value="#{rol.nombre}" /></li>
-
-								</c:forEach>
-
-							</ul>
-						</h:form></td>
-					<td><ui:include src="/infoRol.xhtml" /></td>
-
+							</tr>
+						</table>
+					</td>
 				</tr>
 			</table>
 		</div>
