@@ -20,74 +20,56 @@ import com.sun.faces.context.SessionMap;
  */
 public class NavBean {
 
-	private FacesContext context;
-	private Map<String, Object> sesmap;
-
-	public NavBean() {
-
-	}
 	
-	@PostConstruct
-	public void init(){
-		
-		context = FacesContext.getCurrentInstance();
-		sesmap = context.getExternalContext().getSessionMap();
-		
-	}
-
-	// public String getIndex(){
-	// //TODO
-	// return null;
-	// }
-
+	private FacesContext getContext(){ return FacesContext.getCurrentInstance();}
+	
+	private Map<String, Object> getSessionMap(){ return this.getContext().getExternalContext().getSessionMap();}
+	
+	public NavBean() {}
+	
 	public String getBannerTop() {
 
-		if (sesmap.containsKey("userLogin")) {
-			return "/BannerTop.xhtml";
+		if (this.getSessionMap().containsKey("userLogin")) {
+			UserLogin user = (UserLogin)this.getSessionMap().get("userLogin");
+			if(user.getLogin().booleanValue()){
+				return "BannerTop.xhtml";
+			}
 		}
-		return "/BannerTopWL.xhtml";
-	}
-
-	public String getShowAplicaciones() {
-
-		return null;
-	}
-
-	public String getAltaAplicacion() {
-		// TODO
-		if (sesmap.containsKey("userLogin")) {
-			return "/WebUserManager/altaAplicacion.xhtml";
-		}
-		return null;
+		return "BannerTopWL.xhtml";
 	}
 
 	public String getInfoAplicacion() {
 		// TODO
-		if (sesmap.containsKey("appSesBean")) {
-			return "/WebUserManager/infoAplicacion.xhtml";
-		}
-		return "/WebUserManager/altaAplicacion.xhtml";
+		if (this.getSessionMap().containsKey("userLogin")) {
+			UserLogin user = (UserLogin)this.getSessionMap().get("userLogin");
+			if(user.getApps().size() > 0){
+				return "/infoAplicacion.xhtml";
+			}else{
+				return "/errorNoHayApps.xhtml";
+			}
+			
+		}else{
+			return "/index.xhtml";
+		}	
+		
 	}
 
-	public String getShowRoles() {
+	public String showRoles() {
 		// TODO
-		if (sesmap.containsKey("appSesBean")) 
-		{
-			return "/WebUserManager/showRoles.xhtml";
-		}
-		return "/WebUserManager/altaAplicacion.xhtml";
+		if (this.getSessionMap().containsKey("userLogin")) {
+			UserLogin user = (UserLogin)this.getSessionMap().get("userLogin");
+			if(user.getApps().size() > 0){
+				return "/showSeguridad.xhtml";
+			}else{
+				return "/errorNoHayApps.xhtml";
+			}
+			
+		}else{
+			return "/index.xhtml";
+		}		
 
 	}
+	
 
-	public String getInfoRol() {
-		// TODO
-		if ((sesmap.containsKey("appSesBean"))
-				&& (sesmap.containsKey("rolSesBean"))
-				)
-		{
-			return "/WebUserManager/infoRol.xhtml";
-		}
-		return "/WebUserManager/altaAplicacion.xhtml";
-	}
 
 }
