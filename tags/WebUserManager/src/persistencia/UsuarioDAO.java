@@ -179,7 +179,7 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 			q.setParameter(1, nick).setParameter(2, la.get(0));
 			@SuppressWarnings("unchecked")
 			List<Usuario> us = q.getResultList();
-			if (us.size() == 1 ){
+			if (us.size() == 1 && regid!=""){
 				Usuario u = us.get(0);
 				boolean existe = false;
 				for(Registro r:u.getCanal().getRegistrados()){
