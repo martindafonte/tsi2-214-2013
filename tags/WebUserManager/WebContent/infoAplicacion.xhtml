@@ -41,16 +41,16 @@
 					<th>Agregar Canal</th>
 				</tr>
 				<tr>
-					<td><h:form>
+					<td><h:form id="canalForm">
 							<table class="table-bordered">
 								<tr>
 									<td><h:inputText value="#{canalBean.codigo}"
-											style="height: 30px !important" /></td>
+											style="height: 30px !important" id="canalNom"/></td>
 									<td><h:commandButton action="#{canalBean.altaCanal()}"
 											class="btn btn-primary" value="agregar" /></td>
 									<td>
 										<div class="alert-danger">
-											<h:messages />
+											<strong><h:message for="canalNom" showDetail="false" showSummary="true"/></strong>
 										</div>
 									</td>
 								</tr>
