@@ -25,8 +25,9 @@ public interface ServiciosLocal {
 /*	public Usuario getUsuario(String nick, String pass);
 	public Boolean existeUsuario(String nick, String pass);*/
 	public Boolean existeDesarollador(String nick, String pass);
+	public Boolean existeDesarollador(String nick);
 	
-	public void altaAplicacion(String nombre, String descripcion, String nick, String pass);
+	public int altaAplicacion(String nombre, String descripcion, String nick, String pass);
 	public Aplicacion getApliacion(long id);
 	public List<Aplicacion> getAplicaciones(Desarrollador d);
 	public void cambiarSingleLogin(long id);
