@@ -1,6 +1,7 @@
 package persistencia;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -175,29 +176,49 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 	@Override
 	public int agregarRegistroUsuario(String nick, long app_id, String regid) {
 		try{
-			Query q2 = em.createQuery("SELECT x FROM Aplicacion x WHERE x.id = ?1");
-			q2.setParameter(1, app_id);
-			@SuppressWarnings("unchecked")
-			List<Aplicacion> la = q2.getResultList();
-			Query q = em.createQuery("SELECT x FROM Usuario x WHERE x.nick = ?1 and x.aplicacion = ?2");
-			q.setParameter(1, nick).setParameter(2, la.get(0));
-			@SuppressWarnings("unchecked")
-			List<Usuario> us = q.getResultList();
-			if (us.size() == 1 && regid!=""){
-				Usuario u = us.get(0);
+//			Query q2 = em.createQuery("SELECT x FROM Aplicacion x WHERE x.id = ?1");
+//			q2.setParameter(1, app_id);
+//			@SuppressWarnings("unchecked")
+//			List<Aplicacion> la = q2.getResultList();
+			Aplicacion a = em.find(Aplicacion.class, app_id);
+			if( a == null){
+				return ConstantesPersistencia.Error;
+			}
+			
+//			Query q = em.createQuery("SELECT x FROM Usuario x WHERE x.nick = ?1 and x.aplicacion = ?2");
+//			q.setParameter(1, nick).setParameter(2, a);
+//			@SuppressWarnings("unchecked")
+//			List<Usuario> us = q.getResultList();
+			List<Usuario> us = a.getUsers();
+			Usuario u = null;
+			Iterator<Usuario> itu = us.iterator();
+			while(itu.hasNext()){
+				u = itu.next();
+				if(u.getNick().equals(nick)){
+					break;
+				}
+			}
+
+			if( u != null && regid != ""){
+//			if (us.size() == 1 && regid!=""){
+//				Usuario u = us.get(0);
 				boolean existe = false;
 				for(Registro r:u.getCanal().getRegistrados()){
-					if(r.getRegistrer()==regid){
+					if(r.getRegistrer().equals(regid)){
 						existe =true;
 						break;
 					}
 				}
+				
 				if(!existe){
 					Registro nuevo_r = new Registro();
 					nuevo_r.setRegistrer(regid);
+					List<Canal> lc = new ArrayList<Canal>();
+					nuevo_r.setCanales(lc);
 					em.persist(nuevo_r);
 					u.getCanal().getRegistrados().add(nuevo_r);
-					em.flush();
+					nuevo_r.getCanales().add(u.getCanal());
+//					em.flush();u
 				}
 			}			
 		}catch(Exception e){
