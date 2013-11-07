@@ -197,7 +197,16 @@
   <managed-bean-class>utiles.NavBean</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
- <!--  <navigation-rule> 
+ <managed-bean>
+  <managed-bean-name>valDesarrollador</managed-bean-name>
+  <managed-bean-class>utiles.ValDesarrollador</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+ </managed-bean>
+ <!--  <validator> 
+   <validator-id>valDes</validator-id> 
+   <validator-class>utiles.ValDesarrollador</validator-class> 
+  </validator> 
+  <navigation-rule> 
    <from-view-id>/showAplicaciones.xhtml</from-view-id> 
    <navigation-case> 
     <from-action>#{appSesBean.showAppInfo()}</from-action> 
