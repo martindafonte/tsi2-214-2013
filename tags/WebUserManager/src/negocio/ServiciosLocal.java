@@ -48,7 +48,7 @@ public interface ServiciosLocal {
 	
 	
 	
-	public void crearCanal(String codigo, AppSesBean app);
+	public int crearCanal(String codigo, AppSesBean app);
 	
 	public void borrarCanal(String codigo, AppSesBean app);
 	
