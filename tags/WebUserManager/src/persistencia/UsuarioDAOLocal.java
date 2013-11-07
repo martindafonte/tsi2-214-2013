@@ -13,6 +13,7 @@ public interface UsuarioDAOLocal {
 	
 	public int altaUsuario(Usuario u, long appId);
 	public int altaDesarrollador(Desarrollador u);
+	public boolean existeDesarrollador(String nick);
 	public Usuario chequearUsuario(String nick, String pass, long appid);
 	public Desarrollador getDesarrollador(String nick, String pass);
 	public List<Registro> obtenerRegistrosUsuario(String nick, long app_id);

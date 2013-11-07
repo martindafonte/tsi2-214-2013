@@ -11,7 +11,7 @@ import modelo.Desarrollador;
 @Local
 public interface AplicacionDAOLocal {
 
-	public void altaApliacion(Aplicacion a, Desarrollador d);
+	public int altaApliacion(Aplicacion a, Desarrollador d);
 	public List<Aplicacion> singleLoginAplicaciones();
 	public List<Aplicacion> getAplicaciones(Desarrollador d);
 	public long getIdJSON(Aplicacion a);
