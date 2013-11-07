@@ -58,6 +58,7 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 			a.getCanales().add(c);
 			u.setRoles(lrol);
 			u.setAplicacion(a);
+			u.setCanal(c);
 			em.persist(u);
 			a.getUsers().add(u);
 			
