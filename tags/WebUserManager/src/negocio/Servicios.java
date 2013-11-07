@@ -119,11 +119,11 @@ public class Servicios implements ServiciosLocal {
 	}
 
 	@Override
-	public void altaAplicacion(String nombre, String descripcion, String nick,
+	public int altaAplicacion(String nombre, String descripcion, String nick,
 			String pass) {
 		Desarrollador d = ul.getDesarrollador(nick, pass);
 		if (d == null) {
-			return;
+			return 0;
 		}
 		
 		Aplicacion a = new Aplicacion();
@@ -131,7 +131,7 @@ public class Servicios implements ServiciosLocal {
 //		a.setId(appinfo.getId("Aplicacion"));
 		a.setNombre(nombre);
 		a.setDescripcion(descripcion);
-		al.altaApliacion(a,d);
+		return al.altaApliacion(a,d);
 		
 	}
 
@@ -478,5 +478,11 @@ public class Servicios implements ServiciosLocal {
 		}
 		
 		return 1;
+	}
+
+	@Override
+	public Boolean existeDesarollador(String nick) {
+		
+		return ul.existeDesarrollador(nick);
 	}
 }
