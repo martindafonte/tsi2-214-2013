@@ -118,6 +118,7 @@ public class Servicios implements ServiciosLocal {
 	@Override
 	public int altaAplicacion(String nombre, String descripcion, String nick,
 			String pass) {
+		
 		Desarrollador d = ul.getDesarrollador(nick, pass);
 		if (d == null) {
 			return 0;
@@ -182,6 +183,7 @@ public class Servicios implements ServiciosLocal {
 
 	@Override
 	public List<AppSesBean> getAplicaciones(String nick, String pass) {
+		
 		List<AppSesBean> la = new ArrayList<AppSesBean>();
 		Desarrollador d = this.getDesarrollador(nick, pass);
 		Iterator<Aplicacion> it = d.getLa().iterator();
@@ -484,5 +486,89 @@ public class Servicios implements ServiciosLocal {
 	public Boolean existeDesarollador(String nick) {
 
 		return ul.existeDesarrollador(nick);
+	}
+
+	@Override
+	public int altaDesarrollador(String nick, String pass, String nombre,
+			String apellido, String provider) {
+	
+		Desarrollador d = new Desarrollador();
+		d.setNick(nick);
+		d.setApellido(apellido);
+		d.setNombre(nombre);
+		d.setPass(pass);
+		d.setProviderID(provider);
+		return ul.altaDesarrollador(d, provider);
+	}
+
+	@Override
+	public Desarrollador getDesarrollador(String nick, String pass,
+			String provider) {
+
+		return ul.getDesarrollador(nick, pass, provider);
+	}
+
+	@Override
+	public Boolean existeDesarollador(String nick, String pass, String provider) {
+		// TODO Auto-generated method stub
+		return ul.existeDesarrollador(nick, provider);
+	}
+
+	@Override
+	public List<AppSesBean> getAplicaciones(String nick, String pass,
+			String provider) {
+
+		List<AppSesBean> la = new ArrayList<AppSesBean>();
+		Desarrollador d = this.getDesarrollador(nick, pass, provider);
+		Iterator<Aplicacion> it = d.getLa().iterator();
+		AppSesBean ap = null;
+		Aplicacion a = null;
+		int num = 1;
+		while (it.hasNext()) {
+			ap = new AppSesBean();
+			a = it.next();
+			ap.setAplicacionid(a.getId());
+			ap.setDescripcion(a.getDescripcion());
+			ap.setNombre(a.getNombre());
+			ap.setSingleLogin(a.isSingleLogin());
+			ap.setNum(num);
+			num++;
+			List<CanalSesBean> lc = new ArrayList<CanalSesBean>();
+			Canal c = null;
+			CanalSesBean ca = null;
+			Iterator<Canal> itc = a.getCanales().iterator();
+			while (itc.hasNext()) {
+
+				c = itc.next();
+				ca = new CanalSesBean();
+				ca.setCodigo(c.getCodigo());
+				ca.setRegistrados(c.getRegistrados().size());
+				lc.add(ca);
+
+			}
+			// ap.setRoles(a.getRolSesBeans());
+			// ap.setCanales(lc);
+			la.add(ap);
+		}
+		return la;
+	}
+
+	@Override
+	public int altaAplicacion(String nombre, String descripcion, String nick,
+			String pass, String provider) {
+
+		
+		Desarrollador d = ul.getDesarrollador(nick, pass, provider);
+		if (d == null) {
+			return 0;
+		}
+
+		Aplicacion a = new Aplicacion();
+
+		// a.setId(appinfo.getId("Aplicacion"));
+		a.setNombre(nombre);
+		a.setDescripcion(descripcion);
+		return al.altaApliacion(a, d);		
+
 	}
 }
