@@ -122,6 +122,7 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 			if(existeDesarrollador(u.getNick())){
 				return ConstantesPersistencia.Error;
 			}
+			u.setProviderID("baas");
 			em.persist(u);
 			return ConstantesPersistencia.Exito;
 		}catch(Exception ex){
@@ -136,8 +137,8 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 
 
 		try{
-			Query q = em.createQuery("SELECT x FROM Desarrollador x WHERE x.nick = ?1 and pass = ?2");
-			q.setParameter(1, nick).setParameter(2, pass);
+			Query q = em.createQuery("SELECT x FROM Desarrollador x WHERE x.nick = ?1 and x.pass = ?2 and x.providerID = ?3");
+			q.setParameter(1, nick).setParameter(2, pass).setParameter(3, "baas");			
 			List<Desarrollador> us = q.getResultList();
 			if (us.size() == 1 ){
 				Desarrollador d = us.get(0);
@@ -282,9 +283,54 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 	@Override
 	public boolean existeDesarrollador(String nick) {
 		// TODO Auto-generated method stub
-		Query q = em.createQuery("SELECT x FROM Desarrollador x WHERE x.nick = ?1");
-		q.setParameter(1, nick);
+		Query q = em.createQuery("SELECT x FROM Desarrollador x WHERE x.nick = ?1 and x.providerID = ?2");
+		q.setParameter(1, nick).setParameter(2, "baas");
 		return (q.getResultList().size() > 0);
+	}
+	
+	@Override
+	public boolean existeDesarrollador(String nick, String provider) {
+		// TODO Auto-generated method stub
+		Query q = em.createQuery("SELECT x FROM Desarrollador x WHERE x.nick = ?1 and x.providerID = ?2");
+		q.setParameter(1, nick).setParameter(2, provider);
+		return (q.getResultList().size() > 0);
+	}
+
+
+	@Override
+	public int altaDesarrollador(Desarrollador u, String provider) {
+		// TODO Auto-generated method stub
+		
+		try{
+			if(existeDesarrollador(u.getNick(), provider)){
+				return ConstantesPersistencia.Error;
+			}
+			u.setProviderID(provider);
+			em.persist(u);
+			return ConstantesPersistencia.Exito;
+		}catch(Exception ex){
+			return ConstantesPersistencia.Error;
+		}		
+	}
+
+	@Override
+	public Desarrollador getDesarrollador(String nick, String pass,
+			String provider) {
+		
+		try{
+			Query q = em.createQuery("SELECT x FROM Desarrollador x WHERE x.nick = ?1 and x.pass = ?2 and x.providerID = ?3");
+			q.setParameter(1, nick).setParameter(2, pass).setParameter(3, provider);			
+			@SuppressWarnings("unchecked")
+			List<Desarrollador> us = q.getResultList();
+			if (us.size() == 1 ){
+				Desarrollador d = us.get(0);
+				return d;
+			}
+		}catch(Exception e){
+			return null;
+			
+		}
+		return null;
 	}
 	
 }
