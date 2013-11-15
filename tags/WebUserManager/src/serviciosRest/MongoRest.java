@@ -6,12 +6,14 @@ import java.net.UnknownHostException;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.FormParam;
 
 import mensajesRest.Mensaje;
 import mensajesRest.MensajeJson;
 import mensajesRest.MensajeJsonId;
 import negocio.ServiciosLocal;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 
 import ejb.MongoLocal;
@@ -73,6 +75,9 @@ public class MongoRest implements IMongoPublico  {
 		return m.ObtenerListaJson(appid, Json,desde,cant);
 	}
 
-	
+	public MensajeJson ObtenerListaJsonCampos(int appid, String filtro,String campos, int desde, int cant) throws JSONException, UnknownHostException{
+		return m.ObtenerListaJsonCampos(appid, filtro, campos, desde, cant);
+		
+	}
 	
 }
