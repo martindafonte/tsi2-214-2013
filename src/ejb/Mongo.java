@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.Properties;
 
 import javax.ejb.LocalBean;
+import javax.management.Query;
 
 import mensajesRest.Mensaje;
 import mensajesRest.MensajeJson;
@@ -28,6 +29,7 @@ import persistencia.AplicacionDAOLocal;
 import serviciosRest.Constantes;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.mongodb.*;
 import com.mongodb.util.JSON;
 
@@ -183,6 +185,67 @@ public class Mongo implements MongoLocal {
         return m ;
 	}
 	
+	public MensajeJson ObtenerListaJsonCampos(int appid, String filtro, String campos, int desde, int cant) throws JSONException, UnknownHostException{
+		Aplicacion app = aplicacion.getAplicacion(appid);
+		if (app == null){
+			return  MensajeErrorAppJson();
+		}
+		String nombreDB = Integer.toString(appid).concat("_").concat(app.getNombre().replace(" ", "").toLowerCase());	
+		
+		MongoProperties mprop = new MongoProperties();
+		MongoClient mongoClient = new MongoClient(mprop.hostname,mprop.port);
+		DB base = mongoClient.getDB(nombreDB); 
+		
+		MensajeJson m = new MensajeJson();
+		DBCollection collection = base.getCollection("Json");
+		BasicDBObject query = new BasicDBObject(); 
+       
+		JSONObject jsonFiltro = new JSONObject(filtro);
+
+		Iterator<?> filtros = jsonFiltro.keys();
+		
+		while(filtros.hasNext() ){
+			Object o = filtros.next();
+			
+			query.put(o.toString(),jsonFiltro.get(o.toString()).toString());
+			
+		}
+		
+		JSONObject json = new JSONObject(campos);
+		JSONArray campos2 = json.getJSONArray("campos"); 
+		
+		BasicDBObject q2 = new BasicDBObject();
+		for (int i = 0;i < campos.length(); i++){
+			q2.put(campos2.getString(i),1);
+		}
+	
+		DBCursor cursor;
+		cursor = collection.find(query,q2).skip(desde).limit(cant);
+		
+		
+		if (cursor.size() == 0){
+			m.codigo = Constantes.Cte_Error_Buscar_Id;
+			m.descripcion = "No hay datos para la consulta";
+			m.cant = collection.find().count();
+			return m;
+		}
+			
+		JSONArray array = new JSONArray();
+		
+		while (cursor.hasNext()){
+			DBObject o = cursor.next();
+			array.put(o);
+			
+			
+		}	
+		m.json = array.toString();
+		m.codigo = Constantes.Cte_Exito;
+		m.cant = collection.find().count();
+		
+	
+		return m;
+	}
+	
 	public MensajeJson ObtenerListaJson(int appid, String filtro, int desde, int cant) throws JSONException, UnknownHostException{
 
 		Aplicacion app = aplicacion.getAplicacion(appid);
@@ -207,7 +270,10 @@ public class Mongo implements MongoLocal {
 			Object o = filtros.next();
 			
 			query.put(o.toString(),jsonFiltro.get(o.toString()).toString());
+			
 		}
+		BasicDBObject q2 = new BasicDBObject();
+	//	q2.put("Valor",1);
 		DBCursor cursor;
 		cursor = collection.find(query).skip(desde).limit(cant);
 		
