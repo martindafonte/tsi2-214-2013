@@ -50,6 +50,23 @@ public class AppBean {
 			return "/WebUserManager/index.xhtml";			
 		}
 		
+		if(user.getProviderID() != null && user.getProviderID().equals("facebook")){
+			
+			if( serv.altaAplicacion(nombre, descripcion, user.getNick(), user.getPass() ,  user.getProviderID()) == ConstantesPersistencia.Exito){
+				
+				user.refresh();
+				return null;
+			}else{
+				
+				FacesMessage msg = new FacesMessage("Ya tienes una aplicación con ese nombre", "Error");
+				msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+				context = FacesContext.getCurrentInstance();
+				context.addMessage("appForm:nombreA", msg);
+				return null;
+				
+			}
+		}
+		
 		if( serv.altaAplicacion(nombre, descripcion, user.getNick(), user.getPass()) == ConstantesPersistencia.Exito){
 			
 			user.refresh();
