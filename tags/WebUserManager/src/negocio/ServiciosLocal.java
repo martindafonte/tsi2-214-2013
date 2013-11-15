@@ -20,14 +20,18 @@ import modelo.Aplicacion;
 public interface ServiciosLocal {
 
 	public int altaDesarrollador(String nick, String pass, String nombre, String apellido);
+	public int altaDesarrollador(String nick, String pass, String nombre, String apellido, String provider);
 	public void altaUsuario(String nick, String pass, String nombre, String apellido, long appId);
 	public Desarrollador getDesarrollador(String nick, String pass);
-/*	public Usuario getUsuario(String nick, String pass);
-	public Boolean existeUsuario(String nick, String pass);*/
+	public Desarrollador getDesarrollador(String nick, String pass, String provider);
+
+	public Boolean existeDesarollador(String nick, String pass, String provider);
 	public Boolean existeDesarollador(String nick, String pass);
 	public Boolean existeDesarollador(String nick);
 	
 	public int altaAplicacion(String nombre, String descripcion, String nick, String pass);
+	public int altaAplicacion(String nombre, String descripcion, String nick, String pass, String provider);
+	
 	public Aplicacion getApliacion(long id);
 	public List<Aplicacion> getAplicaciones(Desarrollador d);
 	public void cambiarSingleLogin(long id);
@@ -37,6 +41,7 @@ public interface ServiciosLocal {
 //	################ de prueba
 	//anduvo
 	public List<AppSesBean> getAplicaciones(String nick, String pass);
+	public List<AppSesBean> getAplicaciones(String nick, String pass, String provider);
 	
 	public List<CanalSesBean> getCanales(long id);
 	
