@@ -1,4 +1,5 @@
-<div xmlns:h="http://java.sun.com/jsf/html">
+<div xmlns:h="http://java.sun.com/jsf/html"
+	 xmlns:f="http://java.sun.com/jsf/core">
 	<h:form class="navbar-form pull-right">
 		<h:inputText class="span2" type="text" placeholder="Usuario"
 			value="#{userLogin.nick}" />
@@ -6,5 +7,11 @@
 			value="#{userLogin.pass}" />
 		<h:commandButton class="btn btn-primary" action="#{userLogin.login()}"
 			value="log in" />
+
+		<h:commandLink id="facebook" action="#{userLogin.socialConnect()}">
+			<f:setPropertyActionListener target="#{userLogin.providerID}"
+				value="facebook" />
+				<h:graphicImage value="/resources/img/facebook.png" />
+		</h:commandLink>
 	</h:form>
 </div>
