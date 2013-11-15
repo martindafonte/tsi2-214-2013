@@ -72,6 +72,7 @@ public class UserBean{
 					.getSessionMap().get("userLogin");
 			u.setNick(nick);
 			u.setPass(pass);
+			u.setProviderID("baas");
 			u.setLogin(true);
 
 			return "/showAplicaciones.xhtml";
