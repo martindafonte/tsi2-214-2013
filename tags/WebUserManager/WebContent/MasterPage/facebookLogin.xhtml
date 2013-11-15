@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<h:form xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:permittedTaglibs="http://jakarta.apache.org/taglibs/standard/permittedTaglibs"
+	xmlns:scriptfree="http://jakarta.apache.org/taglibs/standard/scriptfree"
+	xmlns:mj="http://mojarra.dev.java.net/mojarra_ext">
+	
+		<h:panelGroup rendered="#{empty userSession.profile}"
+			id="socialButtons">
+			<h:commandLink id="facebook" action="#{userLogin.socialConnect()}">
+				<f:setPropertyActionListener target="#{userLogin.providerID}"
+					value="facebook" />
+<!-- 				<f:setPropertyActionListener target="#{userLogin.login}" value="true" /> -->
+				<h:graphicImage value="/resources/img/facebook.png" />
+			</h:commandLink>
+		</h:panelGroup>
+
+		<h:panelGrid columns="3" rendered="#{not empty userLogin.profile}">
+			<h:graphicImage
+				rendered="#{not empty userLogin.profile.profileImageURL}"
+				value="#{userLogin.profile.profileImageURL}" />
+			<h:outputText value="Hola #{userLogin.profile.fullName}" />
+			<h:commandButton value="Log out"
+				actionListener="#{userLogin.logOut}" />
+		</h:panelGrid>
+</h:form>
