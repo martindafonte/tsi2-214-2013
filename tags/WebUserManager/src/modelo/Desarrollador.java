@@ -29,7 +29,17 @@ public class Desarrollador implements Serializable {
 	private String pass;
 	private String nombre;
 	private String apellido;
+	private String providerID;
 	
+	public String getProviderID() {
+		return providerID;
+	}
+
+
+	public void setProviderID(String providerID) {
+		this.providerID = providerID;
+	}
+
 	private static final long serialVersionUID = 1L;
 	
 	@OneToMany(mappedBy ="d", cascade=CascadeType.ALL)
