@@ -46,6 +46,16 @@
    <property-class>java.lang.String</property-class>
    <value/>
   </managed-property>
+  <managed-property>
+   <property-name>profile</property-name>
+   <property-class>org.brickred.socialauth.Profile</property-class>
+   <value/>
+  </managed-property>
+  <managed-property>
+   <property-name>providerID</property-name>
+   <property-class>java.lang.String</property-class>
+   <value/>
+  </managed-property>
  </managed-bean>
  <managed-bean>
   <managed-bean-name>appBean</managed-bean-name>
@@ -202,16 +212,49 @@
   <managed-bean-class>utiles.ValDesarrollador</managed-bean-class>
   <managed-bean-scope>request</managed-bean-scope>
  </managed-bean>
- <!--  <validator> 
-   <validator-id>valDes</validator-id> 
-   <validator-class>utiles.ValDesarrollador</validator-class> 
-  </validator> 
-  <navigation-rule> 
-   <from-view-id>/showAplicaciones.xhtml</from-view-id> 
-   <navigation-case> 
-    <from-action>#{appSesBean.showAppInfo()}</from-action> 
-    <from-outcome>/infoAplicacion.xhtml</from-outcome> 
-    <to-view-id>/infoAplicacion.xhtml</to-view-id> 
-   </navigation-case> 
-  </navigation-rule> -->
+ <managed-bean>
+  <managed-bean-name>authenticator</managed-bean-name>
+  <managed-bean-class>presentacion.Authenticator</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+  <managed-property>
+   <property-name>openID</property-name>
+   <property-class>java.lang.String</property-class>
+   <value/>
+  </managed-property>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>updateStatus</managed-bean-name>
+  <managed-bean-class>presentacion.UpdateStatus</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+  <managed-property>
+   <property-name>status</property-name>
+   <property-class>java.lang.String</property-class>
+   <value/>
+  </managed-property>
+  <managed-property>
+   <property-name>statusText</property-name>
+   <property-class>java.lang.String</property-class>
+   <value/>
+  </managed-property>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>userSession</managed-bean-name>
+  <managed-bean-class>presentacion.UserSessionBean</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+  <managed-property>
+   <property-name>profile</property-name>
+   <property-class>org.brickred.socialauth.Profile</property-class>
+   <value/>
+  </managed-property>
+  <managed-property>
+   <property-name>providerID</property-name>
+   <property-class>java.lang.String</property-class>
+   <value/>
+  </managed-property>
+  <managed-property>
+   <property-name>originalURL</property-name>
+   <property-class>java.lang.String</property-class>
+   <value/>
+  </managed-property>
+ </managed-bean>
 </faces-config>
