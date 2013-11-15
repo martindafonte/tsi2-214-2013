@@ -9,6 +9,7 @@ import mensajesRest.Mensaje;
 import mensajesRest.MensajeJson;
 import mensajesRest.MensajeJsonId;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 
 @Local
@@ -22,4 +23,5 @@ public interface MongoLocal {
 	public Mensaje ActualizarJson(int appid, String json, int jsonId) throws UnknownHostException;
 	public Mensaje EliminarJson(int appid, int jsonId) throws UnknownHostException;
 	public MensajeJson ObtenerListaJson(int appid,String Json, int desde, int cant) throws JSONException, UnknownHostException;
+	public MensajeJson ObtenerListaJsonCampos(int appid, String filtro, String campos, int desde, int cant) throws JSONException, UnknownHostException;
 }
