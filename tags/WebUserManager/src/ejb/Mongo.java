@@ -212,10 +212,10 @@ public class Mongo implements MongoLocal {
 		}
 		
 		JSONObject json = new JSONObject(campos);
-		JSONArray campos2 = json.getJSONArray("campos"); 
+		JSONArray campos2 = json.getJSONArray("select"); 
 		
 		BasicDBObject q2 = new BasicDBObject();
-		for (int i = 0;i < campos.length(); i++){
+		for (int i = 0;i < campos2.length(); i++){
 			q2.put(campos2.getString(i),1);
 		}
 	
