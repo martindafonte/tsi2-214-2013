@@ -1,11 +1,7 @@
 package utiles;
 
 import javax.ejb.EJB;
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.Validator;
@@ -32,7 +28,8 @@ public class ValDesarrollador implements Validator {
 				
 			}
 		}
-		String caca = arg2.toString();
+		@SuppressWarnings("unused")
+		String algo = arg2.toString();
 
 	}
 
