@@ -79,10 +79,11 @@ public class Mongo implements MongoLocal {
 				document.put("id", clienteId); 
 				collection.insert(document);
 			}
-			
+			mongoClient.close();
 		}catch (UnknownHostException e) {
 			e.printStackTrace();
 		} 
+		
 	}
     
     public boolean ExisteCliente(String nombreDB, int clienteId) throws UnknownHostException{
@@ -96,7 +97,8 @@ public class Mongo implements MongoLocal {
 		BasicDBObject query = new BasicDBObject(); 
         query.put("_id", clienteId);
         DBCursor cursor = collection.find(query);
-		return cursor.size() > 0;
+        mongoClient.close();
+        return cursor.size() > 0;
     	
     }
 
@@ -114,6 +116,7 @@ public class Mongo implements MongoLocal {
 		Mensaje m = new Mensaje();
 		m.codigo = Constantes.Cte_Exito;
 		m.descripcion = "Base de datos eliminada";
+		mongoClient.close();
 		return m;
 		
 	}
@@ -147,6 +150,7 @@ public class Mongo implements MongoLocal {
 		m.codigo = Constantes.Cte_Exito;
 		m.descripcion = "Json ingresado";
 		m.jsonId = jsonId;
+		mongoClient.close();
 		return m;
 	}
 
@@ -181,7 +185,7 @@ public class Mongo implements MongoLocal {
         
         m.codigo = Constantes.Cte_Exito;
         m.json =  objeto.toString();
-
+        mongoClient.close();
         return m ;
 	}
 	
@@ -241,7 +245,7 @@ public class Mongo implements MongoLocal {
 		m.json = array.toString();
 		m.codigo = Constantes.Cte_Exito;
 		m.cant = collection.find().count();
-		
+		mongoClient.close();
 	
 		return m;
 	}
@@ -296,7 +300,7 @@ public class Mongo implements MongoLocal {
 		m.json = array.toString();
 		m.codigo = Constantes.Cte_Exito;
 		m.cant = collection.find().count();
-		
+		mongoClient.close();
 		
 		return m;
 	}
@@ -333,6 +337,7 @@ public class Mongo implements MongoLocal {
         
 		m.codigo = Constantes.Cte_Exito;
 		m.descripcion = "Json Actualizado";
+		mongoClient.close();
 		return m;
 	}
 
@@ -366,7 +371,7 @@ public class Mongo implements MongoLocal {
 		
     	m.codigo = Constantes.Cte_Exito;
     	m.descripcion = "Json eliminado.";
-		
+    	mongoClient.close();
 		return m;
 	}
 
