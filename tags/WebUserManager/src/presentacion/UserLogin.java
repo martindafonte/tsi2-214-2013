@@ -3,7 +3,6 @@
  */
 package presentacion;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
 
@@ -417,6 +416,25 @@ public class UserLogin {
 //		
 //	}
 	
+	public List<PedSesBean> cantPedidosAPI(long aplicacionid){
+		
+		return serv.cantPedidosAPI(aplicacionid);
+	}
+	
+	public List<PedSesBean> cantDespRegCanales(long appId){
+		
+		return serv.cantDespRegCanales(appId);
+	}
+	
+	public List<PedSesBean> cantMsjEnvPush(long appId){
+		
+		return serv.cantMsjEnvPush(appId);
+	}
+
+	public int getCantUsuarios(Long aplicacionid) {
+
+		return serv.getCantUsuarios(aplicacionid);
+	}
 	
 		
 	
