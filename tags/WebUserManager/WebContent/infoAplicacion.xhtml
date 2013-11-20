@@ -27,10 +27,16 @@
 						<th>Descripcion</th>
 					</tr>
 					<tr>
-
 						<td><h:outputText value="#{appSesBean.nombre}" /></td>
 						<td><h:outputText value="#{appSesBean.descripcion}" /></td>
-
+					</tr>
+				</table>
+				<table class="table table-bordered">
+					<tr>
+						<th>Cantidad de Usuarios</th>
+					</tr>
+					<tr>						
+						<td><h:outputText value="#{appSesBean.cantUsers()}" /></td>
 					</tr>
 				</table>
 			</h:form>
@@ -45,12 +51,13 @@
 							<table class="table-bordered">
 								<tr>
 									<td><h:inputText value="#{canalBean.codigo}"
-											style="height: 30px !important" id="canalNom"/></td>
+											style="height: 30px !important" id="canalNom" /></td>
 									<td><h:commandButton action="#{canalBean.altaCanal()}"
 											class="btn btn-primary" value="agregar" /></td>
 									<td>
-										<div class="alert alert-warning">
-											<strong><h:message for="canalNom" showDetail="false" showSummary="true"/></strong>
+										<div class="alert-danger">
+											<strong><h:message for="canalNom" showDetail="false"
+													showSummary="true" /></strong>
 										</div>
 									</td>
 								</tr>
@@ -59,12 +66,6 @@
 				</tr>
 			</table>
 		</div>
-		<!-- 			<div> -->
-		<!-- 				Single Login -->
-		<!-- 				<h:selectBooleanCheckbox value="#{appSesBean.singleLogin}" /> -->
-		<!-- 				<h:commandButton action="#{appSesBean.changeSingleLogin()}" -->
-		<!-- 					value="guardar cambios" /> -->
-		<!-- 			</div> -->
 
 		<table class="table table-bordered" cellpadding="4">
 			<tr align="center">
@@ -92,17 +93,22 @@
 		</table>
 	</div>
 
-
-
-	<!-- 	<div class="span4"> -->
-	<!-- 	<div class="span4" id="chart_div"></div> -->
 	<div>
 		<h:form prependId="false">
-			<gc:googleChart model="#{appSesBean.getPedidos()}" height="500px"
-				width="500px" />
+			<div>
+				<gc:googleChart model="#{appSesBean.getPedidos()}" height="500px"
+					width="500px" />
+			</div>
+			<div>
+				<gc:googleChart model="#{appSesBean.cantDespReg()}" height="500px"
+					width="500px" />
+			</div>
+			<div>
+				<gc:googleChart model="#{appSesBean.cantMsjEnvPush()}"
+					height="500px" width="500px" />
+			</div>
 		</h:form>
 	</div>
-	<!-- 	<a href="/WebUserManager/showRoles.xhtml">roles</a> -->
-	<!-- 	</div> -->
+
 </body>
 </html>
