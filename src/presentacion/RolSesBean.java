@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.context.FacesContext;
-import javax.swing.text.StyledEditorKit.BoldAction;
 
 /**
  * @author bruno

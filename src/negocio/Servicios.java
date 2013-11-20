@@ -571,4 +571,28 @@ public class Servicios implements ServiciosLocal {
 		return al.altaApliacion(a, d);		
 
 	}
+	
+	@Override
+	public List<PedSesBean> cantPedidosAPI(long aplicacionid){
+		
+		return pl.cantPedidosAPI(aplicacionid);
+	}
+
+	@Override
+	public List<PedSesBean> cantDespRegCanales(long appId) {
+
+		return pl.cantDespRegCanales(appId);
+	}
+
+	@Override
+	public List<PedSesBean> cantMsjEnvPush(long appId) {
+
+		return pl.cantMsjEnvPush(appId);
+	}
+
+	@Override
+	public int getCantUsuarios(Long aplicacionid) {
+
+		return al.cantUsuarios(aplicacionid);
+	}
 }

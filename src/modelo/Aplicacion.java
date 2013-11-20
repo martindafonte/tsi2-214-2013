@@ -341,4 +341,20 @@ public class Aplicacion implements Serializable {
 		return ConstantesPersistencia.Exito;
 
 	}
+
+	public List<CanalSesBean> getCanalesAppSesAll() {
+		
+		List<CanalSesBean> la = new ArrayList<CanalSesBean>();
+		if (canales != null) {
+			Iterator<Canal> itc = canales.iterator();
+			while (itc.hasNext()) {
+				Canal ca = itc.next();
+				CanalSesBean cs = new CanalSesBean();
+				cs.setCodigo(ca.getCodigo());
+				cs.setRegistrados(ca.getRegistrados().size());
+				la.add(cs);
+			}
+		}
+		return la;
+	}
 }

@@ -5,14 +5,8 @@ package utiles;
 
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
-
-import org.jboss.resteasy.spi.HttpRequest;
-
 import presentacion.UserLogin;
-
-import com.sun.faces.context.SessionMap;
 
 /**
  * @author bruno

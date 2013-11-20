@@ -25,5 +25,6 @@ public interface AplicacionDAOLocal {
 	public void cambiarSingleLogin(long id);
 	public void cambiarSingleLogin(long id, boolean valor);
 	public List<Canal> getCanales(Aplicacion a);
+	public int cantUsuarios(Long aplicacionid);
 	
 }

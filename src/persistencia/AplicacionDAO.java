@@ -16,6 +16,7 @@ import javax.persistence.Query;
 import modelo.Aplicacion;
 import modelo.Canal;
 import modelo.Desarrollador;
+import modelo.Usuario;
 
 /**
  * Session Bean implementation class AplicacionDAO
@@ -207,6 +208,20 @@ public class AplicacionDAO implements AplicacionDAOLocal {
 		
 	}
 
+
+	@Override
+	public int cantUsuarios(Long aplicacionid) {
+		
+		Aplicacion a = em.find(Aplicacion.class, aplicacionid);
+		if (a != null){
+			List<Usuario> lu = a.getUsers();
+			if (lu == null)
+					return 0;
+			
+			return lu.size();
+		}
+		return 0;
+	}
 	
 	
 

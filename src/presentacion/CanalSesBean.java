@@ -3,10 +3,7 @@
  */
 package presentacion;
 
-import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
-
-import negocio.ServiciosLocal;
 
 /**
  * @author bruno

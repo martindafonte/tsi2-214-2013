@@ -95,6 +95,17 @@ public interface ServiciosLocal {
 	public List<PedSesBean> getPedidos(long app);
 	public JsonObject getPedidosJson(long app);
 	public int getMensajes(long app, String  canId);
+	
+	//estadisticas
+	public List<PedSesBean> cantPedidosAPI(long aplicacionid);
+	public List<PedSesBean> cantDespRegCanales(long appId);
+	public List<PedSesBean> cantMsjEnvPush(long appId);
+	
+	
+	
+	
+	public int getCantUsuarios(Long aplicacionid);
+	
 
 	
 }
