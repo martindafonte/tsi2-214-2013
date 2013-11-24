@@ -322,18 +322,7 @@ public class PedidosDAO implements PedidosDAOLocal {
 			Aplicacion a = em.find(Aplicacion.class, appId);
 			if (a != null){
 			
-				List<CanalSesBean> lc = a.getCanalesAppSesAll();
-				CanalSesBean c = null;
-				Iterator<CanalSesBean> itc = lc.iterator();
-				PedSesBean p = null;
-				while(itc.hasNext()){
-					
-					p = new PedSesBean();
-					c = itc.next();
-					p.setServicio(c.getCodigo());
-					p.setCantidad(c.getMensajes());					
-					lp.add(p);
-				}
+				lp = a.getCanalesAppSesAllMsj();
 					
 			}			
 			return lp;

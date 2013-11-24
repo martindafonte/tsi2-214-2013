@@ -5,11 +5,14 @@ import java.lang.String;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.persistence.*;
 
 import persistencia.ConstantesPersistencia;
 import presentacion.CanalSesBean;
+import presentacion.PedSesBean;
 import presentacion.PermSesBean;
 import presentacion.RolSesBean;
 
@@ -351,10 +354,46 @@ public class Aplicacion implements Serializable {
 				Canal ca = itc.next();
 				CanalSesBean cs = new CanalSesBean();
 				cs.setCodigo(ca.getCodigo());
-				cs.setRegistrados(ca.getRegistrados().size());
+				cs.setRegistrados(new Integer(ca.getRegistrados().size()));
 				la.add(cs);
 			}
 		}
+		return la;
+	}
+	
+	public List<PedSesBean> getCanalesAppSesAllMsj() {
+		
+		List<PedSesBean> la = new ArrayList<PedSesBean>();
+		TreeMap<String,Integer> map = new TreeMap<String, Integer>();
+				
+		Canal c;
+		if(pedidosMsj != null){
+			
+			Iterator<PedidoMsj> itp = pedidosMsj.iterator(); 
+			while(itp.hasNext()){
+				
+				PedidoMsj ped = itp.next();
+				String key = ped.getCanal().getCodigo();
+				if (map.containsKey(key)){
+					Integer val = map.get(key);
+					val = new Integer(val.intValue() + 1);
+					map.put(key, val);
+				}else{
+					map.put(key, new Integer(1));
+				}
+			}
+			
+			Iterator<Integer> itv = map.values().iterator();
+			Iterator<String> itk = map.keySet().iterator();
+			while (itv.hasNext()){
+				
+				PedSesBean p = new PedSesBean();
+				p.setCantidad(itv.next());
+				p.setServicio(itk.next());
+				la.add(p);
+			}
+			
+		}		
 		return la;
 	}
 }

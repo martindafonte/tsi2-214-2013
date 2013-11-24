@@ -16,7 +16,6 @@ import org.brickred.socialauth.AuthProvider;
 import org.brickred.socialauth.Profile;
 import org.brickred.socialauth.SocialAuthConfig;
 import org.brickred.socialauth.SocialAuthManager;
-import org.brickred.socialauth.provider.FacebookImpl;
 import org.brickred.socialauth.util.SocialAuthUtil;
 
 import persistencia.ConstantesPersistencia;
