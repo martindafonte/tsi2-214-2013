@@ -25,6 +25,7 @@ public class AppSesBean {
 	private Long aplicacionid;
 	private String nombre;
 	private Integer num;
+	private int chart = 1;
 
 	public GoogleChartModel getPedidos() {
 		UserLogin u = getUserLogin();
@@ -251,6 +252,29 @@ public class AppSesBean {
 		
 		UserLogin u = getUserLogin();
 		return u.getCantUsuarios(aplicacionid);
+	}
+	
+	public void showchart1(){
+		chart = 1;
+	}
+	
+	public void showchart2(){
+		chart = 2;
+	}
+	
+	public void showchart3(){
+		chart = 3;
+	}
+	
+	public String getGoogleChart(){
+		
+		if (chart == 1){
+			return "/cantPedAPI.xhtml";
+		}else if (chart == 2){
+			return "/cantDisCanal.xhtml";
+		}else{
+			return "/cantMsjPush.xhtml";
+		}
 	}
 	
 }

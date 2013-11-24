@@ -56,7 +56,9 @@ public class UsuarioDAO implements UsuarioDAOLocal {
 			List<Rol> lrol = new ArrayList<Rol>();
 			c.setRegistrados(lr);
 			c.setUser(u);
-			a.getCanales().add(c);
+			List<Canal> lc = a.getCanales();
+			lc.add(c);
+			a.setCanales(lc);
 			u.setRoles(lrol);
 			u.setAplicacion(a);
 			u.setCanal(c);
