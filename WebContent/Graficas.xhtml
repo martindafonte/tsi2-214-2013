@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<h:head></h:head> 
+<body>
+   <h:form>
+	<table class="table tablebordered">
+		<tr>
+			<td>
+				<table class="table tablebordered">
+					<tr>
+						<td>
+							<h:commandLink value="Pedidos API" action="#{appSesBean.showchart1()}" />							
+						</td>
+						<td>
+							<h:commandLink value="Registrados por Canal" action="#{appSesBean.showchart2()}" />
+						</td>
+						<td>
+							<h:commandLink value="Mensajes por Canal" action="#{appSesBean.showchart3()}" />
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<ui:include src="#{appSesBean.getGoogleChart()}"></ui:include>			
+			</td>
+		</tr>
+	</table>
+	</h:form>
+
+</body> 
+</html>

@@ -12,6 +12,7 @@
 <h:head>
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	<!-- 	<script src="resources/js/bootstrap.js"></script> -->
+	<script src="resources/js/bootstrap-tabs.js"></script>
 	<script src="resources/js/limpiar.js"></script>
 
 </h:head>
@@ -35,7 +36,7 @@
 					<tr>
 						<th>Cantidad de Usuarios</th>
 					</tr>
-					<tr>						
+					<tr>
 						<td><h:outputText value="#{appSesBean.cantUsers()}" /></td>
 					</tr>
 				</table>
@@ -93,22 +94,7 @@
 		</table>
 	</div>
 
-	<div>
-		<h:form prependId="false">
-			<div>
-				<gc:googleChart model="#{appSesBean.getPedidos()}" height="500px"
-					width="500px" />
-			</div>
-			<div>
-				<gc:googleChart model="#{appSesBean.cantDespReg()}" height="500px"
-					width="500px" />
-			</div>
-			<div>
-				<gc:googleChart model="#{appSesBean.cantMsjEnvPush()}"
-					height="500px" width="500px" />
-			</div>
-		</h:form>
-	</div>
 
+	<ui:include src="/Graficas.xhtml"></ui:include>
 </body>
 </html>
