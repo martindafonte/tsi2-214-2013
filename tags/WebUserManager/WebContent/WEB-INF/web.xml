@@ -17,7 +17,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>Resteasy</servlet-name>
-    <url-pattern>/MongoServicios/*</url-pattern>
+    <url-pattern>/JSon/*</url-pattern>
     <url-pattern>/Push/*</url-pattern>
     <url-pattern>/Users/*</url-pattern>
   </servlet-mapping>
