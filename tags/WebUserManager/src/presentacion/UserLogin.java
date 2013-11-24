@@ -16,9 +16,11 @@ import org.brickred.socialauth.AuthProvider;
 import org.brickred.socialauth.Profile;
 import org.brickred.socialauth.SocialAuthConfig;
 import org.brickred.socialauth.SocialAuthManager;
+import org.brickred.socialauth.provider.FacebookImpl;
 import org.brickred.socialauth.util.SocialAuthUtil;
 
 import persistencia.ConstantesPersistencia;
+import utiles.FacebookProperties;
 
 import com.google.gson.JsonObject;
 
@@ -348,7 +350,8 @@ public class UserLogin {
 			// 'successURL' is the page you'll be redirected to on successful login
 			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 //			"http://localhost:8080"
-			String successURL = "http://localhost:8080" + externalContext.getRequestContextPath();
+			String url = FacebookProperties.getProperties();
+			String successURL = url + externalContext.getRequestContextPath();
 //			successURL += "/showAplicaciones.xhtml";
 			successURL += "/socialLoginSuccess.xhtml";
 //			String successURL = "/socialLoginSuccess.xhtml";
@@ -380,6 +383,7 @@ public class UserLogin {
 				this.pass = "";
 				this.providerID = this.profile.getProviderId();
 				this.login = true;
+			
 				
 				serv.altaDesarrollador(nick, pass, this.profile.getFirstName(), this.profile.getLastName(), "facebook");
 				
