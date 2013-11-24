@@ -1,6 +1,8 @@
 package ejb;
 
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -40,12 +42,29 @@ import com.mongodb.util.JSON;
 @LocalBean
 public class Mongo implements MongoLocal {
 	
+	MongoProperties mprop = new MongoProperties();
+	MongoClient mongoClient;
 	@EJB
 	private AplicacionDAOLocal aplicacion;
     /**
      * Default constructor. 
      */
     public Mongo() {
+    }
+    
+    @PostConstruct
+    public void crearConexion(){
+		try {
+			mprop = new MongoProperties();
+			mongoClient = new MongoClient(mprop.hostname,mprop.port);
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    @PreDestroy
+    public void cerrarConexion(){
+    	mongoClient.close();
     }
     
 	public Mensaje MensajeErrorApp(){
@@ -69,8 +88,6 @@ public class Mongo implements MongoLocal {
 	
     public void Crear(String nombreDB, int clienteId) throws IOException{		
 		try{			
-			MongoProperties mprop = new MongoProperties();
-			MongoClient mongoClient = new MongoClient(mprop.hostname,mprop.port);
 			DB base = mongoClient.getDB(nombreDB.toLowerCase());  
 			DBCollection collection = base.getCollection("Json");
 			// Ingreso algo en la base porque si no no me la ingresa.
@@ -79,7 +96,6 @@ public class Mongo implements MongoLocal {
 				document.put("id", clienteId); 
 				collection.insert(document);
 			}
-			mongoClient.close();
 		}catch (UnknownHostException e) {
 			e.printStackTrace();
 		} 
@@ -87,9 +103,6 @@ public class Mongo implements MongoLocal {
 	}
     
     public boolean ExisteCliente(String nombreDB, int clienteId) throws UnknownHostException{
-    	
-    	MongoProperties mprop = new MongoProperties();
-		MongoClient mongoClient = new MongoClient(mprop.hostname,mprop.port);
 		
 		DB base = mongoClient.getDB(nombreDB); 
 		
@@ -97,7 +110,6 @@ public class Mongo implements MongoLocal {
 		BasicDBObject query = new BasicDBObject(); 
         query.put("_id", clienteId);
         DBCursor cursor = collection.find(query);
-        mongoClient.close();
         return cursor.size() > 0;
     	
     }
@@ -109,14 +121,11 @@ public class Mongo implements MongoLocal {
 			return  MensajeErrorApp();
 		}	
 		String nombreDB = Integer.toString(appid).concat("_").concat(app.getNombre().replace(" ", "").toLowerCase());
-		MongoProperties mprop = new MongoProperties();
-		MongoClient mongoClient = new MongoClient(mprop.hostname,mprop.port);
 		mongoClient.dropDatabase(nombreDB);
 		app.setJsonid(0);
 		Mensaje m = new Mensaje();
 		m.codigo = Constantes.Cte_Exito;
 		m.descripcion = "Base de datos eliminada";
-		mongoClient.close();
 		return m;
 		
 	}
@@ -131,10 +140,6 @@ public class Mongo implements MongoLocal {
 		
 		String nombreDB = Integer.toString(appid).concat("_").concat(app.getNombre().replace(" ", "").toLowerCase());
 		int jsonId =(int) app.getJSONID();
-		
-		// conectar con BAse
-		MongoProperties mprop = new MongoProperties();
-		MongoClient mongoClient = new MongoClient(mprop.hostname,mprop.port);
 		DB base = mongoClient.getDB(nombreDB); 
 		
 	
@@ -150,7 +155,6 @@ public class Mongo implements MongoLocal {
 		m.codigo = Constantes.Cte_Exito;
 		m.descripcion = "Json ingresado";
 		m.jsonId = jsonId;
-		mongoClient.close();
 		return m;
 	}
 
@@ -161,9 +165,6 @@ public class Mongo implements MongoLocal {
 			return  MensajeErrorAppJson();
 		}
 		String nombreDB = Integer.toString(appid).concat("_").concat(app.getNombre().replace(" ", "").toLowerCase());	
-		
-		MongoProperties mprop = new MongoProperties();
-		MongoClient mongoClient = new MongoClient(mprop.hostname,mprop.port);
 		DB base = mongoClient.getDB(nombreDB); 
 		
 		MensajeJson m = new MensajeJson();
@@ -185,7 +186,6 @@ public class Mongo implements MongoLocal {
         
         m.codigo = Constantes.Cte_Exito;
         m.json =  objeto.toString();
-        mongoClient.close();
         return m ;
 	}
 	
@@ -195,9 +195,6 @@ public class Mongo implements MongoLocal {
 			return  MensajeErrorAppJson();
 		}
 		String nombreDB = Integer.toString(appid).concat("_").concat(app.getNombre().replace(" ", "").toLowerCase());	
-		
-		MongoProperties mprop = new MongoProperties();
-		MongoClient mongoClient = new MongoClient(mprop.hostname,mprop.port);
 		DB base = mongoClient.getDB(nombreDB); 
 		
 		MensajeJson m = new MensajeJson();
@@ -245,7 +242,7 @@ public class Mongo implements MongoLocal {
 		m.json = array.toString();
 		m.codigo = Constantes.Cte_Exito;
 		m.cant = collection.find().count();
-		mongoClient.close();
+	//	mongoClient.close();
 	
 		return m;
 	}
@@ -257,9 +254,6 @@ public class Mongo implements MongoLocal {
 			return  MensajeErrorAppJson();
 		}
 		String nombreDB = Integer.toString(appid).concat("_").concat(app.getNombre().replace(" ", "").toLowerCase());	
-		
-		MongoProperties mprop = new MongoProperties();
-		MongoClient mongoClient = new MongoClient(mprop.hostname,mprop.port);
 		DB base = mongoClient.getDB(nombreDB); 
 		
 		MensajeJson m = new MensajeJson();
@@ -300,8 +294,6 @@ public class Mongo implements MongoLocal {
 		m.json = array.toString();
 		m.codigo = Constantes.Cte_Exito;
 		m.cant = collection.find().count();
-		mongoClient.close();
-		
 		return m;
 	}
 
@@ -322,9 +314,6 @@ public class Mongo implements MongoLocal {
 	
 		EliminarJson(appid, jsonId);
 		
-		// ingresar json
-		MongoProperties mprop = new MongoProperties();
-		MongoClient mongoClient = new MongoClient(mprop.hostname,mprop.port);
 		DB base = mongoClient.getDB(nombreDB); 
 		
         DBCollection collection = base.getCollection("Json");
@@ -337,7 +326,6 @@ public class Mongo implements MongoLocal {
         
 		m.codigo = Constantes.Cte_Exito;
 		m.descripcion = "Json Actualizado";
-		mongoClient.close();
 		return m;
 	}
 
@@ -358,9 +346,6 @@ public class Mongo implements MongoLocal {
         	return m;
 		}
 		
-		MongoProperties mprop = new MongoProperties();
-		MongoClient mongoClient = new MongoClient(mprop.hostname,mprop.port);
-		
 		DB base = mongoClient.getDB(nombreDB); 
 		DBCollection collection = base.getCollection("Json");
 		 
@@ -371,7 +356,6 @@ public class Mongo implements MongoLocal {
 		
     	m.codigo = Constantes.Cte_Exito;
     	m.descripcion = "Json eliminado.";
-    	mongoClient.close();
 		return m;
 	}
 
