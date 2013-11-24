@@ -24,7 +24,7 @@ import org.json.JSONException;
 
 
 
-@Path("/MongoServicios")
+@Path("/JSon")
 public interface IMongoPublico  {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
